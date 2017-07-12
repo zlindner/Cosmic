@@ -1,0 +1,17 @@
+[
+{
+  "modid": "Ultio",
+  "name": "Ultio",
+  "description": "A mod heavily inspired by the popular 1.4.7 version of GregTech.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "logoFile": "",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["zachy"],
+  "credits": "",
+  "parent": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
