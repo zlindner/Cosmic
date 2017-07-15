@@ -2,9 +2,9 @@ package zachy.ultio.common.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 import zachy.ultio.common.core.Lib;
+import zachy.ultio.common.core.UltioTab;
 
 public class BlockBase extends Block {
 
@@ -13,6 +13,6 @@ public class BlockBase extends Block {
 
         setUnlocalizedName(name);
         setRegistryName(new ResourceLocation(Lib.MOD_ID, name));
-        setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        setCreativeTab(UltioTab.instance);
     }
 }

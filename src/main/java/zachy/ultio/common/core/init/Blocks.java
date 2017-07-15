@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import zachy.ultio.common.block.BlockCable;
+import zachy.ultio.common.block.BlockMachineCasing;
 import zachy.ultio.common.core.Lib;
 import zachy.ultio.common.item.ItemBlockBase;
 import zachy.ultio.common.tile.TileCable;
@@ -16,12 +17,14 @@ import zachy.ultio.common.tile.TileCable;
 public class Blocks {
 
     public static Block cable = new BlockCable();
+    public static Block machineCasing = new BlockMachineCasing();
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         IForgeRegistry<Block> r = event.getRegistry();
 
         r.register(cable);
+        r.register(machineCasing);
 
         registerTiles();
     }
@@ -35,5 +38,6 @@ public class Blocks {
         IForgeRegistry<Item> r = event.getRegistry();
 
         r.register(new ItemBlockBase(cable, true));
+        r.register(new ItemBlockBase(machineCasing, true));
     }
 }

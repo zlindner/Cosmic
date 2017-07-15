@@ -10,5 +10,6 @@ public final class Lib {
 
     public final class Blocks {
         public static final String CABLE = "cable";
+        public static final String MACHINE_CASING = "machine_casing";
     }
 }
