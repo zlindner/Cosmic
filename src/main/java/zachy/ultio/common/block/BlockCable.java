@@ -19,8 +19,10 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import zachy.ultio.client.core.handler.ModelHandler;
 import zachy.ultio.common.core.Lib;
 import zachy.ultio.common.core.Util;
+import zachy.ultio.common.tile.TileBase;
 import zachy.ultio.common.tile.TileCable;
 
 import java.util.ArrayList;
@@ -62,8 +64,8 @@ public class BlockCable extends BlockBase {
     }
 
     @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, TYPE, NORTH, EAST, SOUTH, WEST, UP, DOWN);
+    protected BlockStateContainer.Builder createBlockStateBuilder() {
+        return super.createBlockStateBuilder().add(TYPE, NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
     @Override
@@ -100,7 +102,7 @@ public class BlockCable extends BlockBase {
         TileEntity adjacentTile = access.getTileEntity(pos.offset(direction));
 
         if (adjacentTile != null) {
-            if (adjacentTile instanceof TileCable) {
+            if (adjacentTile instanceof TileBase) {
                 return true;
             }
         }
@@ -193,5 +195,10 @@ public class BlockCable extends BlockBase {
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public void registerModel() {
+        ModelHandler.registerItemBlock(this, 1, i -> "cable_" + CableType.values()[i]);
     }
 }

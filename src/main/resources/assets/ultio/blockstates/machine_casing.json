@@ -1,13 +1,7 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "minecraft:cube_all"
-  },
   "variants": {
-    "type": {
-      "standard": {"textures": {"all": "ultio:blocks/machine_casing_standard"}},
-      "reinforced": {"textures": {"all": "ultio:blocks/machine_casing_reinforced"}},
-      "advanced": {"textures": {"all": "ultio:blocks/machine_casing_advanced"}}
-    }
+    "type=standard": { "model": "ultio:machine_casing_standard" },
+    "type=reinforced": { "model": "ultio:machine_casing_reinforced" },
+    "type=advanced": { "model": "ultio:machine_casing_advanced" }
   }
 }

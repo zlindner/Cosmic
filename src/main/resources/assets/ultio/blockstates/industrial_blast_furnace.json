@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "direction=north": { "model": "ultio:industrial_blast_furnace" },
+    "direction=east": { "model": "ultio:industrial_blast_furnace", "y": 90 },
+    "direction=south": { "model": "ultio:industrial_blast_furnace", "y": 180 },
+    "direction=west": { "model": "ultio:industrial_blast_furnace", "y": 270 }
+  }
+}

@@ -1,23 +1,18 @@
 package zachy.ultio.client.core.proxy;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import zachy.ultio.common.block.CableType;
-import zachy.ultio.common.block.MachineCasingType;
-import zachy.ultio.common.core.init.Blocks;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import zachy.ultio.client.core.handler.GuiHandler;
+import zachy.ultio.common.Ultio;
 import zachy.ultio.common.core.proxy.IProxy;
 
 public class ClientProxy implements IProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-
+        NetworkRegistry.INSTANCE.registerGuiHandler(Ultio.instance, new GuiHandler());
     }
 
     @Override
@@ -28,16 +23,5 @@ public class ClientProxy implements IProxy {
     @Override
     public void postInit(FMLPostInitializationEvent event) {
 
-    }
-
-    @SubscribeEvent
-    public void registerModels(ModelRegistryEvent event) {
-        for (CableType cables : CableType.values()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Blocks.cable), cables.getId(), new ModelResourceLocation("ultio:cable", "type=" + cables.getName()));
-        }
-
-        for (MachineCasingType casings : MachineCasingType.values()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Blocks.machineCasing), casings.getId(), new ModelResourceLocation("ultio:maching_casing", "type=" + casings.getName()));
-        }
     }
 }
