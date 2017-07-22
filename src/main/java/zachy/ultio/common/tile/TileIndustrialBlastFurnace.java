@@ -1,34 +1,30 @@
 package zachy.ultio.common.tile;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import zachy.ultio.common.core.init.UltioBlocks;
+import zachy.ultio.common.core.Lib;
+import zachy.ultio.common.core.util.MultiblockUtil;
 
 public class TileIndustrialBlastFurnace extends TileBase implements ITickable, ISidedInventory {
 
-    public boolean valid = false; // u ugly af fix pls
-    private int internalHeat = 0;
-
-    private int counter = 0;
-
-    // lava = 250 heat ea
-    // standard = 30 heat ea
-    // reinforced = 50 heat ea
-    // advanced = 70 heat ea
+    private boolean complete = false;
+    private boolean _complete = false;
+    private int heat = 0;
 
     public TileIndustrialBlastFurnace() {
 
     }
-     // fix ugliness ... change to boolean? cache validity like heat?
-    private void checkValidity() {
+
+    private boolean verifyStructure() {
         BlockPos start = pos.offset(getDirection().getOpposite()).offset(getDirection().getOpposite());
 
-        int heat = 0;
+        int _heat = 0;
 
         for (int y = 0; y < 4; y++) {
             for (int x = -1; x < 2; x++) {
@@ -36,33 +32,34 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
                     BlockPos check = start.add(x, y, z);
 
                     if (x == 0 && (y == 1 || y == 2) && z == 0) {
-                        if (!isAir(check)) {
-                            if (isLava(check)) {
-                                heat += 250;
+                        if (!MultiblockUtil.isAir(world, check)) {
+                            if (MultiblockUtil.isLava(world, check)) {
+                                _heat += 250;
                             } else {
-                                valid = false;
-
-                                return;
+                                return false;
                             }
                         }
-                    } else if (!isCasing(check)) {
-                        valid = false;
-
-                        return;
+                    } else if (!MultiblockUtil.isCasing(world, check)) {
+                        return false;
                     } else {
-                        heat += 30 + (world.getBlockState(check).getBlock().getMetaFromState(world.getBlockState(check)) * 20);
+                        _heat += 30 + (world.getBlockState(check).getBlock().getMetaFromState(world.getBlockState(check)) * 20);
                     }
                 }
             }
         }
 
-        valid = true;
+        heat = _heat;
 
-        internalHeat = heat;
+        return true;
+    }
+
+    // complete or valid? what sounds better idk :^)
+    public boolean isComplete() {
+        return complete;
     }
 
     public int getHeat() {
-        return internalHeat;
+        return heat;
     }
 
     @Override
@@ -70,26 +67,41 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
         counter++;
 
         if (counter == 20) {
-            checkValidity();
+            complete = verifyStructure();
+
+            if (_complete != complete) {
+                _complete = complete;
+
+                if (world.isRemote) {
+                    IBlockState state = world.getBlockState(pos);
+
+                    world.notifyBlockUpdate(pos, state, state, 3);
+                }
+            }
 
             counter = 0;
         }
 
-        if (!valid) {
+        if (!complete) {
             return;
         }
     }
 
-    public boolean isCasing(BlockPos pos) {
-        return world.getBlockState(pos).getBlock() == UltioBlocks.machineCasing;
+    // required to read / write structure validity?
+    @Override
+    public NBTTagCompound writeUpdate(NBTTagCompound tag) {
+        super.writeUpdate(tag);
+
+        tag.setBoolean(Lib.NBT.COMPLETE, complete);
+
+        return tag;
     }
 
-    public boolean isLava(BlockPos pos) {
-        return world.getBlockState(pos).getBlock() == Blocks.LAVA;
-    }
+    @Override
+    public void readUpdate(NBTTagCompound tag) {
+        super.readUpdate(tag);
 
-    public boolean isAir(BlockPos pos) {
-        return world.isAirBlock(pos);
+        tag.getBoolean(Lib.NBT.COMPLETE);
     }
 
     @Override

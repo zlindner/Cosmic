@@ -15,7 +15,7 @@ import java.util.Collection;
 
 public class Util {
 
-    public static TileEntity getTileEntitySafely(IBlockAccess world, BlockPos pos) {
+    public static TileEntity getTile(IBlockAccess world, BlockPos pos) {
         if (world instanceof ChunkCache) {
             return ((ChunkCache) world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);
         }

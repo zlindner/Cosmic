@@ -14,4 +14,9 @@ public final class Lib {
 
         public static final String INDUSTRIAL_BLAST_FURNACE = "industrial_blast_furnace";
     }
+
+    public final class NBT {
+        public static final String DIRECTION = "Direction";
+        public static final String COMPLETE = "Complete";
+    }
 }

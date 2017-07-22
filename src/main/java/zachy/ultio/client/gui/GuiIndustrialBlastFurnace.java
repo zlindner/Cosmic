@@ -5,7 +5,7 @@ import zachy.ultio.common.tile.TileIndustrialBlastFurnace;
 
 public class GuiIndustrialBlastFurnace extends GuiBase {
 
-    TileIndustrialBlastFurnace tile;
+    private TileIndustrialBlastFurnace tile;
 
     public GuiIndustrialBlastFurnace(ContainerIndustrialBlastFurnace container) {
         super(container, 176, 166);
@@ -38,13 +38,11 @@ public class GuiIndustrialBlastFurnace extends GuiBase {
     public void drawForeground(int mouseX, int mouseY) {
         drawString(7, 7, format("gui.ultio:industrial_blast_furnace"));
 
-        if (tile.valid) {
-            drawString(7, 67, format("gui.ultio:industrial_blast_furnace.valid"));
+        if (tile.isComplete()) {
+            drawString(7, 67, format("gui.ultio:industrial_blast_furnace.heat" + ": " + tile.getHeat()));
         } else {
             drawString(7, 67, format("gui.ultio:industrial_blast_furnace.invalid"));
         }
-
-        //heat
 
         drawString(7, 77, format("container.inventory"));
     }

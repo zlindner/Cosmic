@@ -28,7 +28,7 @@ public class GuiHandler implements IGuiHandler {
     @Nullable
     @Override
     public Object getServerGuiElement(int Id, EntityPlayer player, World world, int x, int y, int z) {
-        return getContainer(Id, Util.getTileEntitySafely(world, new BlockPos(x, y, z)), player);
+        return getContainer(Id, Util.getTile(world, new BlockPos(x, y, z)), player);
     }
 
     @Nullable
@@ -36,7 +36,7 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int Id, EntityPlayer player, World world, int x, int y, int z) {
         switch (Id) {
             case Guis.INDUSTRIAL_BLAST_FURNACE:
-                return new GuiIndustrialBlastFurnace((ContainerIndustrialBlastFurnace) getContainer(Id, Util.getTileEntitySafely(world, new BlockPos(x, y, z)), player));
+                return new GuiIndustrialBlastFurnace((ContainerIndustrialBlastFurnace) getContainer(Id, Util.getTile(world, new BlockPos(x, y, z)), player));
             default:
                 return null;
         }

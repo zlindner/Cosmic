@@ -9,17 +9,24 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import zachy.ultio.common.block.Direction;
 import zachy.ultio.common.tile.TileBase;
 
 public class ItemBlockBase extends ItemBlock {
 
-    private Direction direction;
+    private boolean directional;
 
-    public ItemBlockBase(Block block, Direction direction, boolean subtypes) {
+    public ItemBlockBase(Block block) {
+        this(block, false, false);
+    }
+
+    public ItemBlockBase(Block block, boolean subtypes) {
+        this(block, subtypes, false);
+    }
+
+    public ItemBlockBase(Block block, boolean subtypes, boolean directional) {
         super(block);
 
-        this.direction = direction;
+        this.directional = directional;
 
         setRegistryName(block.getRegistryName());
 
@@ -47,11 +54,12 @@ public class ItemBlockBase extends ItemBlock {
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, IBlockState state) {
         boolean result = super.placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, state);
 
-        if (result && direction != null) {
+        if (result && directional) {
             TileEntity tile = world.getTileEntity(pos);
 
             if (tile instanceof TileBase) {
-                ((TileBase) tile).setDirection(direction.getFrom(side, pos, player));
+                ((TileBase) tile).setDirection(player.getHorizontalFacing().getOpposite()); // as of now only allows horizontal placements (i think?), in future may require verticals as well
+                //((TileBase) tile).setDirection(EnumFacing.getDirectionFromEntityLiving(pos, player)); // implement check if block requires horizontal or any facing ^
             }
         }
 

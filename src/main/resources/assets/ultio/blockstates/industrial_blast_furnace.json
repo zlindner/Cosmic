@@ -1,8 +1,12 @@
 {
   "variants": {
-    "direction=north": { "model": "ultio:industrial_blast_furnace" },
-    "direction=east": { "model": "ultio:industrial_blast_furnace", "y": 90 },
-    "direction=south": { "model": "ultio:industrial_blast_furnace", "y": 180 },
-    "direction=west": { "model": "ultio:industrial_blast_furnace", "y": 270 }
+    "complete=true,direction=north": { "model": "ultio:industrial_blast_furnace_complete"},
+    "complete=true,direction=east": { "model": "ultio:industrial_blast_furnace_complete", "y": 90},
+    "complete=true,direction=south": { "model": "ultio:industrial_blast_furnace_complete", "y": 180},
+    "complete=true,direction=west": { "model": "ultio:industrial_blast_furnace_complete", "y": 270},
+    "complete=false,direction=north": { "model": "ultio:industrial_blast_furnace_incomplete" },
+    "complete=false,direction=east": { "model": "ultio:industrial_blast_furnace_incomplete", "y": 90 },
+    "complete=false,direction=south": { "model": "ultio:industrial_blast_furnace_incomplete", "y": 180 },
+    "complete=false,direction=west": { "model": "ultio:industrial_blast_furnace_incomplete", "y": 270 }
   }
 }

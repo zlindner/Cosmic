@@ -28,12 +28,12 @@ public class BlockMachineCasing extends BlockBase {
 
     @Override
     public Item createItem() {
-        return new ItemBlockBase(this, getDirection(), true);
+        return new ItemBlockBase(this, true);
     }
 
     @Override
-    protected BlockStateContainer.Builder createBlockStateBuilder() {
-        return super.createBlockStateBuilder().add(TYPE);
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, TYPE);
     }
 
     @Override

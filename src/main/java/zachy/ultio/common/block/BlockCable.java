@@ -64,8 +64,8 @@ public class BlockCable extends BlockBase {
     }
 
     @Override
-    protected BlockStateContainer.Builder createBlockStateBuilder() {
-        return super.createBlockStateBuilder().add(TYPE, NORTH, EAST, SOUTH, WEST, UP, DOWN);
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, TYPE, NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class BlockCable extends BlockBase {
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess access, BlockPos pos) {
-        TileEntity tile = Util.getTileEntitySafely(access, pos);
+        TileEntity tile = Util.getTile(access, pos);
 
         state = super.getActualState(state, access, pos)
                 .withProperty(TYPE, state.getValue(TYPE))
