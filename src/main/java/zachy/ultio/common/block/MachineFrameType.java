@@ -2,7 +2,7 @@ package zachy.ultio.common.block;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum MachineCasingType implements IStringSerializable {
+public enum MachineFrameType implements IStringSerializable {
     BASIC,
     INTERMEDIATE,
     ADVANCED;

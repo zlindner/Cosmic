@@ -16,14 +16,14 @@ import zachy.ultio.client.core.handler.ModelHandler;
 import zachy.ultio.common.core.Lib;
 import zachy.ultio.common.item.ItemBlockBase;
 
-public class BlockMachineCasing extends BlockBase {
+public class BlockMachineFrame extends BlockBase {
 
-    private static final IProperty<MachineCasingType> TYPE = PropertyEnum.create("type", MachineCasingType.class);
+    private static final IProperty<MachineFrameType> TYPE = PropertyEnum.create("type", MachineFrameType.class);
 
-    public BlockMachineCasing() {
-        super(Lib.Blocks.MACHINE_CASING);
+    public BlockMachineFrame() {
+        super(Lib.Blocks.MACHINE_FRAME);
 
-        setDefaultState(getDefaultState().withProperty(TYPE, MachineCasingType.BASIC));
+        setDefaultState(getDefaultState().withProperty(TYPE, MachineFrameType.BASIC));
     }
 
     @Override
@@ -43,12 +43,12 @@ public class BlockMachineCasing extends BlockBase {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(TYPE, MachineCasingType.values()[meta]);
+        return getDefaultState().withProperty(TYPE, MachineFrameType.values()[meta]);
     }
 
     @Override
     public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-        for (MachineCasingType type : MachineCasingType.values()) {
+        for (MachineFrameType type : MachineFrameType.values()) {
             list.add(new ItemStack(this, 1, type.ordinal()));
         }
     }
@@ -60,8 +60,9 @@ public class BlockMachineCasing extends BlockBase {
 
     @Override
     public void registerModel() {
-        for (int i = 0; i < MachineCasingType.values().length; i++) {
-            ModelHandler.registerBlock(this, i, getDefaultState().withProperty(TYPE, MachineCasingType.values()[i]));
+        for (int i = 0; i < MachineFrameType.values().length; i++) {
+            ModelHandler.registerBlock(this, i, getDefaultState().withProperty(TYPE, MachineFrameType.values()[i]));
         }
     }
+
 }

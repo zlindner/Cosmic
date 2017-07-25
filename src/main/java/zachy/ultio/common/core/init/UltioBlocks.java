@@ -7,10 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
-import zachy.ultio.common.block.BlockBase;
-import zachy.ultio.common.block.BlockCable;
-import zachy.ultio.common.block.BlockIndustrialBlastFurnace;
-import zachy.ultio.common.block.BlockMachineCasing;
+import zachy.ultio.common.block.*;
 import zachy.ultio.common.core.Lib;
 import zachy.ultio.common.tile.TileCable;
 import zachy.ultio.common.tile.TileIndustrialBlastFurnace;
@@ -20,6 +17,7 @@ public class UltioBlocks {
 
     public static BlockBase cable = new BlockCable();
     public static BlockBase machineCasing = new BlockMachineCasing();
+    public static BlockBase machineFrame = new BlockMachineFrame();
     public static BlockBase industrialBlastFurnace = new BlockIndustrialBlastFurnace();
 
     @SubscribeEvent
@@ -28,6 +26,7 @@ public class UltioBlocks {
 
         r.register(cable);
         r.register(machineCasing);
+        r.register(machineFrame);
         r.register(industrialBlastFurnace);
 
         registerTiles();
@@ -44,6 +43,7 @@ public class UltioBlocks {
 
         r.register(cable.createItem());
         r.register(machineCasing.createItem());
+        r.register(machineFrame.createItem());
         r.register(industrialBlastFurnace.createItem());
     }
 }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=basic": { "model": "ultio:machine_frame_basic" },
+    "type=intermediate": { "model": "ultio:machine_frame_intermediate" },
+    "type=advanced": { "model": "ultio:machine_frame_advanced" }
+  }
+}

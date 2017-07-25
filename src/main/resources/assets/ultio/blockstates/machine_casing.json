@@ -1,7 +1,7 @@
 {
   "variants": {
-    "type=standard": { "model": "ultio:machine_casing_standard" },
-    "type=reinforced": { "model": "ultio:machine_casing_reinforced" },
+    "type=basic": { "model": "ultio:machine_casing_basic" },
+    "type=intermediate": { "model": "ultio:machine_casing_intermediate" },
     "type=advanced": { "model": "ultio:machine_casing_advanced" }
   }
 }

@@ -1,8 +1,9 @@
 {
-  "parent": "minecraft:block/orientable",
+  "parent": "ultio:block/machine",
   "textures": {
     "front": "ultio:blocks/industrial_blast_furnace_front_invalid",
     "side": "ultio:blocks/industrial_blast_furnace_side",
-    "top": "ultio:blocks/industrial_blast_furnace_side"
+    "top": "ultio:blocks/industrial_blast_furnace_side",
+    "back": "ultio:blocks/industrial_blast_furnace_back"
   }
 }
