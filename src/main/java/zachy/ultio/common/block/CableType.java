@@ -7,10 +7,6 @@ public enum CableType implements IStringSerializable {
     TIN,
     GOLD;
 
-    public int getId() {
-        return ordinal();
-    }
-
     @Override
     public String getName() {
         return name().toLowerCase();

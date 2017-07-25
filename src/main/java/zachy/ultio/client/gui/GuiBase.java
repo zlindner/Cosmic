@@ -103,6 +103,10 @@ public abstract class GuiBase extends GuiContainer {
         GlStateManager.enableLighting();
     }
 
+    public void drawStringCentred(int x, int y, String message) {
+        fontRenderer.drawString(message, x / 2 - fontRenderer.getStringWidth(message) / 2, y, 4210752);
+    }
+
     public void drawTexture(int x, int y, int textureX, int textureY, int width, int height) {
         drawTexturedModalRect(x, y, textureX, textureY, width, height);
     }

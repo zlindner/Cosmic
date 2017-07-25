@@ -17,6 +17,8 @@ public final class Lib {
 
     public final class NBT {
         public static final String DIRECTION = "Direction";
-        public static final String COMPLETE = "Complete";
+        public static final String VALID = "Valid";
+        public static final String ITEMS = "Items";
+        public static final String SLOT = "Slot";
     }
 }

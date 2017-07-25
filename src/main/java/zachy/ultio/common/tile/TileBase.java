@@ -30,41 +30,6 @@ public class TileBase extends TileEntity {
         return direction;
     }
 
-    public NBTTagCompound write(NBTTagCompound tag) {
-        tag.setInteger(Lib.NBT.DIRECTION, direction.ordinal());
-
-        return tag;
-    }
-
-    public NBTTagCompound writeUpdate(NBTTagCompound tag) {
-        tag.setInteger(Lib.NBT.DIRECTION, direction.ordinal());
-
-        return tag;
-    }
-
-    public void read(NBTTagCompound tag) {
-        direction = EnumFacing.getFront(tag.getInteger(Lib.NBT.DIRECTION));
-    }
-
-    public void readUpdate(NBTTagCompound tag) {
-        boolean doRender = canCauseRenderUpdate(tag);
-
-        direction = EnumFacing.getFront(tag.getInteger(Lib.NBT.DIRECTION));
-
-        if (doRender) {
-            world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
-        }
-    }
-
-    protected boolean canCauseRenderUpdate(NBTTagCompound tag) {
-        return true;
-    }
-
-    @Override
-    public NBTTagCompound getUpdateTag() {
-        return writeUpdate(super.getUpdateTag());
-    }
-
     @Nullable
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
@@ -72,27 +37,27 @@ public class TileBase extends TileEntity {
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        readUpdate(packet.getNbtCompound());
+    public NBTTagCompound getUpdateTag() {
+        return writeToNBT(new NBTTagCompound());
     }
 
     @Override
-    public void handleUpdateTag(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-
-        readUpdate(tag);
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        // idk if anything needed here
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
 
-        read(tag);
+        direction = EnumFacing.getFront(tag.getInteger(Lib.NBT.DIRECTION));
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-        return write(super.writeToNBT(tag));
+        tag.setInteger(Lib.NBT.DIRECTION, direction.ordinal());
+
+        return super.writeToNBT(tag);
     }
 
     @Override

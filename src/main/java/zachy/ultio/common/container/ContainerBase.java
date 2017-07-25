@@ -1,7 +1,6 @@
 package zachy.ultio.common.container;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -47,16 +46,9 @@ public class ContainerBase extends Container {
     }
 
     @Override
-    public ItemStack slotClick(int id, int dragType, ClickType clickType, EntityPlayer player) {
-
-        return super.slotClick(id, dragType, clickType, player);
-    }
-
-    @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
         return ItemStack.EMPTY;
     }
-
 
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {

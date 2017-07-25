@@ -8,7 +8,7 @@ public class GuiIndustrialBlastFurnace extends GuiBase {
     private TileIndustrialBlastFurnace tile;
 
     public GuiIndustrialBlastFurnace(ContainerIndustrialBlastFurnace container) {
-        super(container, 176, 166);
+        super(container, 176, 182);
 
         tile = (TileIndustrialBlastFurnace) container.getTile();
     }
@@ -36,14 +36,14 @@ public class GuiIndustrialBlastFurnace extends GuiBase {
 
     @Override
     public void drawForeground(int mouseX, int mouseY) {
-        drawString(7, 7, format("gui.ultio:industrial_blast_furnace"));
+        drawStringCentred(xSize, 5, format("gui.ultio:industrial_blast_furnace"));
 
-        if (tile.isComplete()) {
-            drawString(7, 67, format("gui.ultio:industrial_blast_furnace.heat" + ": " + tile.getHeat()));
+        if (tile.isValid()) {
+            drawString(105, 90, format("gui.ultio:industrial_blast_furnace.heat") + ": " + tile.getHeat() + " K");
         } else {
-            drawString(7, 67, format("gui.ultio:industrial_blast_furnace.invalid"));
+            drawString(80, 90, format("gui.ultio:industrial_blast_furnace.invalid"));
         }
 
-        drawString(7, 77, format("container.inventory"));
+        drawString(8,90, format("container.inventory"));
     }
 }

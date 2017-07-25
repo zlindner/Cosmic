@@ -1,32 +1,26 @@
 package zachy.ultio.common.container;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import zachy.ultio.common.container.slot.SlotOutput;
 import zachy.ultio.common.tile.TileIndustrialBlastFurnace;
 
 public class ContainerIndustrialBlastFurnace extends ContainerBase {
 
-    public ContainerIndustrialBlastFurnace(TileIndustrialBlastFurnace industrialBlastFurnace, EntityPlayer player) {
-        super(industrialBlastFurnace, player);
+    public ContainerIndustrialBlastFurnace(TileIndustrialBlastFurnace tile, EntityPlayer player) {
+        super(tile, player);
 
-        int x = 44;
-        int y = 20;
+        addSlotToContainer(new Slot(tile, 0, 62, 34));
+        addSlotToContainer(new Slot(tile, 1, 62, 52));
 
-        /*for (int i = 0; i < 3; ++i) {
-            addSlotToContainer(new SlotItemHandler(solderer.getNode().getIngredients(), i, x, y));
+        addSlotToContainer(new SlotOutput(tile, 2, 116, 43));
+        addSlotToContainer(new SlotOutput(tile, 3, 134, 43));
 
-            y += 18;
-        }
-
-        addSlotToContainer(new SlotOutput(solderer.getNode().getResult(), 0, 127, 38));
-
-        for (int i = 0; i < 4; ++i) {
-            addSlotToContainer(new SlotItemHandler(solderer.getNode().getUpgrades(), i, 187, 6 + (i * 18)));
-        }*/
-
-        addPlayerInventory(8, 89);
+        addPlayerInventory(8, 100);
     }
 
-    /*@Override
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int index) {
         ItemStack stack = ItemStack.EMPTY;
 
@@ -35,20 +29,12 @@ public class ContainerIndustrialBlastFurnace extends ContainerBase {
         if (slot.getHasStack()) {
             stack = slot.getStack();
 
-            if (index < 4) {
-                if (!mergeItemStack(stack, 4 + 4, inventorySlots.size(), false)) {
+            if (index < 2) {
+                if (!mergeItemStack(stack, 4 + 9, inventorySlots.size(), false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index < 4 + 4) {
-                if (!mergeItemStack(stack, 4 + 4, inventorySlots.size(), false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else {
-                if (stack.getItem() != RSItems.UPGRADE || !mergeItemStack(stack, 4, 4 + 4, false)) {
-                    if (!mergeItemStack(stack, 0, 3, false)) { // 0 - 3 because we can't shift click to output slot
-                        return ItemStack.EMPTY;
-                    }
-                }
+            } else if (!mergeItemStack(stack, 0, 2, false)) {
+                return ItemStack.EMPTY;
             }
 
             if (stack.getCount() == 0) {
@@ -59,5 +45,5 @@ public class ContainerIndustrialBlastFurnace extends ContainerBase {
         }
 
         return stack;
-    }*/
+    }
 }

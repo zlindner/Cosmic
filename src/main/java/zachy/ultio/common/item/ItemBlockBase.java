@@ -13,17 +13,17 @@ import zachy.ultio.common.tile.TileBase;
 
 public class ItemBlockBase extends ItemBlock {
 
-    private boolean directional;
+    private int directional;
 
     public ItemBlockBase(Block block) {
-        this(block, false, false);
+        this(block, false, -1);
     }
 
     public ItemBlockBase(Block block, boolean subtypes) {
-        this(block, subtypes, false);
+        this(block, subtypes, -1);
     }
 
-    public ItemBlockBase(Block block, boolean subtypes, boolean directional) {
+    public ItemBlockBase(Block block, boolean subtypes, int directional) {
         super(block);
 
         this.directional = directional;
@@ -54,12 +54,15 @@ public class ItemBlockBase extends ItemBlock {
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, IBlockState state) {
         boolean result = super.placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, state);
 
-        if (result && directional) {
+        if (result && directional != -1) {
             TileEntity tile = world.getTileEntity(pos);
 
             if (tile instanceof TileBase) {
-                ((TileBase) tile).setDirection(player.getHorizontalFacing().getOpposite()); // as of now only allows horizontal placements (i think?), in future may require verticals as well
-                //((TileBase) tile).setDirection(EnumFacing.getDirectionFromEntityLiving(pos, player)); // implement check if block requires horizontal or any facing ^
+                if (directional == 0) { // probably a better way of handling this
+                    ((TileBase) tile).setDirection(player.getHorizontalFacing().getOpposite());
+                } else if (directional == 1) {
+                    ((TileBase) tile).setDirection(EnumFacing.getDirectionFromEntityLiving(pos, player));
+                }
             }
         }
 

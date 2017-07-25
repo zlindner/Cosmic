@@ -35,7 +35,7 @@ public class BlockIndustrialBlastFurnace extends BlockBase {
 
     @Override
     public Item createItem() {
-        return new ItemBlockBase(this, false, true);
+        return new ItemBlockBase(this, false, 0);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class BlockIndustrialBlastFurnace extends BlockBase {
         TileEntity tile = Util.getTile(world, pos);
 
         if (tile instanceof TileIndustrialBlastFurnace) {
-            return getDefaultState().withProperty(DIRECTION, ((TileIndustrialBlastFurnace) tile).getDirection()).withProperty(COMPLETE, ((TileIndustrialBlastFurnace) tile).isComplete());
+            return getDefaultState().withProperty(DIRECTION, ((TileIndustrialBlastFurnace) tile).getDirection()).withProperty(COMPLETE, ((TileIndustrialBlastFurnace) tile).isValid());
         }
 
         return state;

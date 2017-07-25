@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "front": "ultio:blocks/industrial_blast_furnace_front_complete",
+    "front": "ultio:blocks/industrial_blast_furnace_front_valid",
     "side": "ultio:blocks/industrial_blast_furnace_side",
     "top": "ultio:blocks/industrial_blast_furnace_side"
   }

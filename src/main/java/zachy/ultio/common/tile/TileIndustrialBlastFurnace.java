@@ -3,18 +3,22 @@ package zachy.ultio.common.tile;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import zachy.ultio.common.core.Lib;
 import zachy.ultio.common.core.util.MultiblockUtil;
 
 public class TileIndustrialBlastFurnace extends TileBase implements ITickable, ISidedInventory {
 
-    private boolean complete = false;
-    private boolean _complete = false;
+    private NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
+
+    private boolean valid = false;
+    private boolean _valid = false;
     private int heat = 0;
 
     public TileIndustrialBlastFurnace() {
@@ -42,7 +46,9 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
                     } else if (!MultiblockUtil.isCasing(world, check)) {
                         return false;
                     } else {
-                        _heat += 30 + (world.getBlockState(check).getBlock().getMetaFromState(world.getBlockState(check)) * 20);
+                        IBlockState state = world.getBlockState(check);
+
+                        _heat += 30 + (state.getBlock().getMetaFromState(state) * 20);
                     }
                 }
             }
@@ -53,9 +59,8 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
         return true;
     }
 
-    // complete or valid? what sounds better idk :^)
-    public boolean isComplete() {
-        return complete;
+    public boolean isValid() {
+        return valid;
     }
 
     public int getHeat() {
@@ -67,10 +72,10 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
         counter++;
 
         if (counter == 20) {
-            complete = verifyStructure();
+            valid = verifyStructure();
 
-            if (_complete != complete) {
-                _complete = complete;
+            if (_valid != valid) {
+                _valid = valid;
 
                 if (world.isRemote) {
                     IBlockState state = world.getBlockState(pos);
@@ -82,26 +87,25 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
             counter = 0;
         }
 
-        if (!complete) {
+        if (!valid) {
             return;
         }
     }
 
-    // required to read / write structure validity?
     @Override
-    public NBTTagCompound writeUpdate(NBTTagCompound tag) {
-        super.writeUpdate(tag);
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
 
-        tag.setBoolean(Lib.NBT.COMPLETE, complete);
-
-        return tag;
+        valid = tag.getBoolean(Lib.NBT.VALID);
+        ItemStackHelper.loadAllItems(tag, inventory);
     }
 
     @Override
-    public void readUpdate(NBTTagCompound tag) {
-        super.readUpdate(tag);
+    public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+        tag.setBoolean(Lib.NBT.VALID, valid);
+        ItemStackHelper.saveAllItems(tag, inventory);
 
-        tag.getBoolean(Lib.NBT.COMPLETE);
+        return super.writeToNBT(tag);
     }
 
     @Override
@@ -110,7 +114,7 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+    public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) {
         return false;
     }
 
@@ -121,7 +125,7 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
 
     @Override
     public int getSizeInventory() {
-        return 0;
+        return inventory.size();
     }
 
     @Override
@@ -131,27 +135,59 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
 
     @Override
     public ItemStack getStackInSlot(int index) {
-        return ItemStack.EMPTY;
+        return inventory.get(index);
     }
 
     @Override
     public ItemStack decrStackSize(int index, int count) {
-        return ItemStack.EMPTY;
+        ItemStack stack = inventory.get(index);
+
+        if (stack.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+
+        ItemStack stackRemoved;
+
+        if (stack.getCount() <= count) {
+            stackRemoved = stack;
+            inventory.set(index, ItemStack.EMPTY);
+        } else {
+            stackRemoved = stack.splitStack(count);
+            if (stack.getCount() == 0) {
+                setInventorySlotContents(index, ItemStack.EMPTY);
+            }
+        }
+
+        markDirty();
+
+        return stackRemoved;
     }
 
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        return ItemStack.EMPTY;
+        ItemStack stack = inventory.get(index);
+
+        if (!stack.isEmpty()) {
+            inventory.set(index, ItemStack.EMPTY);
+        }
+
+        return stack;
     }
 
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
+        inventory.set(index, stack);
 
+        if (!stack.isEmpty() && stack.getCount() > getInventoryStackLimit()) {
+            stack.setCount(getInventoryStackLimit());
+        }
+
+        markDirty();
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return 0;
+        return 64;
     }
 
     @Override
@@ -171,7 +207,7 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return false;
+        return index < 2;
     }
 
     @Override

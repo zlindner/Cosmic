@@ -7,10 +7,6 @@ public enum MachineCasingType implements IStringSerializable {
     REINFORCED,
     ADVANCED;
 
-    public int getId() {
-        return ordinal();
-    }
-
     @Override
     public String getName() {
         return name().toLowerCase();
