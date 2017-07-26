@@ -1,8 +1,8 @@
 package zachy.ultio.common.core;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import zachy.ultio.common.core.init.UltioBlocks;
 
 public class UltioTab extends CreativeTabs {
 
@@ -14,6 +14,6 @@ public class UltioTab extends CreativeTabs {
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(Items.CARROT_ON_A_STICK);
+        return new ItemStack(UltioBlocks.machineFrame);
     }
 }

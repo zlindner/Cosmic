@@ -34,8 +34,12 @@ public class BlockIndustrialBlastFurnace extends BlockBase {
     }
 
     @Override
-    public Item createItem() {
-        return new ItemBlockBase(this, false, 0);
+    public Item createItemBlock() {
+        ItemBlockBase itemBlock = new ItemBlockBase(this);
+
+        itemBlock.setHorizontal();
+
+        return itemBlock;
     }
 
     @Override

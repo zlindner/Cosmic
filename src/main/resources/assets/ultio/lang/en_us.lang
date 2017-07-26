@@ -1,3 +1,6 @@
+# CREATIVE TAB
+itemGroup.ultio=Ultio
+
 # GUI
 gui.ultio:industrial_blast_furnace=Industrial Blast Furnace
 gui.ultio:industrial_blast_furnace.heat=Heat

@@ -27,8 +27,12 @@ public class BlockMachineCasing extends BlockBase {
     }
 
     @Override
-    public Item createItem() {
-        return new ItemBlockBase(this, true);
+    public Item createItemBlock() {
+        ItemBlockBase itemBlock = new ItemBlockBase(this);
+
+        itemBlock.setHasMeta();
+
+        return itemBlock;
     }
 
     @Override

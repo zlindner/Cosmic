@@ -21,7 +21,7 @@ public class BlockBase extends Block implements IModelRegister {
         setCreativeTab(UltioTab.instance);
     }
 
-    public Item createItem() {
+    public Item createItemBlock() {
         return new ItemBlockBase(this);
     }
 

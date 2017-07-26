@@ -13,27 +13,13 @@ import zachy.ultio.common.tile.TileBase;
 
 public class ItemBlockBase extends ItemBlock {
 
-    private int directional;
+    private boolean horizontal = false;
+    private boolean multidirectional = false;
 
     public ItemBlockBase(Block block) {
-        this(block, false, -1);
-    }
-
-    public ItemBlockBase(Block block, boolean subtypes) {
-        this(block, subtypes, -1);
-    }
-
-    public ItemBlockBase(Block block, boolean subtypes, int directional) {
         super(block);
 
-        this.directional = directional;
-
         setRegistryName(block.getRegistryName());
-
-        if (subtypes) {
-            setMaxDamage(0);
-            setHasSubtypes(true);
-        }
     }
 
     @Override
@@ -50,17 +36,30 @@ public class ItemBlockBase extends ItemBlock {
         return getUnlocalizedName();
     }
 
+    public void setHasMeta() {
+        setMaxDamage(0);
+        setHasSubtypes(true);
+    }
+
+    public void setHorizontal() {
+        horizontal = true;
+    }
+
+    public void setMultidirectional() {
+        multidirectional = true;
+    }
+
     @Override
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, IBlockState state) {
         boolean result = super.placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, state);
 
-        if (result && directional != -1) {
+        if (result && (horizontal || multidirectional)) {
             TileEntity tile = world.getTileEntity(pos);
 
             if (tile instanceof TileBase) {
-                if (directional == 0) { // probably a better way of handling this
+                if (horizontal) {
                     ((TileBase) tile).setDirection(player.getHorizontalFacing().getOpposite());
-                } else if (directional == 1) {
+                } else if (multidirectional) {
                     ((TileBase) tile).setDirection(EnumFacing.getDirectionFromEntityLiving(pos, player));
                 }
             }

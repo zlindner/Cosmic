@@ -41,9 +41,9 @@ public class UltioBlocks {
     public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> r = event.getRegistry();
 
-        r.register(cable.createItem());
-        r.register(machineCasing.createItem());
-        r.register(machineFrame.createItem());
-        r.register(industrialBlastFurnace.createItem());
+        r.register(cable.createItemBlock());
+        r.register(machineCasing.createItemBlock());
+        r.register(machineFrame.createItemBlock());
+        r.register(industrialBlastFurnace.createItemBlock());
     }
 }
