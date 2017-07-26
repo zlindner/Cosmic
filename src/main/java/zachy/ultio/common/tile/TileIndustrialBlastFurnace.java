@@ -1,5 +1,7 @@
 package zachy.ultio.common.tile;
 
+import elucent.albedo.lighting.ILightProvider;
+import elucent.albedo.lighting.Light;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -10,10 +12,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.common.Optional;
+import zachy.ultio.common.Ultio;
 import zachy.ultio.common.core.Lib;
 import zachy.ultio.common.core.util.MultiblockUtil;
 
-public class TileIndustrialBlastFurnace extends TileBase implements ITickable, ISidedInventory {
+@Optional.Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = "albedo")
+public class TileIndustrialBlastFurnace extends TileBase implements ITickable, ISidedInventory, ILightProvider {
 
     private NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
 
@@ -238,5 +243,19 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
     @Override
     public boolean hasCustomName() {
         return false;
+    }
+
+    @Optional.Method(modid = "albedo")
+    @Override
+    public Light provideLight() {
+        if (Ultio.INSTANCE.config.enableColouredLights) {
+            if (isValid()) {
+                return Light.builder().pos(pos.offset(getDirection())).color(0, 1, 0).radius(2).build();
+            }
+
+            return Light.builder().pos(pos.offset(getDirection())).color(1, 0, 0).radius(2).build();
+        }
+
+        return null;
     }
 }

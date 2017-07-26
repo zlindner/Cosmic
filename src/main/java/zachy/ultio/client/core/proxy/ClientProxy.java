@@ -12,7 +12,7 @@ public class ClientProxy implements IProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(Ultio.instance, new GuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(Ultio.INSTANCE, new GuiHandler());
     }
 
     @Override

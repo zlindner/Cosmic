@@ -71,7 +71,7 @@ public class BlockIndustrialBlastFurnace extends BlockBase {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
-            player.openGui(Ultio.instance, Guis.INDUSTRIAL_BLAST_FURNACE, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Ultio.INSTANCE, Guis.INDUSTRIAL_BLAST_FURNACE, world, pos.getX(), pos.getY(), pos.getZ());
         }
 
         return true;
