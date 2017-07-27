@@ -16,7 +16,7 @@ import zachy.ultio.client.core.handler.ModelHandler;
 import zachy.ultio.client.gui.Guis;
 import zachy.ultio.common.Ultio;
 import zachy.ultio.common.core.Lib;
-import zachy.ultio.common.core.Util;
+import zachy.ultio.common.core.util.WorldUtils;
 import zachy.ultio.common.item.ItemBlockBase;
 import zachy.ultio.common.tile.TileIndustrialBlastFurnace;
 
@@ -59,7 +59,7 @@ public class BlockIndustrialBlastFurnace extends BlockBase {
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-        TileEntity tile = Util.getTile(world, pos);
+        TileEntity tile = WorldUtils.getTile(world, pos);
 
         if (tile instanceof TileIndustrialBlastFurnace) {
             return getDefaultState().withProperty(DIRECTION, ((TileIndustrialBlastFurnace) tile).getDirection()).withProperty(COMPLETE, ((TileIndustrialBlastFurnace) tile).isValid());

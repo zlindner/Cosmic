@@ -1,4 +1,4 @@
-package zachy.ultio.common.core;
+package zachy.ultio.common.core.util;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -9,11 +9,12 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.Collection;
 
-public class Util {
+public class WorldUtils {
 
     public static TileEntity getTile(IBlockAccess world, BlockPos pos) {
         if (world instanceof ChunkCache) {
@@ -21,6 +22,12 @@ public class Util {
         }
 
         return world.getTileEntity(pos);
+    }
+
+    public static void updateBlock(World world, BlockPos pos) {
+        if (world != null) {
+            world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 1 | 2);
+        }
     }
 
     public static AxisAlignedBB getAABB(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {

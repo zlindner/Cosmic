@@ -18,9 +18,12 @@ public final class Lib {
     }
 
     public final class NBT {
+        public static final String SLOT = "Slot";
+        public static final String INVENTORY = "Inventory";
         public static final String DIRECTION = "Direction";
         public static final String VALID = "Valid";
-        public static final String ITEMS = "Items";
-        public static final String SLOT = "Slot";
+        public static final String HEAT = "Heat";
+        public static final String WORKING = "Working";
+        public static final String PROGRESS = "Progress";
     }
 }

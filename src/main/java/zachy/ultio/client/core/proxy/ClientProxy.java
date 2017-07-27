@@ -3,25 +3,22 @@ package zachy.ultio.client.core.proxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import zachy.ultio.client.core.handler.GuiHandler;
-import zachy.ultio.common.Ultio;
-import zachy.ultio.common.core.proxy.IProxy;
+import zachy.ultio.common.core.proxy.ServerProxy;
 
-public class ClientProxy implements IProxy {
+public class ClientProxy extends ServerProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(Ultio.INSTANCE, new GuiHandler());
+        super.preInit(event);
     }
 
     @Override
     public void init(FMLInitializationEvent event) {
-
+        super.init(event);
     }
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
-
+        super.postInit(event);
     }
 }

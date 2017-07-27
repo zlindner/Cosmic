@@ -7,8 +7,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import zachy.ultio.common.core.Lib;
 import zachy.ultio.common.core.handler.ConfigHandler;
-import zachy.ultio.common.core.proxy.IProxy;
+import zachy.ultio.common.core.proxy.ServerProxy;
 
+//TODO change name of mod, not a fan of ultio
 @Mod(modid = Lib.MOD_ID, name = Lib.MOD_NAME, version = Lib.VERSION)
 public class Ultio {
 
@@ -16,7 +17,7 @@ public class Ultio {
     public static Ultio INSTANCE;
 
     @SidedProxy(serverSide = Lib.PROXY_SERVER, clientSide = Lib.PROXY_CLIENT)
-    public static IProxy proxy;
+    public static ServerProxy proxy;
 
     public ConfigHandler config;
 

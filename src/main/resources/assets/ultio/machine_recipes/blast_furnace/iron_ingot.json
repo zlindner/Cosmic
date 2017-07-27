@@ -1,0 +1,19 @@
+{
+  "outputs": [
+    {
+      "item": "minecraft:iron_ingot",
+      "data": 0
+    },
+    null
+  ],
+  "duration": 100,
+  "energy": 0,
+  "heat": 2500,
+  "inputs": [
+    {
+      "item": "minecraft:iron_nugget",
+      "data": 0
+    },
+    null
+  ]
+}

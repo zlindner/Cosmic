@@ -29,9 +29,9 @@ public class GuiIndustrialBlastFurnace extends GuiBase {
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
-        /*if (TileIndustrialBlastFurnace.WORKING.getValue()) {
-            drawTexture(x + 83, y + 38 - 1, 212, 0, getProgressScaled(22), 15);
-        }*/
+        if (tile.isWorking()) {
+            drawTexture(x + 86, y + 43, 176, 0, getProgressScaled(22), 15);
+        }
     }
 
     @Override
@@ -45,5 +45,16 @@ public class GuiIndustrialBlastFurnace extends GuiBase {
         }
 
         drawString(8,90, format("container.inventory"));
+    }
+
+    private int getProgressScaled(int scale) {
+        float progress = tile.getProgress();
+        float duration = tile.getDuration();
+
+        if (progress > duration) {
+            return scale;
+        }
+
+        return (int) (progress / duration * (float) scale);
     }
 }

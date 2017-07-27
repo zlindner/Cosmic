@@ -5,7 +5,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import zachy.ultio.common.core.init.UltioBlocks;
 
-public class MultiblockUtil {
+public class MultiBlockUtils {
 
     public static boolean isCasing(World world, BlockPos pos) {
         return world.getBlockState(pos).getBlock() == UltioBlocks.machineCasing;

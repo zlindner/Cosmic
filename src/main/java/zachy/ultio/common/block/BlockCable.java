@@ -21,7 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import zachy.ultio.client.core.handler.ModelHandler;
 import zachy.ultio.common.core.Lib;
-import zachy.ultio.common.core.Util;
+import zachy.ultio.common.core.util.WorldUtils;
 import zachy.ultio.common.tile.TileBase;
 import zachy.ultio.common.tile.TileCable;
 
@@ -39,13 +39,13 @@ public class BlockCable extends BlockBase {
     private static final PropertyBool UP = PropertyBool.create("up");
     private static final PropertyBool DOWN = PropertyBool.create("down");
 
-    private static final AxisAlignedBB CORE_AABB = Util.getAABB(6, 6, 6, 10, 10, 10);
-    private static final AxisAlignedBB NORTH_AABB = Util.getAABB(6, 6, 0, 10, 10, 6);
-    private static final AxisAlignedBB EAST_AABB = Util.getAABB(10, 6, 6, 16, 10, 10);
-    private static final AxisAlignedBB SOUTH_AABB = Util.getAABB(6, 6, 10, 10, 10, 16);
-    private static final AxisAlignedBB WEST_AABB = Util.getAABB(0, 6, 6, 6, 10, 10);
-    private static final AxisAlignedBB UP_AABB = Util.getAABB(6, 10, 6, 10, 16, 10);
-    private static final AxisAlignedBB DOWN_AABB = Util.getAABB(6, 0, 6, 10, 6, 10);
+    private static final AxisAlignedBB CORE_AABB = WorldUtils.getAABB(6, 6, 6, 10, 10, 10);
+    private static final AxisAlignedBB NORTH_AABB = WorldUtils.getAABB(6, 6, 0, 10, 10, 6);
+    private static final AxisAlignedBB EAST_AABB = WorldUtils.getAABB(10, 6, 6, 16, 10, 10);
+    private static final AxisAlignedBB SOUTH_AABB = WorldUtils.getAABB(6, 6, 10, 10, 10, 16);
+    private static final AxisAlignedBB WEST_AABB = WorldUtils.getAABB(0, 6, 6, 6, 10, 10);
+    private static final AxisAlignedBB UP_AABB = WorldUtils.getAABB(6, 10, 6, 10, 16, 10);
+    private static final AxisAlignedBB DOWN_AABB = WorldUtils.getAABB(6, 0, 6, 10, 6, 10);
 
     public BlockCable() {
         super(Lib.Blocks.CABLE);
@@ -80,7 +80,7 @@ public class BlockCable extends BlockBase {
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess access, BlockPos pos) {
-        TileEntity tile = Util.getTile(access, pos);
+        TileEntity tile = WorldUtils.getTile(access, pos);
 
         state = super.getActualState(state, access, pos)
                 .withProperty(TYPE, state.getValue(TYPE))
@@ -163,7 +163,7 @@ public class BlockCable extends BlockBase {
 
     @Override
     public RayTraceResult collisionRayTrace(IBlockState state, World world, BlockPos pos, Vec3d start, Vec3d end) {
-        Util.AdvancedRayTraceResult result = Util.collisionRayTrace(pos, start, end, getCollisionBoxes(this.getActualState(state, world, pos)));
+        WorldUtils.AdvancedRayTraceResult result = WorldUtils.collisionRayTrace(pos, start, end, getCollisionBoxes(this.getActualState(state, world, pos)));
 
         return result != null ? result.hit : null;
     }

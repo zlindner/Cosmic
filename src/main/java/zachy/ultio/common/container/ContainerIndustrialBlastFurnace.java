@@ -29,7 +29,7 @@ public class ContainerIndustrialBlastFurnace extends ContainerBase {
         if (slot.getHasStack()) {
             stack = slot.getStack();
 
-            if (index < 2) {
+            if (index < 4) {
                 if (!mergeItemStack(stack, 4 + 9, inventorySlots.size(), false)) {
                     return ItemStack.EMPTY;
                 }

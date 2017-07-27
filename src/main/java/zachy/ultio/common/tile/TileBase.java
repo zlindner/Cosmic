@@ -33,7 +33,7 @@ public class TileBase extends TileEntity {
     @Nullable
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
-        return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
+        return new SPacketUpdateTileEntity(pos, 0, getUpdateTag());
     }
 
     @Override
@@ -43,7 +43,7 @@ public class TileBase extends TileEntity {
 
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        // idk if anything needed here
+        readFromNBT(packet.getNbtCompound());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TileBase extends TileEntity {
     }
 
     @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-        return oldState.getBlock() != newState.getBlock();
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return oldState.getBlock() != newSate.getBlock();
     }
 }

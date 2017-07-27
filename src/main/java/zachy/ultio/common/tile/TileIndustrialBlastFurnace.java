@@ -5,26 +5,35 @@ import elucent.albedo.lighting.Light;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
+import zachy.ultio.api.recipe.IBlastFurnaceRecipe;
+import zachy.ultio.apiimpl.API;
 import zachy.ultio.common.Ultio;
 import zachy.ultio.common.core.Lib;
-import zachy.ultio.common.core.util.MultiblockUtil;
+import zachy.ultio.common.core.util.MultiBlockUtils;
+import zachy.ultio.common.core.util.StackUtils;
+import zachy.ultio.common.core.util.WorldUtils;
 
 @Optional.Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = "albedo")
 public class TileIndustrialBlastFurnace extends TileBase implements ITickable, ISidedInventory, ILightProvider {
 
     private NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
 
+    private IBlastFurnaceRecipe recipe;
+
     private boolean valid = false;
-    private boolean _valid = false;
+    private boolean working = false;
+
     private int heat = 0;
+    private int progress = 0;
 
     public TileIndustrialBlastFurnace() {
 
@@ -41,14 +50,14 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
                     BlockPos check = start.add(x, y, z);
 
                     if (x == 0 && (y == 1 || y == 2) && z == 0) {
-                        if (!MultiblockUtil.isAir(world, check)) {
-                            if (MultiblockUtil.isLava(world, check)) {
+                        if (!MultiBlockUtils.isAir(world, check)) {
+                            if (MultiBlockUtils.isLava(world, check)) {
                                 _heat += 250;
                             } else {
                                 return false;
                             }
                         }
-                    } else if (!MultiblockUtil.isCasing(world, check)) {
+                    } else if (!MultiBlockUtils.isCasing(world, check)) {
                         return false;
                     } else {
                         IBlockState state = world.getBlockState(check);
@@ -68,26 +77,54 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
         return valid;
     }
 
+    public boolean isWorking() {
+        return working;
+    }
+
     public int getHeat() {
         return heat;
     }
 
+    public int getProgress() {
+        return progress;
+    }
+
+    public int getDuration() {
+        return recipe != null ? recipe.getDuration() : 0;
+    }
+
+    public IBlastFurnaceRecipe getRecipe() {
+        return recipe;
+    }
+
+    private void onInventoryChanged() {
+        IBlastFurnaceRecipe _recipe = API.instance().getBlastFurnaceRegistry().getRecipe(this);
+
+        if (_recipe != recipe) {
+            progress = 0;
+        }
+
+        recipe = _recipe;
+
+        markDirty();
+
+        WorldUtils.updateBlock(world, pos);
+    }
+
     @Override
     public void update() {
+        if (world.isRemote) {
+            return;
+        }
+
         counter++;
 
         if (counter == 20) {
             valid = verifyStructure();
 
-            if (_valid != valid) {
-                _valid = valid;
+            markDirty();
 
-                if (world.isRemote) {
-                    IBlockState state = world.getBlockState(pos);
-
-                    world.notifyBlockUpdate(pos, state, state, 3);
-                }
-            }
+            WorldUtils.updateBlock(world, pos);
 
             counter = 0;
         }
@@ -95,20 +132,103 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
         if (!valid) {
             return;
         }
+
+        if (recipe != null && getHeat() < recipe.getHeat()) {
+            return;
+        }
+
+        if (working) {
+            if (recipe == null) {
+                working = false;
+            } else if ((getStackInSlot(2).isEmpty() && getStackInSlot(3).isEmpty()
+                    || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(0), getStackInSlot(2))
+                    && getStackInSlot(2).getCount() + recipe.getOutput(0).getCount() <= getStackInSlot(2).getMaxStackSize())
+                    || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(1), getStackInSlot(3))
+                    && getStackInSlot(3).getCount() + recipe.getOutput(1).getCount() <= getStackInSlot(3).getMaxStackSize()))) {
+
+                progress++;
+
+                if (progress >= recipe.getDuration()) {
+                    for (int i = 0; i < 2; i++) {
+                        ItemStack outputSlot = getStackInSlot(i + 2);
+
+                        if (outputSlot.isEmpty()) {
+                            setInventorySlotContents(i + 2, recipe.getOutput(i).copy());
+                        } else {
+                            outputSlot.grow(recipe.getOutput(i).getCount());
+                        }
+                    }
+
+                    for (int i = 0; i < 2; i++) {
+                        ItemStack inputSlot = getStackInSlot(i);
+
+                        if (!inputSlot.isEmpty()) {
+                            inputSlot.shrink(recipe.getInput(i).get(0).getCount());
+                        }
+                    }
+
+                    recipe = API.instance().getBlastFurnaceRegistry().getRecipe(this);
+                    progress = 0;
+                }
+
+                markDirty();
+
+                WorldUtils.updateBlock(world, pos);
+            }
+        } else if (recipe != null) {
+            working = true;
+        }
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        boolean clientValid = isValid();
+
+        super.onDataPacket(net, packet);
+
+        if (world.isRemote) {
+            boolean serverValid = isValid();
+
+            if (serverValid != clientValid) {
+                world.markBlockRangeForRenderUpdate(pos, pos);
+            }
+        }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
 
+        StackUtils.readItems(this, 0, tag);
+        StackUtils.readItems(this, 1, tag);
+        StackUtils.readItems(this, 2, tag);
+        StackUtils.readItems(this, 3, tag);
+
+        recipe = API.instance().getBlastFurnaceRegistry().getRecipe(this);
+
         valid = tag.getBoolean(Lib.NBT.VALID);
-        ItemStackHelper.loadAllItems(tag, inventory);
+        heat = tag.getInteger(Lib.NBT.HEAT);
+
+        if (tag.hasKey(Lib.NBT.WORKING)) {
+            working = tag.getBoolean(Lib.NBT.WORKING);
+        }
+
+        if (tag.hasKey(Lib.NBT.PROGRESS)) {
+            progress = tag.getInteger(Lib.NBT.PROGRESS);
+        }
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+        StackUtils.writeItems(this, 0, tag);
+        StackUtils.writeItems(this, 1, tag);
+        StackUtils.writeItems(this, 2, tag);
+        StackUtils.writeItems(this, 3, tag);
+
         tag.setBoolean(Lib.NBT.VALID, valid);
-        ItemStackHelper.saveAllItems(tag, inventory);
+        tag.setInteger(Lib.NBT.HEAT, heat);
+        tag.setBoolean(Lib.NBT.WORKING, working);
+        tag.setInteger(Lib.NBT.PROGRESS, progress);
 
         return super.writeToNBT(tag);
     }
@@ -163,7 +283,7 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
             }
         }
 
-        markDirty();
+        onInventoryChanged();
 
         return stackRemoved;
     }
@@ -174,6 +294,8 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
 
         if (!stack.isEmpty()) {
             inventory.set(index, ItemStack.EMPTY);
+
+            onInventoryChanged();
         }
 
         return stack;
@@ -187,7 +309,7 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
             stack.setCount(getInventoryStackLimit());
         }
 
-        markDirty();
+        onInventoryChanged();
     }
 
     @Override
