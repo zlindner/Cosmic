@@ -10,8 +10,8 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "0.0.1"
-group = "zachy.ultio"
-archivesBaseName = "ultio"
+group = "zachy.cosmic"
+archivesBaseName = "cosmic"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {

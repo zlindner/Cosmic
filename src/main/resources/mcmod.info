@@ -1,7 +1,7 @@
 [
 {
-  "modid": "Ultio",
-  "name": "Ultio",
+  "modid": "Cosmic",
+  "name": "Cosmic",
   "description": "A mod heavily inspired by the popular 1.4.7 version of GregTech.",
   "version": "${version}",
   "mcversion": "${mcversion}",
