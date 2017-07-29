@@ -1,9 +1,9 @@
 {
-  "parent": "ultio:block/machine",
+  "parent": "cosmic:block/machine",
   "textures": {
-    "front": "ultio:blocks/industrial_blast_furnace_front_valid",
-    "side": "ultio:blocks/industrial_blast_furnace_side",
-    "top": "ultio:blocks/industrial_blast_furnace_side",
-    "back": "ultio:blocks/industrial_blast_furnace_back"
+    "front": "cosmic:blocks/industrial_blast_furnace_front_valid",
+    "side": "cosmic:blocks/industrial_blast_furnace_side",
+    "top": "cosmic:blocks/industrial_blast_furnace_side",
+    "back": "cosmic:blocks/industrial_blast_furnace_back"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "ultio:blocks/machine_casing_basic"
+    "all": "cosmic:blocks/machine_casing_basic"
   }
 }

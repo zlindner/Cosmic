@@ -23,5 +23,6 @@ public final class Lib {
         public static final String HEAT = "Heat";
         public static final String WORKING = "Working";
         public static final String PROGRESS = "Progress";
+        public static final String ENERGY = "Energy";
     }
 }

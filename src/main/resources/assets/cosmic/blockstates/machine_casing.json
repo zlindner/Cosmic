@@ -1,7 +1,7 @@
 {
   "variants": {
-    "type=basic": { "model": "ultio:machine_casing_basic" },
-    "type=intermediate": { "model": "ultio:machine_casing_intermediate" },
-    "type=advanced": { "model": "ultio:machine_casing_advanced" }
+    "type=basic": { "model": "cosmic:machine_casing_basic" },
+    "type=intermediate": { "model": "cosmic:machine_casing_intermediate" },
+    "type=advanced": { "model": "cosmic:machine_casing_advanced" }
   }
 }

@@ -1,7 +1,7 @@
 # CREATIVE TAB
-itemGroup.ultio=Ultio
+itemGroup.cosmic=Cosmic
 
 # GUI
-gui.ultio:industrial_blast_furnace=Industrial Blast Furnace
-gui.ultio:industrial_blast_furnace.heat=Heat
-gui.ultio:industrial_blast_furnace.invalid=Invalid Structure
+gui.cosmic:industrial_blast_furnace=Industrial Blast Furnace
+gui.cosmic:industrial_blast_furnace.heat=Heat
+gui.cosmic:industrial_blast_furnace.invalid=Invalid Structure

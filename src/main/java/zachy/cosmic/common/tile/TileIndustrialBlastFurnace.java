@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
@@ -23,7 +22,7 @@ import zachy.cosmic.common.core.util.StackUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 
 @Optional.Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = "albedo")
-public class TileIndustrialBlastFurnace extends TileBase implements ITickable, ISidedInventory, ILightProvider {
+public class TileIndustrialBlastFurnace extends TileMachineBase implements ISidedInventory, ILightProvider {
 
     private NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
 
@@ -35,7 +34,7 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
     private int heat = 0;
     private int progress = 0;
 
-    //TODO add to ic2 enet
+    //TODO adjust internal energy storage? maybe 0?
     public TileIndustrialBlastFurnace() {
 
     }
@@ -94,8 +93,23 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
         return recipe != null ? recipe.getDuration() : 0;
     }
 
-    public IBlastFurnaceRecipe getRecipe() {
-        return recipe;
+    public double getEnergy() {
+        return energy;
+    }
+
+    @Override
+    public double getMaxInput() {
+        return 128;
+    }
+
+    @Override
+    public double getMaxStored() {
+        return 12800;
+    }
+
+    @Override
+    public int getSinkTier() {
+        return 2;
     }
 
     private void onInventoryChanged() {
@@ -112,6 +126,7 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
         WorldUtils.updateBlock(world, pos);
     }
 
+    //TODO possibly cache recipe heat, energy, duration (may reduce overhead)
     @Override
     public void update() {
         if (world.isRemote) {
@@ -121,6 +136,8 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
         counter++;
 
         if (counter == 20) {
+            System.out.println(getEnergy());
+
             valid = verifyStructure();
 
             markDirty();
@@ -134,7 +151,11 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
             return;
         }
 
-        if (recipe != null && getHeat() < recipe.getHeat()) {
+        if (recipe != null && heat < recipe.getHeat()) {
+            return;
+        }
+
+        if (energy < 0) {
             return;
         }
 
@@ -146,6 +167,14 @@ public class TileIndustrialBlastFurnace extends TileBase implements ITickable, I
                     && getStackInSlot(2).getCount() + recipe.getOutput(0).getCount() <= getStackInSlot(2).getMaxStackSize())
                     || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(1), getStackInSlot(3))
                     && getStackInSlot(3).getCount() + recipe.getOutput(1).getCount() <= getStackInSlot(3).getMaxStackSize()))) {
+
+                if (energy >= recipe.getEnergy()) {
+                    drainEnergy(recipe.getEnergy());
+                } else {
+                    progress = 0;
+
+                    return;
+                }
 
                 progress++;
 

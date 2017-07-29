@@ -33,13 +33,14 @@ repositories {
     }
 
 	maven {
+	    name = "albedo"
 		url 'https://repo.elytradev.com/'
 	}
 }
 
 dependencies {
     compile 'elucent:albedo:2.0-SNAPSHOT'
-    deobfCompile  'net.industrial-craft:industrialcraft-2:2.8.9-ex112'
+    deobfCompile 'net.industrial-craft:industrialcraft-2:2.8.9-ex112'
 }
 
 processResources {
