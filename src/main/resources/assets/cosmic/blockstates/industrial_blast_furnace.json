@@ -1,12 +1,12 @@
 {
   "variants": {
-    "complete=true,direction=north": { "model": "cosmic:industrial_blast_furnace_valid"},
-    "complete=true,direction=east": { "model": "cosmic:industrial_blast_furnace_valid", "y": 90},
-    "complete=true,direction=south": { "model": "cosmic:industrial_blast_furnace_valid", "y": 180},
-    "complete=true,direction=west": { "model": "cosmic:industrial_blast_furnace_valid", "y": 270},
-    "complete=false,direction=north": { "model": "cosmic:industrial_blast_furnace_invalid" },
-    "complete=false,direction=east": { "model": "cosmic:industrial_blast_furnace_invalid", "y": 90 },
-    "complete=false,direction=south": { "model": "cosmic:industrial_blast_furnace_invalid", "y": 180 },
-    "complete=false,direction=west": { "model": "cosmic:industrial_blast_furnace_invalid", "y": 270 }
+    "direction=north,valid=true": { "model": "cosmic:industrial_blast_furnace_valid"},
+    "direction=east,valid=true": { "model": "cosmic:industrial_blast_furnace_valid", "y": 90},
+    "direction=south,valid=true": { "model": "cosmic:industrial_blast_furnace_valid", "y": 180},
+    "direction=west,valid=true": { "model": "cosmic:industrial_blast_furnace_valid", "y": 270},
+    "direction=north,valid=false": { "model": "cosmic:industrial_blast_furnace_invalid" },
+    "direction=east,valid=false": { "model": "cosmic:industrial_blast_furnace_invalid", "y": 90 },
+    "direction=south,valid=false": { "model": "cosmic:industrial_blast_furnace_invalid", "y": 180 },
+    "direction=west,valid=false": { "model": "cosmic:industrial_blast_furnace_invalid", "y": 270 }
   }
 }

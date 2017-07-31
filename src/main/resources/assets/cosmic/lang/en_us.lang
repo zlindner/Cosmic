@@ -5,3 +5,6 @@ itemGroup.cosmic=Cosmic
 gui.cosmic:industrial_blast_furnace=Industrial Blast Furnace
 gui.cosmic:industrial_blast_furnace.heat=Heat
 gui.cosmic:industrial_blast_furnace.invalid=Invalid Structure
+
+gui.cosmic:industrial_grinder=Industrial Grinder
+gui.cosmic:industrial_grinder.invalid=Invalid Structure

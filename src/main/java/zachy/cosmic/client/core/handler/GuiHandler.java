@@ -7,10 +7,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import zachy.cosmic.client.gui.GuiIndustrialBlastFurnace;
+import zachy.cosmic.client.gui.GuiIndustrialGrinder;
 import zachy.cosmic.client.gui.Guis;
 import zachy.cosmic.common.container.ContainerIndustrialBlastFurnace;
+import zachy.cosmic.common.container.ContainerIndustrialGrinder;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.TileIndustrialBlastFurnace;
+import zachy.cosmic.common.tile.TileIndustrialGrinder;
 
 import javax.annotation.Nullable;
 
@@ -20,6 +23,8 @@ public class GuiHandler implements IGuiHandler {
         switch(Id) {
             case Guis.INDUSTRIAL_BLAST_FURNACE:
                 return new ContainerIndustrialBlastFurnace((TileIndustrialBlastFurnace) tile, player);
+            case Guis.INDUSTRIAL_GRINDER:
+                return new ContainerIndustrialGrinder((TileIndustrialGrinder) tile, player);
             default:
                 return null;
         }
@@ -37,6 +42,8 @@ public class GuiHandler implements IGuiHandler {
         switch (Id) {
             case Guis.INDUSTRIAL_BLAST_FURNACE:
                 return new GuiIndustrialBlastFurnace((ContainerIndustrialBlastFurnace) getContainer(Id, WorldUtils.getTile(world, new BlockPos(x, y, z)), player));
+            case Guis.INDUSTRIAL_GRINDER:
+                return new GuiIndustrialGrinder((ContainerIndustrialGrinder) getContainer(Id, WorldUtils.getTile(world, new BlockPos(x, y, z)), player));
             default:
                 return null;
         }

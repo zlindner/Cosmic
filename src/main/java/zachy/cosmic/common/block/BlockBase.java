@@ -16,6 +16,9 @@ public class BlockBase extends Block implements IModelRegister {
     public BlockBase(String name) {
         super(Material.ROCK);
 
+        setHardness(2.0F);
+        //setResistance()
+
         setUnlocalizedName(name);
         setRegistryName(new ResourceLocation(Lib.MOD_ID, name));
         setCreativeTab(CosmicTab.INSTANCE);
@@ -31,7 +34,6 @@ public class BlockBase extends Block implements IModelRegister {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState();
     }

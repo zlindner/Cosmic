@@ -16,8 +16,6 @@ public class TileBase extends TileEntity {
 
     private EnumFacing direction = EnumFacing.NORTH;
 
-    protected int counter = 0;
-
     public void setDirection(EnumFacing direction) {
         this.direction = direction;
 

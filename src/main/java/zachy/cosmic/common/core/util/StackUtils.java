@@ -1,10 +1,13 @@
 package zachy.cosmic.common.core.util;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.ArrayUtils;
@@ -13,6 +16,7 @@ import zachy.cosmic.common.core.Lib;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class StackUtils {
 
@@ -77,6 +81,34 @@ public class StackUtils {
                     inventory.setInventorySlotContents(slot, stack);
                 }
             }
+        }
+    }
+
+    public static void dropInventory(World world, BlockPos pos, IInventory inventory) {
+        for (int i = 0; i < inventory.getSizeInventory(); ++i) {
+            ItemStack stack = inventory.getStackInSlot(i);
+
+            if (!stack.isEmpty()) {
+                spawnStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+            }
+        }
+    }
+
+    public static void spawnStack(World world, double x, double y, double z, ItemStack stack) {
+        Random random = new Random();
+
+        float f = random.nextFloat() * 0.8F + 0.1F;
+        float f1 = random.nextFloat() * 0.8F + 0.1F;
+        float f2 = random.nextFloat() * 0.8F + 0.1F;
+
+        while (!stack.isEmpty()) {
+            EntityItem entityitem = new EntityItem(world, x + (double) f, y + (double) f1, z + (double) f2, stack.splitStack(random.nextInt(21) + 10));
+
+            entityitem.motionX = random.nextGaussian() * 0.05000000074505806D;
+            entityitem.motionY = random.nextGaussian() * 0.05000000074505806D + 0.20000000298023224D;
+            entityitem.motionZ = random.nextGaussian() * 0.05000000074505806D;
+
+            world.spawnEntity(entityitem);
         }
     }
 

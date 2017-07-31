@@ -13,6 +13,7 @@ public final class Lib {
         public static final String MACHINE_FRAME = "machine_frame";
 
         public static final String INDUSTRIAL_BLAST_FURNACE = "industrial_blast_furnace";
+        public static final String INDUSTRIAL_GRINDER = "industrial_grinder";
     }
 
     public final class NBT {

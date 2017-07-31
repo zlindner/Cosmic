@@ -11,23 +11,23 @@ import zachy.cosmic.client.core.handler.ModelHandler;
 import zachy.cosmic.client.gui.Guis;
 import zachy.cosmic.common.Cosmic;
 import zachy.cosmic.common.core.Lib;
-import zachy.cosmic.common.tile.TileIndustrialBlastFurnace;
+import zachy.cosmic.common.tile.TileIndustrialGrinder;
 
-public class BlockIndustrialBlastFurnace extends BlockMultiBlockBase {
+public class BlockIndustrialGrinder extends BlockMultiBlockBase {
 
-    public BlockIndustrialBlastFurnace() {
-        super(Lib.Blocks.INDUSTRIAL_BLAST_FURNACE);
+    public BlockIndustrialGrinder() {
+        super(Lib.Blocks.INDUSTRIAL_GRINDER);
     }
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileIndustrialBlastFurnace();
+        return new TileIndustrialGrinder();
     }
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote && !player.isSneaking()) {
-            player.openGui(Cosmic.INSTANCE, Guis.INDUSTRIAL_BLAST_FURNACE, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Cosmic.INSTANCE, Guis.INDUSTRIAL_GRINDER, world, pos.getX(), pos.getY(), pos.getZ());
         }
 
         return true;
