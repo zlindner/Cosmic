@@ -22,7 +22,7 @@
 !/gradle/wrapper/gradle-wrapper.jar
 
 # Photoshop
-/src/main/resources/assets/ultio/textures/psdzzz
+/src/main/resources/assets/cosmic/textures/psdzzz
 
 # OSX (adds a lot of garbage)
 .DS_Store
