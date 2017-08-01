@@ -6,15 +6,13 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import zachy.cosmic.common.core.util.MultiBlockUtils;
 
-import javax.annotation.Nullable;
+public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidHandler {
 
-public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidTank {
-
-    FluidTank tank = new FluidTank(4000);
+    private FluidTank tank = new FluidTank(16000);
 
     private final int INPUT_SLOTS[] = {0};
     private final int OUTPUT_SLOTS[] = {1, 2, 3, 4};
@@ -59,7 +57,7 @@ public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidT
 
     @Override
     public double getMaxStored() {
-        return 0;
+        return 12800;
     }
 
     @Override
@@ -98,34 +96,27 @@ public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidT
         return index == OUTPUT_SLOTS[0] || index == OUTPUT_SLOTS[1] || index == OUTPUT_SLOTS[2] || index == OUTPUT_SLOTS[3];
     }
 
-    @Nullable
     @Override
-    public FluidStack getFluid() {
-        return null;
-    }
-
-    @Override
-    public int getFluidAmount() {
-        return 0;
-    }
-
-    @Override
-    public int getCapacity() {
-        return 0;
-    }
-
-    @Override
-    public FluidTankInfo getInfo() {
-        return null;
+    public IFluidTankProperties[] getTankProperties() {
+        return tank.getTankProperties();
     }
 
     @Override
     public int fill(FluidStack resource, boolean doFill) {
-        return 0;
+        return tank.fill(resource, doFill);
+    }
+
+    @Override
+    public FluidStack drain(FluidStack resource, boolean doDrain) {
+        return tank.drain(resource, doDrain);
     }
 
     @Override
     public FluidStack drain(int maxDrain, boolean doDrain) {
-        return null;
+        return tank.drain(maxDrain, doDrain);
+    }
+
+    public FluidStack getFluidStack() {
+        return tank.getFluid();
     }
 }

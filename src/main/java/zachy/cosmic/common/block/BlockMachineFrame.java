@@ -12,6 +12,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import zachy.cosmic.apiimpl.state.enums.MachineFrameType;
 import zachy.cosmic.client.core.handler.ModelHandler;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.item.ItemBlockBase;

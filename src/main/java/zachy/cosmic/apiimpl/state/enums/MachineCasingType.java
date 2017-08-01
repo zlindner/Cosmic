@@ -1,8 +1,8 @@
-package zachy.cosmic.common.block;
+package zachy.cosmic.apiimpl.state.enums;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum MachineFrameType implements IStringSerializable {
+public enum MachineCasingType implements IStringSerializable {
     BASIC,
     INTERMEDIATE,
     ADVANCED;

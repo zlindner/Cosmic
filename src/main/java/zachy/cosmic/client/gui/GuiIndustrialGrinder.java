@@ -1,11 +1,14 @@
 package zachy.cosmic.client.gui;
 
 import zachy.cosmic.common.container.ContainerIndustrialGrinder;
+import zachy.cosmic.common.core.util.RenderUtils;
 import zachy.cosmic.common.tile.TileIndustrialGrinder;
 
 public class GuiIndustrialGrinder extends GuiBase {
 
     private TileIndustrialGrinder tile;
+
+    private final RenderUtils.FluidRenderer FLUID_RENDERER = new RenderUtils.FluidRenderer(16000, 12, 38);
 
     public GuiIndustrialGrinder(ContainerIndustrialGrinder container) {
         super(container, 176, 182);
@@ -29,6 +32,10 @@ public class GuiIndustrialGrinder extends GuiBase {
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
+        if (tile.getFluidStack() != null) {
+            FLUID_RENDERER.draw(mc, x + 40, y + 43, tile.getFluidStack());
+        }
+
         /*if (tile.isWorking()) {
             drawTexture(x + 86, y + 43, 176, 0, getProgressScaled(22), 15);
         }*/
@@ -42,7 +49,7 @@ public class GuiIndustrialGrinder extends GuiBase {
             drawString(80, 90, format("gui.cosmic:industrial_grinder.invalid"));
         }
 
-        drawString(8,90, format("container.inventory"));
+        drawString(8, 90, format("container.inventory"));
     }
 
     /*private int getProgressScaled(int scale) {

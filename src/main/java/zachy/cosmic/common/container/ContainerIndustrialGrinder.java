@@ -11,7 +11,7 @@ public class ContainerIndustrialGrinder extends ContainerBase {
     public ContainerIndustrialGrinder(TileIndustrialGrinder tile, EntityPlayer player) {
         super(tile, player);
 
-        addSlotToContainer(new Slot(tile, 0, 38, 34));
+        addSlotToContainer(new Slot(tile, 0, 38, 18));
 
         addSlotToContainer(new SlotOutput(tile, 1, 93, 43));
         addSlotToContainer(new SlotOutput(tile, 2, 111, 43));
