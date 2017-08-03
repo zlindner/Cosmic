@@ -32,13 +32,13 @@ public class GuiIndustrialGrinder extends GuiBase {
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
+        if (tile.isWorking()) {
+            drawTexture(x + 62, y + 45, 176, 0, getProgressScaled(22), 11);
+        }
+
         if (tile.getFluidStack() != null) {
             FLUID_RENDERER.draw(mc, x + 40, y + 43, tile.getFluidStack());
         }
-
-        /*if (tile.isWorking()) {
-            drawTexture(x + 86, y + 43, 176, 0, getProgressScaled(22), 15);
-        }*/
     }
 
     @Override
@@ -52,7 +52,7 @@ public class GuiIndustrialGrinder extends GuiBase {
         drawString(8, 90, format("container.inventory"));
     }
 
-    /*private int getProgressScaled(int scale) {
+    private int getProgressScaled(int scale) {
         float progress = tile.getProgress();
         float duration = tile.getDuration();
 
@@ -61,5 +61,5 @@ public class GuiIndustrialGrinder extends GuiBase {
         }
 
         return (int) (progress / duration * (float) scale);
-    }*/
+    }
 }

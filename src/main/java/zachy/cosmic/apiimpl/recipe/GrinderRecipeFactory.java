@@ -10,47 +10,46 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
-import zachy.cosmic.api.recipe.IBlastFurnaceRecipe;
-import zachy.cosmic.common.core.util.StackUtils;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import zachy.cosmic.api.recipe.IGrinderRecipe;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
 
-public class BlastFurnaceRecipeFactory {
+public class GrinderRecipeFactory {
 
     private final ResourceLocation name;
     private JsonObject json;
 
-    public BlastFurnaceRecipeFactory(ResourceLocation name, JsonObject json) {
+    public GrinderRecipeFactory(ResourceLocation name, JsonObject json) {
         this.name = name;
         this.json = json;
     }
 
-    public IBlastFurnaceRecipe create(JsonContext context) {
-        JsonArray inputsArray = JsonUtils.getJsonArray(json, "inputs");
+    public IGrinderRecipe create(JsonContext context) {
+        JsonArray inputArray = JsonUtils.getJsonArray(json, "input");
 
-        if (inputsArray.size() != 2) {
-            throw new JsonSyntaxException("Expected 2 inputs, got " + inputsArray.size() + " input(s)");
+        if (inputArray.size() != 1) {
+            throw new JsonSyntaxException("Expected 1 input, got " + inputArray.size() + " input(s)");
         }
 
-        List<NonNullList<ItemStack>> inputs = new ArrayList<>(2);
+        NonNullList<ItemStack> _input = NonNullList.create();
 
-        for (JsonElement element : inputsArray) {
-            if (element.isJsonNull()) {
-                inputs.add(StackUtils.emptyNonNullList());
-            } else {
-                inputs.add(NonNullList.from(ItemStack.EMPTY, CraftingHelper.getIngredient(element, context).getMatchingStacks()));
-            }
+        for (JsonElement element : inputArray) {
+            _input = NonNullList.from(ItemStack.EMPTY, CraftingHelper.getIngredient(element, context).getMatchingStacks());
         }
+
+        NonNullList<ItemStack> input = _input;
+
+        FluidStack fluid = FluidRegistry.getFluidStack(JsonUtils.getString(json, "fluid"), 0);
 
         JsonArray outputsArray = JsonUtils.getJsonArray(json, "outputs");
 
-        if (outputsArray.size() != 2) {
-            throw new JsonSyntaxException("Expected 2 outputs, got " + outputsArray.size() + " output(s)");
+        if (outputsArray.size() != 4) {
+            throw new JsonSyntaxException("Expected 4 outputs, got " + outputsArray.size() + " output(s)");
         }
 
-        NonNullList<ItemStack> outputs = NonNullList.withSize(2, ItemStack.EMPTY);
+        NonNullList<ItemStack> outputs = NonNullList.withSize(4, ItemStack.EMPTY);
 
         int i = 0;
 
@@ -62,11 +61,11 @@ public class BlastFurnaceRecipeFactory {
             i++;
         }
 
+        final int fluidAmount = JsonUtils.getInt(json, "fluid_amount");
         final int duration = JsonUtils.getInt(json, "duration");
         final int energy = JsonUtils.getInt(json, "energy");
-        final int heat = JsonUtils.getInt(json, "heat");
 
-        return new IBlastFurnaceRecipe() {
+        return new IGrinderRecipe() {
             @Override
             public ResourceLocation getName() {
                 return name;
@@ -74,8 +73,18 @@ public class BlastFurnaceRecipeFactory {
 
             @Nonnull
             @Override
-            public NonNullList<ItemStack> getInput(int index) {
-                return inputs.get(index);
+            public NonNullList<ItemStack> getInput() {
+                return input;
+            }
+
+            @Override
+            public FluidStack getFluid() {
+                return fluid;
+            }
+
+            @Override
+            public int getFluidAmount() {
+                return fluidAmount;
             }
 
             @Nonnull
@@ -92,11 +101,6 @@ public class BlastFurnaceRecipeFactory {
             @Override
             public int getEnergy() {
                 return energy;
-            }
-
-            @Override
-            public int getHeat() {
-                return heat;
             }
         };
     }

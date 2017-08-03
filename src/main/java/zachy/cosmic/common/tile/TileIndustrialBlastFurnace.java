@@ -107,6 +107,14 @@ public class TileIndustrialBlastFurnace extends TileMultiBlockBase {
     public void update() {
         super.update();
 
+        if (world.isRemote) {
+            return;
+        }
+
+        if (!isValid()) {
+            return;
+        }
+
         if (recipe != null && heat < recipe.getHeat()) {
             return;
         }
@@ -158,6 +166,7 @@ public class TileIndustrialBlastFurnace extends TileMultiBlockBase {
                     }
 
                     recipe = API.instance().getBlastFurnaceRegistry().getRecipe(this);
+
                     setProgress(0);
                 }
 

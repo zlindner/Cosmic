@@ -42,10 +42,6 @@ public abstract class TileMultiBlockBase extends TileMachineBase {
 
             counter = 0;
         }
-
-        if (!isValid()) {
-            return;
-        }
     }
 
     @Override

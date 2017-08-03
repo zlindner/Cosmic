@@ -6,8 +6,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import zachy.cosmic.api.IAPI;
 import zachy.cosmic.api.recipe.IBlastFurnaceRegistry;
+import zachy.cosmic.api.recipe.IGrinderRegistry;
 import zachy.cosmic.api.util.IComparer;
 import zachy.cosmic.apiimpl.recipe.BlastFurnaceRegistry;
+import zachy.cosmic.apiimpl.recipe.GrinderRegistry;
 import zachy.cosmic.apiimpl.util.Comparer;
 
 import javax.annotation.Nonnull;
@@ -18,6 +20,7 @@ public class API implements IAPI {
 
     private IComparer comparer = new Comparer();
     private IBlastFurnaceRegistry blastFurnaceRegistry = new BlastFurnaceRegistry();
+    private IGrinderRegistry grinderRegistry = new GrinderRegistry();
 
     public static IAPI instance() {
         return INSTANCE;
@@ -29,8 +32,16 @@ public class API implements IAPI {
         return comparer;
     }
 
+    @Nonnull
+    @Override
     public IBlastFurnaceRegistry getBlastFurnaceRegistry() {
         return blastFurnaceRegistry;
+    }
+
+    @Nonnull
+    @Override
+    public IGrinderRegistry getGrinderRegistry() {
+        return grinderRegistry;
     }
 
     @Override
