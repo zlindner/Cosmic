@@ -1,4 +1,4 @@
-package zachy.cosmic.common.tile;
+package zachy.cosmic.common.tile.base;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;

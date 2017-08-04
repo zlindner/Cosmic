@@ -6,11 +6,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import zachy.cosmic.api.recipe.IBlastFurnaceRecipe;
+import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRecipe;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.core.util.MultiBlockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
+import zachy.cosmic.common.tile.base.TileMultiBlockBase;
 
 public class TileIndustrialBlastFurnace extends TileMultiBlockBase {
 
@@ -22,7 +23,7 @@ public class TileIndustrialBlastFurnace extends TileMultiBlockBase {
     private final int OUTPUT_SLOTS[] = {2, 3};
 
     //TODO adjust internal energy storage? maybe 0?
-    //TODO investigate client / server de-sync when removing item from output slot (fixed i think)
+    //TODO add tank
     public TileIndustrialBlastFurnace() {
         setValid(false);
         setWorking(false);

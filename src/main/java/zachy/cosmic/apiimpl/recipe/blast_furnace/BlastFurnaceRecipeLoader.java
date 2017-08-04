@@ -1,4 +1,4 @@
-package zachy.cosmic.apiimpl.recipe;
+package zachy.cosmic.apiimpl.recipe.blast_furnace;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

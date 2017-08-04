@@ -10,6 +10,7 @@ public class GuiIndustrialGrinder extends GuiBase {
 
     private final RenderUtils.FluidRenderer FLUID_RENDERER = new RenderUtils.FluidRenderer(16000, 12, 38);
 
+    //TODO add fluid tooltip on hover (fluid name + amount)
     public GuiIndustrialGrinder(ContainerIndustrialGrinder container) {
         super(container, 176, 182);
 
@@ -33,11 +34,11 @@ public class GuiIndustrialGrinder extends GuiBase {
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
         if (tile.isWorking()) {
-            drawTexture(x + 62, y + 45, 176, 0, getProgressScaled(22), 11);
+            drawTexture(x + 72, y + 45, 176, 0, getProgressScaled(22), 11);
         }
 
         if (tile.getFluidStack() != null) {
-            FLUID_RENDERER.draw(mc, x + 40, y + 43, tile.getFluidStack());
+            FLUID_RENDERER.draw(mc, x + 50, y + 43, tile.getFluidStack());
         }
     }
 

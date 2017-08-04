@@ -1,12 +1,12 @@
-package zachy.cosmic.apiimpl.recipe;
+package zachy.cosmic.apiimpl.recipe.grinder;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import zachy.cosmic.api.recipe.IGrinderRecipe;
-import zachy.cosmic.api.recipe.IGrinderRegistry;
+import zachy.cosmic.api.recipe.grinder.IGrinderRecipe;
+import zachy.cosmic.api.recipe.grinder.IGrinderRegistry;
 import zachy.cosmic.api.util.IComparer;
 import zachy.cosmic.apiimpl.API;
 

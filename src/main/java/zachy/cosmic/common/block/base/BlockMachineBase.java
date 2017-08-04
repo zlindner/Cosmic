@@ -1,4 +1,4 @@
-package zachy.cosmic.common.block;
+package zachy.cosmic.common.block.base;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyDirection;

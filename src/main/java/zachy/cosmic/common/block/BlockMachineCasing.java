@@ -14,6 +14,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import zachy.cosmic.apiimpl.state.enums.MachineCasingType;
 import zachy.cosmic.client.core.handler.ModelHandler;
+import zachy.cosmic.common.block.base.BlockBase;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.item.ItemBlockBase;
 

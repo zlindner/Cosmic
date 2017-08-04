@@ -1,10 +1,10 @@
-package zachy.cosmic.apiimpl.recipe;
+package zachy.cosmic.apiimpl.recipe.blast_furnace;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import zachy.cosmic.api.recipe.IBlastFurnaceRecipe;
-import zachy.cosmic.api.recipe.IBlastFurnaceRegistry;
+import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRecipe;
+import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
 import zachy.cosmic.api.util.IComparer;
 import zachy.cosmic.apiimpl.API;
 

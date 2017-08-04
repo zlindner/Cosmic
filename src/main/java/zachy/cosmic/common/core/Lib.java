@@ -14,6 +14,7 @@ public final class Lib {
 
         public static final String INDUSTRIAL_BLAST_FURNACE = "industrial_blast_furnace";
         public static final String INDUSTRIAL_GRINDER = "industrial_grinder";
+        public static final String INDUSTRIAL_SAWMILL = "industrial_sawmill";
     }
 
     public final class NBT {

@@ -12,6 +12,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import zachy.cosmic.client.core.handler.ModelHandler;
 import zachy.cosmic.client.gui.Guis;
 import zachy.cosmic.common.Cosmic;
+import zachy.cosmic.common.block.base.BlockMultiBlockBase;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.core.util.FluidUtils;
 import zachy.cosmic.common.core.util.WorldUtils;

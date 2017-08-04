@@ -11,12 +11,11 @@ public class ContainerIndustrialGrinder extends ContainerBase {
     public ContainerIndustrialGrinder(TileIndustrialGrinder tile, EntityPlayer player) {
         super(tile, player);
 
-        addSlotToContainer(new Slot(tile, 0, 38, 18));
+        addSlotToContainer(new Slot(tile, 0, 48, 18));
 
-        addSlotToContainer(new SlotOutput(tile, 1, 93, 43));
-        addSlotToContainer(new SlotOutput(tile, 2, 111, 43));
-        addSlotToContainer(new SlotOutput(tile, 3, 129, 43));
-        addSlotToContainer(new SlotOutput(tile, 4, 147, 43));
+        addSlotToContainer(new SlotOutput(tile, 1, 103, 43));
+        addSlotToContainer(new SlotOutput(tile, 2, 121, 43));
+        addSlotToContainer(new SlotOutput(tile, 3, 139, 43));
 
         addPlayerInventory(8, 100);
     }
@@ -30,8 +29,8 @@ public class ContainerIndustrialGrinder extends ContainerBase {
         if (slot.getHasStack()) {
             stack = slot.getStack();
 
-            if (index < 5) {
-                if (!mergeItemStack(stack, 5 + 9, inventorySlots.size(), false)) {
+            if (index < 4) {
+                if (!mergeItemStack(stack, 4 + 9, inventorySlots.size(), false)) {
                     return ItemStack.EMPTY;
                 }
             } else if (!mergeItemStack(stack, 0, 1, false)) {

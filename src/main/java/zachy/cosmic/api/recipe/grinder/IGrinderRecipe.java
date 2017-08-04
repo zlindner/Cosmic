@@ -1,27 +1,37 @@
-package zachy.cosmic.api.recipe;
+package zachy.cosmic.api.recipe.grinder;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 
 /**
- * Represents a recipe in the industrial blast furnace.
+ * Represents a recipe in the industrial grinder.
  */
-public interface IBlastFurnaceRecipe {
+public interface IGrinderRecipe {
 
     /**
-     * @return the name of this industrial blast furnace recipe
+     * @return the name of this industrial grinder recipe
      */
     ResourceLocation getName();
 
     /**
-     * @param index the input slot that we want the stack for (0 - 1)
-     * @return possible stack(s) for the given slot, or empty list for no stack
+     * @return possible stack(s) for the input slot, or empty list for no stack
      */
     @Nonnull
-    NonNullList<ItemStack> getInput(int index);
+    NonNullList<ItemStack> getInput();
+
+    /**
+     * @return the fluidstack required by the recipe (if needed)
+     */
+    FluidStack getFluid();
+
+    /**
+     * @return the amount of fluid required by the recipe (if needed)
+     */
+    int getFluidAmount();
 
     /**
      * @param index the output slot that we want the stack for (0 - 1)
@@ -39,9 +49,4 @@ public interface IBlastFurnaceRecipe {
      * @return the energy in eu per tick that this recipe requires to complete
      */
     int getEnergy();
-
-    /**
-     * @return the internal heat that this recipe requires to complete
-     */
-    int getHeat();
 }

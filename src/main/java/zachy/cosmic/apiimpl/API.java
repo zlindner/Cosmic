@@ -5,11 +5,11 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import zachy.cosmic.api.IAPI;
-import zachy.cosmic.api.recipe.IBlastFurnaceRegistry;
-import zachy.cosmic.api.recipe.IGrinderRegistry;
+import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
+import zachy.cosmic.api.recipe.grinder.IGrinderRegistry;
 import zachy.cosmic.api.util.IComparer;
-import zachy.cosmic.apiimpl.recipe.BlastFurnaceRegistry;
-import zachy.cosmic.apiimpl.recipe.GrinderRegistry;
+import zachy.cosmic.apiimpl.recipe.blast_furnace.BlastFurnaceRegistry;
+import zachy.cosmic.apiimpl.recipe.grinder.GrinderRegistry;
 import zachy.cosmic.apiimpl.util.Comparer;
 
 import javax.annotation.Nonnull;

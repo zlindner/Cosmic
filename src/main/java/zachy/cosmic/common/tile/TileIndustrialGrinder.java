@@ -9,10 +9,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import zachy.cosmic.api.recipe.IGrinderRecipe;
+import zachy.cosmic.api.recipe.grinder.IGrinderRecipe;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.core.util.MultiBlockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
+import zachy.cosmic.common.tile.base.TileMultiBlockBase;
 
 public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidHandler {
 
@@ -21,16 +22,18 @@ public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidH
     private IGrinderRecipe recipe;
 
     private final int INPUT_SLOTS[] = {0};
-    private final int OUTPUT_SLOTS[] = {1, 2, 3, 4};
+    private final int OUTPUT_SLOTS[] = {1, 2, 3};
 
     private boolean wasFilled = false;
 
+    //TODO test / add fluid pipe compatibility
+    //TODO remove last output slot from gui
     public TileIndustrialGrinder() {
         setValid(false);
         setWorking(false);
         setProgress(0);
 
-        inventory = NonNullList.withSize(5, ItemStack.EMPTY);
+        inventory = NonNullList.withSize(4, ItemStack.EMPTY);
     }
 
     @Override
@@ -121,15 +124,13 @@ public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidH
         if (isWorking()) {
             if (recipe == null) {
                 setWorking(false);
-            } else if ((getStackInSlot(1).isEmpty() && getStackInSlot(2).isEmpty() && getStackInSlot(3).isEmpty() && getStackInSlot(4).isEmpty()
+            } else if ((getStackInSlot(1).isEmpty() && getStackInSlot(2).isEmpty() && getStackInSlot(3).isEmpty()
                     || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(0), getStackInSlot(1))
                     && getStackInSlot(1).getCount() + recipe.getOutput(0).getCount() <= getStackInSlot(1).getMaxStackSize())
                     || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(1), getStackInSlot(2))
                     && getStackInSlot(2).getCount() + recipe.getOutput(1).getCount() <= getStackInSlot(2).getMaxStackSize()))
                     || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(2), getStackInSlot(3))
-                    && getStackInSlot(3).getCount() + recipe.getOutput(2).getCount() <= getStackInSlot(3).getMaxStackSize())
-                    || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(3), getStackInSlot(4))
-                    && getStackInSlot(4).getCount() + recipe.getOutput(3).getCount() <= getStackInSlot(4).getMaxStackSize())) {
+                    && getStackInSlot(3).getCount() + recipe.getOutput(2).getCount() <= getStackInSlot(3).getMaxStackSize())) {
 
                 if (getEnergy() >= recipe.getEnergy()) {
                     drainEnergy(recipe.getEnergy());
@@ -199,7 +200,7 @@ public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidH
     @Override
     public int[] getSlotsForFace(EnumFacing side) {
         if (side == EnumFacing.UP) {
-            return new int[]{INPUT_SLOTS[0]};
+            return INPUT_SLOTS;
         } else if (side == EnumFacing.DOWN) {
             return new int[0];
         } else {
@@ -214,7 +215,7 @@ public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidH
 
     @Override
     public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == OUTPUT_SLOTS[0] || index == OUTPUT_SLOTS[1] || index == OUTPUT_SLOTS[2] || index == OUTPUT_SLOTS[3];
+        return index == OUTPUT_SLOTS[0] || index == OUTPUT_SLOTS[1] || index == OUTPUT_SLOTS[2];
     }
 
     @Override
@@ -222,7 +223,7 @@ public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidH
         return tank.getTankProperties();
     }
 
-    //TODO possibly create custom implementation of FluidTank of IFluidHandler
+    //TODO possibly create custom implementation of FluidTank or IFluidHandler
     @Override
     public int fill(FluidStack resource, boolean doFill) {
         wasFilled = true;

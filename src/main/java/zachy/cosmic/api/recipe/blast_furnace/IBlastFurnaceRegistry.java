@@ -1,4 +1,4 @@
-package zachy.cosmic.api.recipe;
+package zachy.cosmic.api.recipe.blast_furnace;
 
 import net.minecraft.inventory.IInventory;
 

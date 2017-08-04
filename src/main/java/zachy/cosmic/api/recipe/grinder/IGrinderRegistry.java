@@ -1,4 +1,4 @@
-package zachy.cosmic.api.recipe;
+package zachy.cosmic.api.recipe.grinder;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraftforge.fluids.FluidTank;

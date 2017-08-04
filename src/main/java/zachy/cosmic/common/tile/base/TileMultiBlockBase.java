@@ -1,4 +1,4 @@
-package zachy.cosmic.common.tile;
+package zachy.cosmic.common.tile.base;
 
 import elucent.albedo.lighting.Light;
 import net.minecraft.nbt.NBTTagCompound;

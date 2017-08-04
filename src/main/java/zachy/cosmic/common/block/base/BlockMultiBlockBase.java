@@ -1,4 +1,4 @@
-package zachy.cosmic.common.block;
+package zachy.cosmic.common.block.base;
 
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import zachy.cosmic.common.core.init.ModBlocks;
 import zachy.cosmic.common.core.util.WorldUtils;
-import zachy.cosmic.common.tile.TileMultiBlockBase;
+import zachy.cosmic.common.tile.base.TileMultiBlockBase;
 
 public class BlockMultiBlockBase extends BlockMachineBase {
 
