@@ -49,6 +49,10 @@ public class GuiIndustrialSawmill extends GuiBase {
             drawString(80, 90, format("gui.cosmic:industrial_sawmill.invalid"));
         }
 
+        if (inBounds(55, 39, 20, 46, mouseX, mouseY) && tile.getFluidStack() != null) {
+            drawTooltip(mouseX, mouseY, tile.getFluidStack().getLocalizedName() + "\n" + tile.getFluidStack().amount + " mB");
+        }
+
         drawString(8, 90, format("container.inventory"));
     }
 

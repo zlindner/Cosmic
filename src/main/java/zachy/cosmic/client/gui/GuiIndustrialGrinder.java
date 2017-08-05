@@ -50,6 +50,10 @@ public class GuiIndustrialGrinder extends GuiBase {
             drawString(80, 90, format("gui.cosmic:industrial_grinder.invalid"));
         }
 
+        if (inBounds(46, 39, 20, 46, mouseX, mouseY) && tile.getFluidStack() != null) {
+            drawTooltip(mouseX, mouseY, tile.getFluidStack().getLocalizedName() + "\n" + tile.getFluidStack().amount + " mB");
+        }
+
         drawString(8, 90, format("container.inventory"));
     }
 

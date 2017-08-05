@@ -5,10 +5,15 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import zachy.cosmic.common.core.Lib;
 
+import javax.annotation.Nonnull;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class GuiBase extends GuiContainer {
@@ -111,6 +116,22 @@ public abstract class GuiBase extends GuiContainer {
         drawTexturedModalRect(x, y, textureX, textureY, width, height);
     }
 
+    public void drawTooltip(@Nonnull ItemStack stack, int x, int y, String lines) {
+        drawTooltip(stack, x, y, Arrays.asList(lines.split("\n")));
+    }
+
+    public void drawTooltip(int x, int y, String lines) {
+        drawTooltip(ItemStack.EMPTY, x, y, lines);
+    }
+
+    public void drawTooltip(@Nonnull ItemStack stack, int x, int y, List<String> lines) {
+        GlStateManager.disableLighting();
+
+        GuiUtils.drawHoveringText(stack, lines, x, y, width - guiLeft, height, -1, fontRenderer);
+
+        GlStateManager.enableLighting();
+    }
+
     public static String format(String name, Object... format) {
         return I18n.format(name, format);
     }
@@ -131,9 +152,7 @@ public abstract class GuiBase extends GuiContainer {
         return guiTop;
     }
 
-    public static int calculateOffsetOnScale(int pos, float scale) {
-        float multiplier = (pos / scale);
-
-        return (int) multiplier;
+    public boolean inBounds(int x, int y, int w, int h, int ox, int oy) {
+        return ox >= x && ox <= x + w && oy >= y && oy <= y + h;
     }
 }
