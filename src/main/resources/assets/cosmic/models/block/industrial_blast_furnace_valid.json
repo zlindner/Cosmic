@@ -4,6 +4,7 @@
     "front": "cosmic:blocks/industrial_blast_furnace_front_valid",
     "side": "cosmic:blocks/industrial_blast_furnace_side",
     "top": "cosmic:blocks/industrial_blast_furnace_side",
-    "back": "cosmic:blocks/industrial_blast_furnace_back"
+    "back": "cosmic:blocks/industrial_blast_furnace_back",
+    "down": "cosmic:blocks/industrial_blast_furnace_side"
   }
 }

@@ -46,6 +46,8 @@ public abstract class TileMachineBase extends TileBase implements ITickable, IEn
         this.progress = progress;
     }
 
+    public abstract int getDuration();
+
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);

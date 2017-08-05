@@ -28,7 +28,17 @@ public class GuiIndustrialSawmill extends GuiBase {
 
     @Override
     public void drawBackground(int x, int y, int mouseX, int mouseY) {
+        bindTexture("gui/industrial_sawmill.png");
 
+        drawTexture(x, y, 0, 0, screenWidth, screenHeight);
+
+        if (tile.isWorking()) {
+            drawTexture(x + 83, y + 45, 176, 0, getProgressScaled(22), 11);
+        }
+
+        if (tile.getFluidStack() != null) {
+            FLUID_RENDERER.draw(mc, x + 59, y + 43, tile.getFluidStack());
+        }
     }
 
     @Override
@@ -40,5 +50,16 @@ public class GuiIndustrialSawmill extends GuiBase {
         }
 
         drawString(8, 90, format("container.inventory"));
+    }
+
+    private int getProgressScaled(int scale) {
+        float progress = tile.getProgress();
+        float duration = tile.getDuration();
+
+        if (progress > duration) {
+            return scale;
+        }
+
+        return (int) (progress / duration * (float) scale);
     }
 }

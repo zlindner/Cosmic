@@ -9,7 +9,7 @@
   },
   "textures": {
     "particle": "#front",
-    "down": "#top",
+    "down": "##down",
     "up": "#top",
     "north": "#front",
     "east": "#side",

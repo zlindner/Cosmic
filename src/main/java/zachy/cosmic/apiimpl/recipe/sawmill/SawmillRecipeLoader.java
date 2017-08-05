@@ -1,4 +1,4 @@
-package zachy.cosmic.apiimpl.recipe.grinder;
+package zachy.cosmic.apiimpl.recipe.sawmill;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,15 +19,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 
-//TODO could possibly use one loader class implementing <T>
-public class GrinderRecipeLoader {
+public class SawmillRecipeLoader {
 
     private static Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     public static void load() {
         JsonContext context = new JsonContext(Lib.MOD_ID);
 
-        CraftingHelper.findFiles(Loader.instance().activeModContainer(), "assets/" + Lib.MOD_ID + "/machine_recipes/grinder", root -> {
+        CraftingHelper.findFiles(Loader.instance().activeModContainer(), "assets/" + Lib.MOD_ID + "/machine_recipes/sawmill", root -> {
             //TODO Load the constants into to the context.
 
             return true;
@@ -46,13 +45,13 @@ public class GrinderRecipeLoader {
             try {
                 reader = Files.newBufferedReader(file);
 
-                API.instance().getGrinderRegistry().addRecipe(new GrinderRecipeFactory(key, JsonUtils.fromJson(GSON, reader, JsonObject.class)).create(context));
+                API.instance().getSawmillRegistry().addRecipe(new SawmillRecipeFactory(key, JsonUtils.fromJson(GSON, reader, JsonObject.class)).create(context));
             } catch (JsonParseException e) {
-                FMLLog.log.error("Parsing error while reading JSON grinder recipe {}", key, e);
+                FMLLog.log.error("Parsing error while reading JSON sawmill recipe {}", key, e);
 
                 return false;
             } catch (IOException e) {
-                FMLLog.log.error("Couldn't read JSON grinder recipe {} from {}", key, file, e);
+                FMLLog.log.error("Couldn't read JSON sawmill recipe {} from {}", key, file, e);
 
                 return false;
             } finally {

@@ -8,3 +8,6 @@ gui.cosmic:industrial_blast_furnace.invalid=Invalid Structure
 
 gui.cosmic:industrial_grinder=Industrial Grinder
 gui.cosmic:industrial_grinder.invalid=Invalid Structure
+
+gui.cosmic:industrial_sawmill=Industrial Sawmill
+gui.cosmic:industrial_sawmill.invalid=Invalid Structure

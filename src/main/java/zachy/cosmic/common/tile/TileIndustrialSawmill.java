@@ -11,8 +11,11 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.common.Optional;
+import zachy.cosmic.api.recipe.sawmill.ISawmillRecipe;
+import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.Cosmic;
 import zachy.cosmic.common.core.util.MultiBlockUtils;
+import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiBlockBase;
 
 import javax.annotation.Nullable;
@@ -21,8 +24,12 @@ public class TileIndustrialSawmill extends TileMultiBlockBase implements IFluidH
 
     private FluidTank tank = new FluidTank(16000);
 
+    private ISawmillRecipe recipe;
+
     private final int INPUT_SLOTS[] = {0};
-    private final int OUTPUT_SLOTS[] = {1, 2, 3};
+    private final int OUTPUT_SLOTS[] = {1, 2};
+
+    private boolean wasFilled = false;
 
     public TileIndustrialSawmill() {
         setValid(false);
@@ -54,6 +61,11 @@ public class TileIndustrialSawmill extends TileMultiBlockBase implements IFluidH
     }
 
     @Override
+    public int getDuration() {
+        return recipe != null ? recipe.getDuration() : 0;
+    }
+
+    @Override
     public double getMaxInput() {
         return 32;
     }
@@ -70,7 +82,17 @@ public class TileIndustrialSawmill extends TileMultiBlockBase implements IFluidH
 
     @Override
     public void onInventoryChanged() {
+        ISawmillRecipe _recipe = API.instance().getSawmillRegistry().getRecipe(this, tank);
 
+        if (_recipe != recipe) {
+            setProgress(0);
+        }
+
+        recipe = _recipe;
+
+        markDirty();
+
+        WorldUtils.updateBlock(world, pos);
     }
 
     @Override
@@ -84,6 +106,75 @@ public class TileIndustrialSawmill extends TileMultiBlockBase implements IFluidH
         if (!isValid()) {
             return;
         }
+
+        if (wasFilled) {
+            onInventoryChanged();
+
+            wasFilled = false;
+        }
+
+        if (recipe != null && recipe.getFluidAmount() > tank.getFluidAmount()) {
+            return;
+        }
+
+        if (getEnergy() < 0) {
+            return;
+        }
+
+        if (isWorking()) {
+            if (recipe == null) {
+                setWorking(false);
+            } else if ((getStackInSlot(1).isEmpty() && getStackInSlot(2).isEmpty()
+                    || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(0), getStackInSlot(1))
+                    && getStackInSlot(1).getCount() + recipe.getOutput(0).getCount() <= getStackInSlot(1).getMaxStackSize())
+                    || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(1), getStackInSlot(2))
+                    && getStackInSlot(2).getCount() + recipe.getOutput(1).getCount() <= getStackInSlot(2).getMaxStackSize()))) {
+
+                if (getEnergy() >= recipe.getEnergy()) {
+                    drainEnergy(recipe.getEnergy());
+                } else {
+                    setProgress(0);
+
+                    return;
+                }
+
+                setProgress(getProgress() + 1);
+
+                if (getProgress() >= recipe.getDuration()) {
+                    for (int i = 0; i < OUTPUT_SLOTS.length; i++) {
+                        ItemStack outputSlot = getStackInSlot(OUTPUT_SLOTS[i]);
+
+                        if (outputSlot.isEmpty()) {
+                            setInventorySlotContents(OUTPUT_SLOTS[i], recipe.getOutput(i).copy());
+                        } else {
+                            outputSlot.grow(recipe.getOutput(i).getCount());
+
+                            markDirty();
+
+                            WorldUtils.updateBlock(world, pos);
+                        }
+                    }
+
+                    ItemStack inputSlot = getStackInSlot(INPUT_SLOTS[0]);
+
+                    if (!inputSlot.isEmpty()) {
+                        inputSlot.shrink(recipe.getInput().get(0).getCount());
+                    }
+
+                    drain(recipe.getFluidAmount(), true);
+
+                    recipe = API.instance().getSawmillRegistry().getRecipe(this, tank);
+
+                    setProgress(0);
+                }
+
+                markDirty();
+
+                WorldUtils.updateBlock(world, pos);
+            }
+        } else if (recipe != null) {
+            setWorking(true);
+        }
     }
 
     @Override
@@ -91,6 +182,8 @@ public class TileIndustrialSawmill extends TileMultiBlockBase implements IFluidH
         super.readFromNBT(tag);
 
         tank.setFluid(FluidStack.loadFluidStackFromNBT(tag));
+
+        recipe = API.instance().getSawmillRegistry().getRecipe(this, tank);
     }
 
     @Override
@@ -130,6 +223,8 @@ public class TileIndustrialSawmill extends TileMultiBlockBase implements IFluidH
 
     @Override
     public int fill(FluidStack resource, boolean doFill) {
+        wasFilled = true;
+
         return tank.fill(resource, doFill);
     }
 
@@ -143,6 +238,10 @@ public class TileIndustrialSawmill extends TileMultiBlockBase implements IFluidH
     @Override
     public FluidStack drain(int maxDrain, boolean doDrain) {
         return tank.drain(maxDrain, doDrain);
+    }
+
+    public FluidStack getFluidStack() {
+        return tank.getFluid();
     }
 
     @Optional.Method(modid = "albedo")

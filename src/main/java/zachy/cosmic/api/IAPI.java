@@ -3,6 +3,7 @@ package zachy.cosmic.api;
 import net.minecraft.item.ItemStack;
 import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
 import zachy.cosmic.api.recipe.grinder.IGrinderRegistry;
+import zachy.cosmic.api.recipe.sawmill.ISawmillRegistry;
 import zachy.cosmic.api.util.IComparer;
 
 import javax.annotation.Nonnull;
@@ -30,6 +31,12 @@ public interface IAPI {
      */
     @Nonnull
     IGrinderRegistry getGrinderRegistry();
+
+    /**
+     * @return the industrial sawmill registry
+     */
+    @Nonnull
+    ISawmillRegistry getSawmillRegistry();
 
     /**
      * @param stack the stack
