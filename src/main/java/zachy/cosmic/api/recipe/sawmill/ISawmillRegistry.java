@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * The recipe registry of the industrial sawmill.
+ * The recipe registry of the sawmill.
  */
 public interface ISawmillRegistry {
 
@@ -20,7 +20,7 @@ public interface ISawmillRegistry {
     void addRecipe(@Nonnull ISawmillRecipe recipe);
 
     /**
-     * Returns an industrial sawmill recipe from the slots.
+     * Returns an sawmill recipe from the slots.
      *
      * @param inventory an iinventory, where slot 0 is the inputs, 1, and 2 are the outputs
      * @param tank a fluid tank
@@ -30,7 +30,7 @@ public interface ISawmillRegistry {
     ISawmillRecipe getRecipe(IInventory inventory, FluidTank tank);
 
     /**
-     * @return a list with all of the industrial sawmill recipes
+     * @return a list with all of the sawmill recipes
      */
     List<ISawmillRecipe> getRecipes();
 }

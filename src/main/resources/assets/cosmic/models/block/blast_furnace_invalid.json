@@ -1,0 +1,10 @@
+{
+  "parent": "cosmic:block/machine",
+  "textures": {
+    "front": "cosmic:blocks/blast_furnace_front_invalid",
+    "side": "cosmic:blocks/blast_furnace_side",
+    "top": "cosmic:blocks/blast_furnace_side",
+    "back": "cosmic:blocks/blast_furnace_back",
+    "down": "cosmic:blocks/blast_furnace_side"
+  }
+}

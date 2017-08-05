@@ -4,18 +4,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import zachy.cosmic.common.container.slot.SlotOutput;
-import zachy.cosmic.common.tile.TileIndustrialGrinder;
+import zachy.cosmic.common.tile.TileBlastFurnace;
 
-public class ContainerIndustrialGrinder extends ContainerBase {
+public class ContainerBlastFurnace extends ContainerBase {
 
-    public ContainerIndustrialGrinder(TileIndustrialGrinder tile, EntityPlayer player) {
+    public ContainerBlastFurnace(TileBlastFurnace tile, EntityPlayer player) {
         super(tile, player);
 
-        addSlotToContainer(new Slot(tile, 0, 48, 18));
+        addSlotToContainer(new Slot(tile, 0, 62, 34));
+        addSlotToContainer(new Slot(tile, 1, 62, 52));
 
-        addSlotToContainer(new SlotOutput(tile, 1, 103, 43));
-        addSlotToContainer(new SlotOutput(tile, 2, 121, 43));
-        addSlotToContainer(new SlotOutput(tile, 3, 139, 43));
+        addSlotToContainer(new SlotOutput(tile, 2, 116, 43));
+        addSlotToContainer(new SlotOutput(tile, 3, 134, 43));
 
         addPlayerInventory(8, 100);
     }
@@ -33,7 +33,7 @@ public class ContainerIndustrialGrinder extends ContainerBase {
                 if (!mergeItemStack(stack, 4 + 9, inventorySlots.size(), false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!mergeItemStack(stack, 0, 1, false)) {
+            } else if (!mergeItemStack(stack, 0, 2, false)) {
                 return ItemStack.EMPTY;
             }
 

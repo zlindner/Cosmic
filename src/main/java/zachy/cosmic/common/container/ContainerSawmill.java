@@ -4,11 +4,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import zachy.cosmic.common.container.slot.SlotOutput;
-import zachy.cosmic.common.tile.TileIndustrialSawmill;
+import zachy.cosmic.common.tile.TileSawmill;
 
-public class ContainerIndustrialSawmill extends ContainerBase {
+public class ContainerSawmill extends ContainerBase {
 
-    public ContainerIndustrialSawmill(TileIndustrialSawmill tile, EntityPlayer player) {
+    public ContainerSawmill(TileSawmill tile, EntityPlayer player) {
         super(tile, player);
 
         addSlotToContainer(new Slot(tile, 0, 57, 18));

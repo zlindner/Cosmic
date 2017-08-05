@@ -30,7 +30,7 @@ public class ItemBlockBase extends ItemBlock {
     @Override
     public String getUnlocalizedName(ItemStack stack) {
         if (getHasSubtypes()) {
-            return getUnlocalizedName() + "." + stack.getItemDamage();
+            return getUnlocalizedName() + "_" + stack.getItemDamage();
         }
 
         return getUnlocalizedName();

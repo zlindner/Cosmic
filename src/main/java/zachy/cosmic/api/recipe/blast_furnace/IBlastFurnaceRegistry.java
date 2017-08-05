@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * The recipe registry of the industrial blast furnace.
+ * The recipe registry of the blast furnace.
  */
 public interface IBlastFurnaceRegistry {
 
@@ -19,7 +19,7 @@ public interface IBlastFurnaceRegistry {
     void addRecipe(@Nonnull IBlastFurnaceRecipe recipe);
 
     /**
-     * Returns an industrial blast furnace recipe from the slots.
+     * Returns an blast furnace recipe from the slots.
      *
      * @param inventory an iinventory, where slots 0 and 1 are the inputs, 2 and 3 are the outputs
      * @return the recipe, or null if no recipe was found
@@ -28,7 +28,7 @@ public interface IBlastFurnaceRegistry {
     IBlastFurnaceRecipe getRecipe(IInventory inventory);
 
     /**
-     * @return a list with all of the industrial blast furnace recipes
+     * @return a list with all of the blast furnace recipes
      */
     List<IBlastFurnaceRecipe> getRecipes();
 }

@@ -1,13 +1,25 @@
 # CREATIVE TAB
 itemGroup.cosmic=Cosmic
 
+# BLOCK
+tile.machine_frame_0.name=Basic Machine Frame
+tile.machine_frame_1.name=Intermediate Machine Frame
+tile.machine_frame_2.name=Advanced Machine Frame
+
+tile.machine_casing_0.name=Basic Machine Casing
+tile.machine_casing_1.name=Intermediate Machine Casing
+tile.machine_casing_2.name=Advanced Machine Casing
+
+tile.blast_furnace.name=iBlast Furnace
+tile.grinder.name=iGrinder
+tile.sawmill.name=iSawmill
+
 # GUI
-gui.cosmic:industrial_blast_furnace=Industrial Blast Furnace
-gui.cosmic:industrial_blast_furnace.heat=Heat
-gui.cosmic:industrial_blast_furnace.invalid=Invalid Structure
+gui.cosmic:blast_furnace=iBlast Furnace
+gui.cosmic:blast_furnace.heat=Heat
 
-gui.cosmic:industrial_grinder=Industrial Grinder
-gui.cosmic:industrial_grinder.invalid=Invalid Structure
+gui.cosmic:grinder=iGrinder
 
-gui.cosmic:industrial_sawmill=Industrial Sawmill
-gui.cosmic:industrial_sawmill.invalid=Invalid Structure
+gui.cosmic:sawmill=iSawmill
+
+gui.cosmic:invalid=Invalid Structure

@@ -20,7 +20,7 @@ import zachy.cosmic.common.tile.base.TileMultiBlockBase;
 
 import javax.annotation.Nullable;
 
-public class TileIndustrialSawmill extends TileMultiBlockBase implements IFluidHandler {
+public class TileSawmill extends TileMultiBlockBase implements IFluidHandler {
 
     private FluidTank tank = new FluidTank(16000);
 
@@ -31,7 +31,7 @@ public class TileIndustrialSawmill extends TileMultiBlockBase implements IFluidH
 
     private boolean wasFilled = false;
 
-    public TileIndustrialSawmill() {
+    public TileSawmill() {
         setValid(false);
         setWorking(false);
         setProgress(0);

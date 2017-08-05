@@ -1,0 +1,10 @@
+{
+  "parent": "cosmic:block/machine",
+  "textures": {
+    "front": "cosmic:blocks/sawmill_side",
+    "side": "cosmic:blocks/sawmill_side",
+    "top": "cosmic:blocks/sawmill_top_invalid",
+    "back": "cosmic:blocks/sawmill_side",
+    "down": "cosmic:blocks/sawmill_bottom"
+  }
+}

@@ -8,12 +8,12 @@ import net.minecraftforge.fluids.FluidStack;
 import javax.annotation.Nonnull;
 
 /**
- * Represents a recipe in the industrial sawmill.
+ * Represents a recipe in the sawmill.
  */
 public interface ISawmillRecipe {
 
     /**
-     * @return the name of this industrial sawmill recipe
+     * @return the name of this sawmill recipe
      */
     ResourceLocation getName();
 

@@ -13,7 +13,7 @@ import zachy.cosmic.common.core.util.MultiBlockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiBlockBase;
 
-public class TileIndustrialBlastFurnace extends TileMultiBlockBase {
+public class TileBlastFurnace extends TileMultiBlockBase {
 
     private IBlastFurnaceRecipe recipe;
 
@@ -24,7 +24,7 @@ public class TileIndustrialBlastFurnace extends TileMultiBlockBase {
 
     //TODO adjust internal energy storage? maybe 0?
     //TODO add tank
-    public TileIndustrialBlastFurnace() {
+    public TileBlastFurnace() {
         setValid(false);
         setWorking(false);
         setProgress(0);

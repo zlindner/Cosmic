@@ -7,12 +7,12 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 /**
- * Represents a recipe in the industrial blast furnace.
+ * Represents a recipe in the blast furnace.
  */
 public interface IBlastFurnaceRecipe {
 
     /**
-     * @return the name of this industrial blast furnace recipe
+     * @return the name of this blast furnace recipe
      */
     ResourceLocation getName();
 

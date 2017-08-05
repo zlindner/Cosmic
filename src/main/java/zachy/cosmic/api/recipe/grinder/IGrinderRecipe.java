@@ -8,12 +8,12 @@ import net.minecraftforge.fluids.FluidStack;
 import javax.annotation.Nonnull;
 
 /**
- * Represents a recipe in the industrial grinder.
+ * Represents a recipe in the grinder.
  */
 public interface IGrinderRecipe {
 
     /**
-     * @return the name of this industrial grinder recipe
+     * @return the name of this grinder recipe
      */
     ResourceLocation getName();
 

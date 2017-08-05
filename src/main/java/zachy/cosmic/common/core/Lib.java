@@ -12,9 +12,9 @@ public final class Lib {
         public static final String MACHINE_CASING = "machine_casing";
         public static final String MACHINE_FRAME = "machine_frame";
 
-        public static final String INDUSTRIAL_BLAST_FURNACE = "industrial_blast_furnace";
-        public static final String INDUSTRIAL_GRINDER = "industrial_grinder";
-        public static final String INDUSTRIAL_SAWMILL = "industrial_sawmill";
+        public static final String BLAST_FURNACE = "blast_furnace";
+        public static final String GRINDER = "grinder";
+        public static final String SAWMILL = "sawmill";
     }
 
     public final class NBT {

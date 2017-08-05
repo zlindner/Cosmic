@@ -1,0 +1,10 @@
+{
+  "parent": "cosmic:block/machine",
+  "textures": {
+    "front": "cosmic:blocks/grinder_front_valid",
+    "side": "cosmic:blocks/grinder_side",
+    "top": "cosmic:blocks/grinder_side",
+    "back": "cosmic:blocks/grinder_back",
+    "down": "cosmic:blocks/grinder_side"
+  }
+}

@@ -16,17 +16,17 @@ import zachy.cosmic.common.block.base.BlockMultiBlockBase;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.core.util.FluidUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
-import zachy.cosmic.common.tile.TileIndustrialGrinder;
+import zachy.cosmic.common.tile.TileSawmill;
 
-public class BlockIndustrialGrinder extends BlockMultiBlockBase {
+public class BlockSawmill extends BlockMultiBlockBase {
 
-    public BlockIndustrialGrinder() {
-        super(Lib.Blocks.INDUSTRIAL_GRINDER);
+    public BlockSawmill() {
+        super(Lib.Blocks.SAWMILL);
     }
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileIndustrialGrinder();
+        return new TileSawmill();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class BlockIndustrialGrinder extends BlockMultiBlockBase {
         }
 
         if (!world.isRemote && !player.isSneaking()) {
-            player.openGui(Cosmic.INSTANCE, Guis.INDUSTRIAL_GRINDER, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Cosmic.INSTANCE, Guis.SAWMILL, world, pos.getX(), pos.getY(), pos.getZ());
         }
 
         return true;

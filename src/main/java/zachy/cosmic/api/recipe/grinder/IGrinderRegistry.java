@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * The recipe registry of the industrial grinder.
+ * The recipe registry of the grinder.
  */
 public interface IGrinderRegistry {
 
@@ -20,7 +20,7 @@ public interface IGrinderRegistry {
     void addRecipe(@Nonnull IGrinderRecipe recipe);
 
     /**
-     * Returns an industrial grinder recipe from the slots.
+     * Returns an grinder recipe from the slots.
      *
      * @param inventory an iinventory, where slot 0 is the inputs, 1, 2, 3 and 4 are the outputs
      * @param tank a fluid tank
@@ -30,7 +30,7 @@ public interface IGrinderRegistry {
     IGrinderRecipe getRecipe(IInventory inventory, FluidTank tank);
 
     /**
-     * @return a list with all of the industrial grinder recipes
+     * @return a list with all of the grinder recipes
      */
     List<IGrinderRecipe> getRecipes();
 }

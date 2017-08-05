@@ -15,7 +15,7 @@ import zachy.cosmic.common.core.util.MultiBlockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiBlockBase;
 
-public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidHandler {
+public class TileGrinder extends TileMultiBlockBase implements IFluidHandler {
 
     private FluidTank tank = new FluidTank(16000);
 
@@ -28,7 +28,7 @@ public class TileIndustrialGrinder extends TileMultiBlockBase implements IFluidH
 
     //TODO test / add fluid pipe compatibility
     //TODO remove last output slot from gui
-    public TileIndustrialGrinder() {
+    public TileGrinder() {
         setValid(false);
         setWorking(false);
         setProgress(0);

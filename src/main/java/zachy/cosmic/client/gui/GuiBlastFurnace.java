@@ -1,16 +1,16 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.common.container.ContainerIndustrialBlastFurnace;
-import zachy.cosmic.common.tile.TileIndustrialBlastFurnace;
+import zachy.cosmic.common.container.ContainerBlastFurnace;
+import zachy.cosmic.common.tile.TileBlastFurnace;
 
-public class GuiIndustrialBlastFurnace extends GuiBase {
+public class GuiBlastFurnace extends GuiBase {
 
-    private TileIndustrialBlastFurnace tile;
+    private TileBlastFurnace tile;
 
-    public GuiIndustrialBlastFurnace(ContainerIndustrialBlastFurnace container) {
+    public GuiBlastFurnace(ContainerBlastFurnace container) {
         super(container, 176, 182);
 
-        tile = (TileIndustrialBlastFurnace) container.getTile();
+        tile = (TileBlastFurnace) container.getTile();
     }
 
     @Override
@@ -25,7 +25,7 @@ public class GuiIndustrialBlastFurnace extends GuiBase {
 
     @Override
     public void drawBackground(int x, int y, int mouseX, int mouseY) {
-        bindTexture("gui/industrial_blast_furnace.png");
+        bindTexture("gui/blast_furnace.png");
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
@@ -36,15 +36,15 @@ public class GuiIndustrialBlastFurnace extends GuiBase {
 
     @Override
     public void drawForeground(int mouseX, int mouseY) {
-        drawStringCentred(xSize, 5, format("gui.cosmic:industrial_blast_furnace"));
+        drawStringCentred(xSize, 5, format("gui.cosmic:blast_furnace"));
 
         if (tile.isValid()) {
-            drawString(105, 90, format("gui.cosmic:industrial_blast_furnace.heat") + ": " + tile.getHeat() + " K");
+            drawString(105, 90, format("gui.cosmic:blast_furnace.heat") + ": " + tile.getHeat() + " K");
         } else {
-            drawString(80, 90, format("gui.cosmic:industrial_blast_furnace.invalid"));
+            drawString(80, 90, format("gui.cosmic:invalid"));
         }
 
-        drawString(8,90, format("container.inventory"));
+        drawString(8, 90, format("container.inventory"));
     }
 
     private int getProgressScaled(int scale) {
