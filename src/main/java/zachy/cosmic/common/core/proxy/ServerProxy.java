@@ -5,6 +5,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import zachy.cosmic.apiimpl.recipe.blast_furnace.BlastFurnaceRecipeLoader;
+import zachy.cosmic.apiimpl.recipe.compressor.CompressorRecipeLoader;
 import zachy.cosmic.apiimpl.recipe.grinder.GrinderRecipeLoader;
 import zachy.cosmic.apiimpl.recipe.sawmill.SawmillRecipeLoader;
 import zachy.cosmic.client.core.handler.GuiHandler;
@@ -22,6 +23,7 @@ public class ServerProxy {
         BlastFurnaceRecipeLoader.load();
         GrinderRecipeLoader.load();
         SawmillRecipeLoader.load();
+        CompressorRecipeLoader.load();
     }
 
     public void postInit(FMLPostInitializationEvent event) {

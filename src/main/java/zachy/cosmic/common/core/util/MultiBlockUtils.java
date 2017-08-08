@@ -8,19 +8,19 @@ import zachy.cosmic.common.core.init.ModBlocks;
 public class MultiBlockUtils {
 
     public static boolean isAnyCasing(World world, BlockPos pos) {
-        return world.getBlockState(pos).getBlock() == ModBlocks.machineCasing;
+        return world.getBlockState(pos).getBlock() == ModBlocks.machine_casing;
     }
 
     public static boolean isStandardCasing(World world, BlockPos pos) {
-        return world.getBlockState(pos) == ModBlocks.machineCasing.getStateFromMeta(0);
+        return world.getBlockState(pos) == ModBlocks.machine_casing.getStateFromMeta(0);
     }
 
     public static boolean isIntermediateCasing(World world, BlockPos pos) {
-        return world.getBlockState(pos) == ModBlocks.machineCasing.getStateFromMeta(1);
+        return world.getBlockState(pos) == ModBlocks.machine_casing.getStateFromMeta(1);
     }
 
     public static boolean isAdvancedCasing(World world, BlockPos pos) {
-        return world.getBlockState(pos) == ModBlocks.machineCasing.getStateFromMeta(2);
+        return world.getBlockState(pos) == ModBlocks.machine_casing.getStateFromMeta(2);
     }
 
     public static boolean isLava(World world, BlockPos pos) {

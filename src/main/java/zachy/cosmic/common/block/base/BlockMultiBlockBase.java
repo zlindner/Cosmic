@@ -3,13 +3,10 @@ package zachy.cosmic.common.block.base;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import zachy.cosmic.common.core.init.ModBlocks;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiBlockBase;
 
@@ -40,7 +37,7 @@ public class BlockMultiBlockBase extends BlockMachineBase {
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(ModBlocks.machineFrame, 1, 1));
+    public boolean isIntermediate() {
+        return true;
     }
 }

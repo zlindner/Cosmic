@@ -1,0 +1,10 @@
+{
+  "parent": "cosmic:block/machine",
+  "textures": {
+    "front": "cosmic:blocks/compressor_side_1",
+    "side": "cosmic:blocks/compressor_side_2",
+    "top": "cosmic:blocks/compressor_top_valid",
+    "back": "cosmic:blocks/compressor_side_1",
+    "down": "cosmic:blocks/compressor_bottom"
+  }
+}

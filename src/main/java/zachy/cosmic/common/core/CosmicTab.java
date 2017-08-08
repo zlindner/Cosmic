@@ -14,6 +14,6 @@ public class CosmicTab extends CreativeTabs {
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(ModBlocks.machineFrame);
+        return new ItemStack(ModBlocks.machine_frame);
     }
 }

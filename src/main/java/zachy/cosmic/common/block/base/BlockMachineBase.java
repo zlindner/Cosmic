@@ -6,10 +6,14 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import zachy.cosmic.common.core.init.ModBlocks;
 import zachy.cosmic.common.core.util.StackUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.item.ItemBlockBase;
@@ -18,7 +22,6 @@ import java.util.Arrays;
 
 public class BlockMachineBase extends BlockBase {
 
-    //TODO add basic / intermediate / advanced boolean method, drop machine block accordingly
     protected static final PropertyDirection DIRECTION = PropertyDirection.create("direction", Arrays.asList(EnumFacing.HORIZONTALS));
 
     public BlockMachineBase(String name) {
@@ -56,5 +59,32 @@ public class BlockMachineBase extends BlockBase {
         StackUtils.dropInventory(world, pos, (IInventory) tile);
 
         super.breakBlock(world, pos, state);
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        if (isBasic()) {
+            drops.add(new ItemStack(ModBlocks.machine_frame, 1, 0));
+        }
+
+        if (isIntermediate()) {
+            drops.add(new ItemStack(ModBlocks.machine_frame, 1, 1));
+        }
+
+        if (isAdvanced()) {
+            drops.add(new ItemStack(ModBlocks.machine_frame, 1, 2));
+        }
+    }
+
+    public boolean isBasic() {
+        return false;
+    }
+
+    public boolean isIntermediate() {
+        return false;
+    }
+
+    public boolean isAdvanced() {
+        return false;
     }
 }

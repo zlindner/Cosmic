@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Optional;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.core.util.StackUtils;
+import zachy.cosmic.common.core.util.WorldUtils;
 
 @Optional.Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = "albedo")
 public abstract class TileMachineBase extends TileBase implements ITickable, IEnergySink, ISidedInventory, ILightProvider {
@@ -47,6 +48,8 @@ public abstract class TileMachineBase extends TileBase implements ITickable, IEn
     }
 
     public abstract int getDuration();
+
+    public abstract void onInventoryChanged();
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
@@ -302,6 +305,4 @@ public abstract class TileMachineBase extends TileBase implements ITickable, IEn
     public boolean hasCustomName() {
         return false;
     }
-
-    public abstract void onInventoryChanged();
 }

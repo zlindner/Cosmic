@@ -1,16 +1,16 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.common.container.ContainerBlastFurnace;
-import zachy.cosmic.common.tile.TileBlastFurnace;
+import zachy.cosmic.common.container.ContainerCompressor;
+import zachy.cosmic.common.tile.TileCompressor;
 
-public class GuiBlastFurnace extends GuiBase {
+public class GuiCompressor extends GuiBase {
 
-    private TileBlastFurnace tile;
+    private TileCompressor tile;
 
-    public GuiBlastFurnace(ContainerBlastFurnace container) {
+    public GuiCompressor(ContainerCompressor container) {
         super(container, 176, 182);
 
-        tile = (TileBlastFurnace) container.getTile();
+        tile = (TileCompressor) container.getTile();
     }
 
     @Override
@@ -25,22 +25,20 @@ public class GuiBlastFurnace extends GuiBase {
 
     @Override
     public void drawBackground(int x, int y, int mouseX, int mouseY) {
-        bindTexture("gui/blast_furnace.png");
+        bindTexture("gui/compressor.png");
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
         if (tile.isWorking()) {
-            drawTexture(x + 81, y + 43, 176, 0, getProgressScaled(22), 15);
+            drawTexture(x + 81, y + 45, 176, 0, getProgressScaled(22), 11);
         }
     }
 
     @Override
     public void drawForeground(int mouseX, int mouseY) {
-        drawStringCentred(xSize, 5, format("gui.cosmic:blast_furnace"));
+        drawStringCentred(xSize, 5, format("gui.cosmic:compressor"));
 
-        if (tile.isValid()) {
-            drawString(105, 90, format("gui.cosmic:blast_furnace.heat") + ": " + tile.getHeat() + " K");
-        } else {
+        if (!tile.isValid()) {
             drawString(80, 90, format("gui.cosmic:invalid"));
         }
 

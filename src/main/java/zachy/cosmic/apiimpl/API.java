@@ -6,10 +6,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import zachy.cosmic.api.IAPI;
 import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
+import zachy.cosmic.api.recipe.compressor.ICompressorRegistry;
 import zachy.cosmic.api.recipe.grinder.IGrinderRegistry;
 import zachy.cosmic.api.recipe.sawmill.ISawmillRegistry;
 import zachy.cosmic.api.util.IComparer;
 import zachy.cosmic.apiimpl.recipe.blast_furnace.BlastFurnaceRegistry;
+import zachy.cosmic.apiimpl.recipe.compressor.CompressorRegistry;
 import zachy.cosmic.apiimpl.recipe.grinder.GrinderRegistry;
 import zachy.cosmic.apiimpl.recipe.sawmill.SawmillRegistry;
 import zachy.cosmic.apiimpl.util.Comparer;
@@ -21,9 +23,11 @@ public class API implements IAPI {
     private static final IAPI INSTANCE = new API();
 
     private IComparer comparer = new Comparer();
+
     private IBlastFurnaceRegistry blastFurnaceRegistry = new BlastFurnaceRegistry();
     private IGrinderRegistry grinderRegistry = new GrinderRegistry();
     private ISawmillRegistry sawmillRegistry = new SawmillRegistry();
+    private ICompressorRegistry compressorRegistry = new CompressorRegistry();
 
     public static IAPI instance() {
         return INSTANCE;
@@ -51,6 +55,12 @@ public class API implements IAPI {
     @Override
     public ISawmillRegistry getSawmillRegistry() {
         return sawmillRegistry;
+    }
+
+    @Nonnull
+    @Override
+    public ICompressorRegistry getCompressorRegistry() {
+        return compressorRegistry;
     }
 
     @Override

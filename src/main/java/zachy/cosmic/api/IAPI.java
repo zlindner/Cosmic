@@ -2,6 +2,7 @@ package zachy.cosmic.api;
 
 import net.minecraft.item.ItemStack;
 import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
+import zachy.cosmic.api.recipe.compressor.ICompressorRegistry;
 import zachy.cosmic.api.recipe.grinder.IGrinderRegistry;
 import zachy.cosmic.api.recipe.sawmill.ISawmillRegistry;
 import zachy.cosmic.api.util.IComparer;
@@ -21,22 +22,28 @@ public interface IAPI {
     IComparer getComparer();
 
     /**
-     * @return the industrial blast furnace registry
+     * @return the blast furnace registry
      */
     @Nonnull
     IBlastFurnaceRegistry getBlastFurnaceRegistry();
 
     /**
-     * @return the industrial grinder registry
+     * @return the grinder registry
      */
     @Nonnull
     IGrinderRegistry getGrinderRegistry();
 
     /**
-     * @return the industrial sawmill registry
+     * @return the sawmill registry
      */
     @Nonnull
     ISawmillRegistry getSawmillRegistry();
+
+    /**
+     * @return the compressor registry
+     */
+    @Nonnull
+    ICompressorRegistry getCompressorRegistry();
 
     /**
      * @param stack the stack
