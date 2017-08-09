@@ -14,6 +14,7 @@ tile.blast_furnace.name=iBlast Furnace
 tile.grinder.name=iGrinder
 tile.sawmill.name=iSawmill
 tile.compressor.name=iCompressor
+tile.vacuum_freezer.name=iVacuum Freezer
 
 # GUI
 gui.cosmic:blast_furnace=iBlast Furnace
@@ -24,5 +25,7 @@ gui.cosmic:grinder=iGrinder
 gui.cosmic:sawmill=iSawmill
 
 gui.cosmic:compressor=iCompressor
+
+gui.cosmic:vacuum_freezer=iVacuum Freezer
 
 gui.cosmic:invalid=Invalid Structure

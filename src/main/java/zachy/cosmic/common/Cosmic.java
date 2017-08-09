@@ -9,6 +9,7 @@ import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.core.handler.ConfigHandler;
 import zachy.cosmic.common.core.proxy.ServerProxy;
 
+//TODO rewrite after multiblocks 100%
 @Mod(modid = Lib.MOD_ID, name = Lib.MOD_NAME, version = Lib.VERSION)
 public class Cosmic {
 

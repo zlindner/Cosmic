@@ -7,15 +7,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import zachy.cosmic.client.gui.*;
-import zachy.cosmic.common.container.ContainerBlastFurnace;
-import zachy.cosmic.common.container.ContainerGrinder;
-import zachy.cosmic.common.container.ContainerCompressor;
-import zachy.cosmic.common.container.ContainerSawmill;
+import zachy.cosmic.common.container.*;
 import zachy.cosmic.common.core.util.WorldUtils;
-import zachy.cosmic.common.tile.TileBlastFurnace;
-import zachy.cosmic.common.tile.TileGrinder;
-import zachy.cosmic.common.tile.TileCompressor;
-import zachy.cosmic.common.tile.TileSawmill;
+import zachy.cosmic.common.tile.*;
 
 import javax.annotation.Nullable;
 
@@ -31,6 +25,8 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerSawmill((TileSawmill) tile, player);
             case Guis.IMPLOSION_COMPRESSOR:
                 return new ContainerCompressor((TileCompressor) tile, player);
+            case Guis.VACUUM_FREEZER:
+                return new ContainerVacuumFreezer((TileVacuumFreezer) tile, player);
             default:
                 return null;
         }
@@ -54,6 +50,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiISawmill((ContainerSawmill) getContainer(Id, WorldUtils.getTile(world, new BlockPos(x, y, z)), player));
             case Guis.IMPLOSION_COMPRESSOR:
                 return new GuiCompressor((ContainerCompressor) getContainer(Id, WorldUtils.getTile(world, new BlockPos(x, y, z)), player));
+            case Guis.VACUUM_FREEZER:
+                return new GuiVacuumFreezer((ContainerVacuumFreezer) getContainer(Id, WorldUtils.getTile(world, new BlockPos(x, y, z)), player));
             default:
                 return null;
         }

@@ -10,10 +10,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import zachy.cosmic.common.block.*;
 import zachy.cosmic.common.block.base.BlockBase;
 import zachy.cosmic.common.core.Lib;
-import zachy.cosmic.common.tile.TileBlastFurnace;
-import zachy.cosmic.common.tile.TileGrinder;
-import zachy.cosmic.common.tile.TileCompressor;
-import zachy.cosmic.common.tile.TileSawmill;
+import zachy.cosmic.common.tile.*;
 
 @Mod.EventBusSubscriber
 public class ModBlocks {
@@ -24,6 +21,7 @@ public class ModBlocks {
     public static BlockBase grinder = new BlockGrinder();
     public static BlockBase sawmill = new BlockSawmill();
     public static BlockBase compressor = new BlockCompressor();
+    public static BlockBase vacuum_freezer = new BlockVacuumFreezer();
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -35,6 +33,7 @@ public class ModBlocks {
         r.register(grinder);
         r.register(sawmill);
         r.register(compressor);
+        r.register(vacuum_freezer);
 
         registerTiles();
     }
@@ -44,6 +43,7 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(TileGrinder.class, Lib.MOD_ID + ":" + Lib.Blocks.GRINDER);
         GameRegistry.registerTileEntity(TileSawmill.class, Lib.MOD_ID + ":" + Lib.Blocks.SAWMILL);
         GameRegistry.registerTileEntity(TileCompressor.class, Lib.MOD_ID + ":" + Lib.Blocks.COMPRESSOR);
+        GameRegistry.registerTileEntity(TileVacuumFreezer.class, Lib.MOD_ID + ":" + Lib.Blocks.VACUUM_FREEZER);
     }
 
     @SubscribeEvent
@@ -56,5 +56,6 @@ public class ModBlocks {
         r.register(grinder.createItemBlock());
         r.register(sawmill.createItemBlock());
         r.register(compressor.createItemBlock());
+        r.register(vacuum_freezer.createItemBlock());
     }
 }

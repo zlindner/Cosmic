@@ -4,18 +4,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import zachy.cosmic.common.container.slot.SlotOutput;
-import zachy.cosmic.common.tile.TileCompressor;
+import zachy.cosmic.common.tile.TileVacuumFreezer;
 
-public class ContainerCompressor extends ContainerBase {
+public class ContainerVacuumFreezer extends ContainerBase {
 
-    public ContainerCompressor(TileCompressor tile, EntityPlayer player) {
+    public ContainerVacuumFreezer(TileVacuumFreezer tile, EntityPlayer player) {
         super(tile, player);
 
-        addSlotToContainer(new Slot(tile, 0, 57, 34));
-        addSlotToContainer(new Slot(tile, 1, 57, 52));
+        addSlotToContainer(new Slot(tile, 0, 48, 18));
 
-        addSlotToContainer(new SlotOutput(tile, 2, 111, 43));
-        addSlotToContainer(new SlotOutput(tile, 3, 129, 43));
+        addSlotToContainer(new SlotOutput(tile, 1, 103, 43));
 
         addPlayerInventory(8, 100);
     }
@@ -29,11 +27,11 @@ public class ContainerCompressor extends ContainerBase {
         if (slot.getHasStack()) {
             stack = slot.getStack();
 
-            if (index < 4) {
-                if (!mergeItemStack(stack, 4 + 9, inventorySlots.size(), false)) {
+            if (index < 2) {
+                if (!mergeItemStack(stack, 2 + 9, inventorySlots.size(), false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!mergeItemStack(stack, 0, 2, false)) {
+            } else if (!mergeItemStack(stack, 0, 1, false)) {
                 return ItemStack.EMPTY;
             }
 

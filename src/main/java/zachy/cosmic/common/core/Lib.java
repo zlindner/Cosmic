@@ -16,6 +16,7 @@ public final class Lib {
         public static final String GRINDER = "grinder";
         public static final String SAWMILL = "sawmill";
         public static final String COMPRESSOR = "compressor";
+        public static final String VACUUM_FREEZER = "vacuum_freezer";
     }
 
     public final class NBT {
