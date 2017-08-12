@@ -1,0 +1,10 @@
+{
+  "parent": "cosmic:block/machine",
+  "textures": {
+    "front": "cosmic:blocks/vacuum_freezer_side",
+    "side": "cosmic:blocks/vacuum_freezer_side",
+    "top": "cosmic:blocks/vacuum_freezer_top_invalid",
+    "back": "cosmic:blocks/vacuum_freezer_side",
+    "down": "cosmic:blocks/vacuum_freezer_bottom"
+  }
+}

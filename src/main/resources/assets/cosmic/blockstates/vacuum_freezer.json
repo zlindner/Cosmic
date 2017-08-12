@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "direction=north,valid=true": { "model": "cosmic:vacuum_freezer_valid", "y": 180 },
+    "direction=east,valid=true": { "model": "cosmic:vacuum_freezer_valid", "y": 270 },
+    "direction=south,valid=true": { "model": "cosmic:vacuum_freezer_valid" },
+    "direction=west,valid=true": { "model": "cosmic:vacuum_freezer_valid", "y": 90} ,
+    "direction=north,valid=false": { "model": "cosmic:vacuum_freezer_invalid", "y": 180 },
+    "direction=east,valid=false": { "model": "cosmic:vacuum_freezer_invalid", "y": 270 },
+    "direction=south,valid=false": { "model": "cosmic:vacuum_freezer_invalid" },
+    "direction=west,valid=false": { "model": "cosmic:vacuum_freezer_invalid", "y": 90 }
+  }
+}

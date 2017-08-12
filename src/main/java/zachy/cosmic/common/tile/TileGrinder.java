@@ -27,7 +27,7 @@ public class TileGrinder extends TileMultiBlockBase implements IFluidHandler {
     private boolean wasFilled = false;
 
     //TODO test / add fluid pipe compatibility
-    //TODO remove last output slot from gui
+    //TODO possibly remove tank, add 2nd input
     public TileGrinder() {
         setValid(false);
         setWorking(false);

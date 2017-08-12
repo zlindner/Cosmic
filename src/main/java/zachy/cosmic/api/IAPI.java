@@ -5,6 +5,7 @@ import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
 import zachy.cosmic.api.recipe.compressor.ICompressorRegistry;
 import zachy.cosmic.api.recipe.grinder.IGrinderRegistry;
 import zachy.cosmic.api.recipe.sawmill.ISawmillRegistry;
+import zachy.cosmic.api.recipe.vacuum_freezer.IVacuumFreezerRegistry;
 import zachy.cosmic.api.util.IComparer;
 
 import javax.annotation.Nonnull;
@@ -44,6 +45,12 @@ public interface IAPI {
      */
     @Nonnull
     ICompressorRegistry getCompressorRegistry();
+
+    /**
+     * @return the vacuum freezer registry
+     */
+    @Nonnull
+    IVacuumFreezerRegistry getVacuumFreezerRegistry();
 
     /**
      * @param stack the stack

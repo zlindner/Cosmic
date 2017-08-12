@@ -1,4 +1,4 @@
-package zachy.cosmic.apiimpl.recipe.compressor;
+package zachy.cosmic.apiimpl.recipe.vacuum_freezer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,14 +19,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class CompressorRecipeLoader {
+public class VacuumFreezerRecipeLoader {
 
     private static Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     public static void load() {
         JsonContext context = new JsonContext(Lib.MOD_ID);
 
-        CraftingHelper.findFiles(Loader.instance().activeModContainer(), "assets/" + Lib.MOD_ID + "/machine_recipes/compressor", root -> {
+        CraftingHelper.findFiles(Loader.instance().activeModContainer(), "assets/" + Lib.MOD_ID + "/machine_recipes/vacuum_freezer", root -> {
             //TODO Load the constants into to the context.
 
             return true;
@@ -45,13 +45,13 @@ public class CompressorRecipeLoader {
             try {
                 reader = Files.newBufferedReader(file);
 
-                API.instance().getCompressorRegistry().addRecipe(new CompressorRecipeFactory(key, JsonUtils.fromJson(GSON, reader, JsonObject.class)).create(context));
+                API.instance().getVacuumFreezerRegistry().addRecipe(new VacuumFreezerRecipeFactory(key, JsonUtils.fromJson(GSON, reader, JsonObject.class)).create(context));
             } catch (JsonParseException e) {
-                FMLLog.log.error("Parsing error while reading JSON compressor recipe {}", key, e);
+                FMLLog.log.error("Parsing error while reading JSON vacuum freezer recipe {}", key, e);
 
                 return false;
             } catch (IOException e) {
-                FMLLog.log.error("Couldn't read JSON compressor recipe {} from {}", key, file, e);
+                FMLLog.log.error("Couldn't read JSON vacuum freezer recipe {} from {}", key, file, e);
 
                 return false;
             } finally {

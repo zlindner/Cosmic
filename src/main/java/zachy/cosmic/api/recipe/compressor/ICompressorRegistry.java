@@ -32,4 +32,3 @@ public interface ICompressorRegistry {
      */
     List<ICompressorRecipe> getRecipes();
 }
-

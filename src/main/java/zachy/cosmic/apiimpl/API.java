@@ -9,11 +9,13 @@ import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
 import zachy.cosmic.api.recipe.compressor.ICompressorRegistry;
 import zachy.cosmic.api.recipe.grinder.IGrinderRegistry;
 import zachy.cosmic.api.recipe.sawmill.ISawmillRegistry;
+import zachy.cosmic.api.recipe.vacuum_freezer.IVacuumFreezerRegistry;
 import zachy.cosmic.api.util.IComparer;
 import zachy.cosmic.apiimpl.recipe.blast_furnace.BlastFurnaceRegistry;
 import zachy.cosmic.apiimpl.recipe.compressor.CompressorRegistry;
 import zachy.cosmic.apiimpl.recipe.grinder.GrinderRegistry;
 import zachy.cosmic.apiimpl.recipe.sawmill.SawmillRegistry;
+import zachy.cosmic.apiimpl.recipe.vacuum_freezer.VacuumFreezerRegistry;
 import zachy.cosmic.apiimpl.util.Comparer;
 
 import javax.annotation.Nonnull;
@@ -28,6 +30,7 @@ public class API implements IAPI {
     private IGrinderRegistry grinderRegistry = new GrinderRegistry();
     private ISawmillRegistry sawmillRegistry = new SawmillRegistry();
     private ICompressorRegistry compressorRegistry = new CompressorRegistry();
+    private IVacuumFreezerRegistry vacuumFreezerRegistry = new VacuumFreezerRegistry();
 
     public static IAPI instance() {
         return INSTANCE;
@@ -61,6 +64,12 @@ public class API implements IAPI {
     @Override
     public ICompressorRegistry getCompressorRegistry() {
         return compressorRegistry;
+    }
+
+    @Nonnull
+    @Override
+    public IVacuumFreezerRegistry getVacuumFreezerRegistry() {
+        return vacuumFreezerRegistry;
     }
 
     @Override

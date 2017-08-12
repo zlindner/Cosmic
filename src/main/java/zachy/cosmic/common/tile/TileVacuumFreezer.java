@@ -7,11 +7,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
+import zachy.cosmic.api.recipe.vacuum_freezer.IVacuumFreezerRecipe;
+import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.Cosmic;
 import zachy.cosmic.common.core.util.MultiBlockUtils;
+import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiBlockBase;
 
 public class TileVacuumFreezer extends TileMultiBlockBase {
+
+    private IVacuumFreezerRecipe recipe;
 
     private final int INPUT_SLOTS[] = {0};
     private final int OUTPUT_SLOTS[] = {1};
@@ -76,6 +81,60 @@ public class TileVacuumFreezer extends TileMultiBlockBase {
         if (!isValid()) {
             return;
         }
+
+        if (getEnergy() < 0) {
+            return;
+        }
+
+        if (isWorking()) {
+            if (recipe == null) {
+                setWorking(false);
+            } else if ((getStackInSlot(1).isEmpty()
+                    || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(), getStackInSlot(1))
+                    && getStackInSlot(1).getCount() + recipe.getOutput().getCount() <= getStackInSlot(1).getMaxStackSize()))) {
+
+                if (getEnergy() >= recipe.getEnergy()) {
+                    drainEnergy(recipe.getEnergy());
+                } else {
+                    setProgress(0);
+
+                    return;
+                }
+
+                setProgress(getProgress() + 1);
+
+                if (getProgress() >= recipe.getDuration()) {
+                    ItemStack outputSlot = getStackInSlot(OUTPUT_SLOTS[0]);
+
+                    if (outputSlot.isEmpty()) {
+                        setInventorySlotContents(OUTPUT_SLOTS[0], recipe.getOutput().copy());
+                    } else {
+                        outputSlot.grow(recipe.getOutput().getCount());
+
+                        markDirty();
+
+                        WorldUtils.updateBlock(world, pos);
+                    }
+
+
+                    ItemStack inputSlot = getStackInSlot(0);
+
+                    if (!inputSlot.isEmpty()) {
+                        inputSlot.shrink(recipe.getInput().get(0).getCount());
+                    }
+
+                    recipe = API.instance().getVacuumFreezerRegistry().getRecipe(this);
+
+                    setProgress(0);
+                }
+
+                markDirty();
+
+                WorldUtils.updateBlock(world, pos);
+            }
+        } else if (recipe != null) {
+            setWorking(true);
+        }
     }
 
     @Override
@@ -85,12 +144,22 @@ public class TileVacuumFreezer extends TileMultiBlockBase {
 
     @Override
     public int getDuration() {
-        return 0;
+        return recipe != null ? recipe.getDuration() : 0;
     }
 
     @Override
     public void onInventoryChanged() {
+        IVacuumFreezerRecipe _recipe = API.instance().getVacuumFreezerRegistry().getRecipe(this);
 
+        if (_recipe != recipe) {
+            setProgress(0);
+        }
+
+        recipe = _recipe;
+
+        markDirty();
+
+        WorldUtils.updateBlock(world, pos);
     }
 
     @Override
