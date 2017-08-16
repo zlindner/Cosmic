@@ -46,15 +46,4 @@ public class GuiBlastFurnace extends GuiBase {
 
         drawString(8, 90, format("container.inventory"));
     }
-
-    private int getProgressScaled(int scale) {
-        float progress = tile.getProgress();
-        float duration = tile.getDuration();
-
-        if (progress > duration) {
-            return scale;
-        }
-
-        return (int) (progress / duration * (float) scale);
-    }
 }

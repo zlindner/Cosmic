@@ -20,11 +20,11 @@ import zachy.cosmic.common.item.ItemBlockBase;
 
 import java.util.Arrays;
 
-public class BlockMachineBase extends BlockBase {
+public class BlockMachine extends BlockBase {
 
     protected static final PropertyDirection DIRECTION = PropertyDirection.create("direction", Arrays.asList(EnumFacing.HORIZONTALS));
 
-    public BlockMachineBase(String name) {
+    public BlockMachine(String name) {
         super(name);
 
         setSoundType(SoundType.METAL);

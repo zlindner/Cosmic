@@ -2,32 +2,27 @@ package zachy.cosmic.common.tile;
 
 import elucent.albedo.lighting.Light;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
-import zachy.cosmic.api.recipe.compressor.ICompressorRecipe;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.Cosmic;
+import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.core.util.MultiBlockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
-import zachy.cosmic.common.tile.base.TileMultiBlockBase;
+import zachy.cosmic.common.tile.base.TileMultiblockController;
 
-public class TileCompressor extends TileMultiBlockBase {
-
-    private ICompressorRecipe recipe;
-
-    private final int INPUT_SLOTS[] = {0, 1};
-    private final int OUTPUT_SLOTS[] = {2, 3};
+public class TileCompressor extends TileMultiblockController {
 
     //TODO fix shift clicking not updating recipe?
     public TileCompressor() {
-        setValid(false);
-        setWorking(false);
-        setProgress(0);
+        name = Lib.Blocks.COMPRESSOR;
 
-        inventory = NonNullList.withSize(4, ItemStack.EMPTY);
+        INPUT_SLOTS = new int[] {0, 1};
+        OUTPUT_SLOTS = new int[] {2, 3};
+
+        inventory = NonNullList.withSize(getInputs() + getOutputs(), ItemStack.EMPTY);
     }
 
     @Override
@@ -66,11 +61,6 @@ public class TileCompressor extends TileMultiBlockBase {
     }
 
     @Override
-    public int getDuration() {
-        return recipe != null ? recipe.getDuration() : 0;
-    }
-
-    @Override
     public double getMaxInput() {
         return 32;
     }
@@ -85,21 +75,7 @@ public class TileCompressor extends TileMultiBlockBase {
         return 1;
     }
 
-    @Override
-    public void onInventoryChanged() {
-        ICompressorRecipe _recipe = API.instance().getCompressorRegistry().getRecipe(this);
-
-        if (_recipe != recipe) {
-            setProgress(0);
-        }
-
-        recipe = _recipe;
-
-        markDirty();
-
-        WorldUtils.updateBlock(world, pos);
-    }
-
+    //TODO put in controller class
     @Override
     public void update() {
         super.update();
@@ -108,7 +84,7 @@ public class TileCompressor extends TileMultiBlockBase {
             return;
         }
 
-        if (!isValid()) {
+        if (!valid) {
             return;
         }
 
@@ -118,7 +94,7 @@ public class TileCompressor extends TileMultiBlockBase {
 
         if (isWorking()) {
             if (recipe == null) {
-                setWorking(false);
+                working = false;
             } else if ((getStackInSlot(2).isEmpty() && getStackInSlot(3).isEmpty()
                     || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(0), getStackInSlot(2))
                     && getStackInSlot(2).getCount() + recipe.getOutput(0).getCount() <= getStackInSlot(2).getMaxStackSize())
@@ -128,12 +104,12 @@ public class TileCompressor extends TileMultiBlockBase {
                 if (getEnergy() >= recipe.getEnergy()) {
                     drainEnergy(recipe.getEnergy());
                 } else {
-                    setProgress(0);
+                    progress = 0;
 
                     return;
                 }
 
-                setProgress(getProgress() + 1);
+                progress++;
 
                 if (getProgress() >= recipe.getDuration()) {
                     for (int i = 0; i < OUTPUT_SLOTS.length; i++) {
@@ -158,9 +134,9 @@ public class TileCompressor extends TileMultiBlockBase {
                         }
                     }
 
-                    recipe = API.instance().getCompressorRegistry().getRecipe(this);
+                    recipe = API.instance().getMachineRegistry(name).getRecipe(this, getInputs());
 
-                    setProgress(0);
+                    progress = 0;
                 }
 
                 markDirty();
@@ -168,15 +144,8 @@ public class TileCompressor extends TileMultiBlockBase {
                 WorldUtils.updateBlock(world, pos);
             }
         } else if (recipe != null) {
-            setWorking(true);
+            working = true;
         }
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-
-        recipe = API.instance().getCompressorRegistry().getRecipe(this);
     }
 
     @Override
@@ -204,7 +173,7 @@ public class TileCompressor extends TileMultiBlockBase {
     @Override
     public Light provideLight() {
         if (Cosmic.INSTANCE.config.enableColouredLights) {
-            if (isValid()) {
+            if (valid) {
                 return Light.builder().pos(pos).color(0, 1, 0).radius(2).build();
             }
 

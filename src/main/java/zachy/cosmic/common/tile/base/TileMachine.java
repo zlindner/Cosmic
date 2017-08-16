@@ -16,40 +16,52 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Optional;
+import zachy.cosmic.api.recipe.IMachineRecipe;
+import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.core.util.StackUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 
 @Optional.Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = "albedo")
-public abstract class TileMachineBase extends TileBase implements ITickable, IEnergySink, ISidedInventory, ILightProvider {
+public abstract class TileMachine extends TileBase implements ITickable, IEnergySink, ISidedInventory, ILightProvider {
 
-    private boolean working;
-    private int progress;
+    protected boolean working;
+    protected int progress;
 
     private double energy;
     private boolean enet;
 
     protected NonNullList<ItemStack> inventory;
 
+    protected IMachineRecipe recipe;
+
+    protected String name;
+
     public boolean isWorking() {
         return working;
-    }
-
-    public void setWorking(boolean working) {
-        this.working = working;
     }
 
     public int getProgress() {
         return progress;
     }
 
-    public void setProgress(int progress) {
-        this.progress = progress;
+    public int getDuration() {
+        return recipe != null ? recipe.getDuration() : 0;
     }
 
-    public abstract int getDuration();
+    public void onInventoryChanged() {
+        IMachineRecipe _recipe = API.instance().getMachineRegistry(name).getRecipe(this, getInputs());
 
-    public abstract void onInventoryChanged();
+        if (_recipe != recipe) {
+            progress = 0;
+        }
+
+        recipe = _recipe;
+
+        markDirty();
+
+        WorldUtils.updateBlock(world, pos);
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
@@ -68,6 +80,8 @@ public abstract class TileMachineBase extends TileBase implements ITickable, IEn
         }
 
         energy = tag.getDouble(Lib.NBT.ENERGY);
+
+        recipe = API.instance().getMachineRegistry(name).getRecipe(this, getInputs());
     }
 
     @Override
@@ -118,6 +132,7 @@ public abstract class TileMachineBase extends TileBase implements ITickable, IEn
 
     }
 
+    //Don't remove, may need for gui's in future
     public double getEnergy() {
         return energy;
     }
@@ -303,6 +318,6 @@ public abstract class TileMachineBase extends TileBase implements ITickable, IEn
 
     @Override
     public boolean hasCustomName() {
-        return false;
+        return true;
     }
 }

@@ -5,16 +5,16 @@
       "data": 0
     },
     null,
+    null,
     null
   ],
-  "fluid": "water",
-  "fluid_amount": 1000,
   "duration": 100,
   "energy": 32,
-  "input": [
+  "inputs": [
     {
       "item": "minecraft:iron_nugget",
       "data": 0
-    }
+    },
+    null
   ]
 }

@@ -6,30 +6,24 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRecipe;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.core.util.MultiBlockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
-import zachy.cosmic.common.tile.base.TileMultiBlockBase;
+import zachy.cosmic.common.tile.base.TileMultiblockController;
 
-public class TileBlastFurnace extends TileMultiBlockBase {
-
-    private IBlastFurnaceRecipe recipe;
+public class TileBlastFurnace extends TileMultiblockController {
 
     private int heat = 0;
 
-    private final int INPUT_SLOTS[] = {0, 1};
-    private final int OUTPUT_SLOTS[] = {2, 3};
-
     //TODO adjust internal energy storage? maybe 0?
-    //TODO add tank
     public TileBlastFurnace() {
-        setValid(false);
-        setWorking(false);
-        setProgress(0);
+        name = Lib.Blocks.BLAST_FURNACE;
 
-        inventory = NonNullList.withSize(4, ItemStack.EMPTY);
+        INPUT_SLOTS = new int[]{0, 1};
+        OUTPUT_SLOTS = new int[]{2, 3};
+
+        inventory = NonNullList.withSize(getInputs() + getOutputs(), ItemStack.EMPTY);
     }
 
     @Override
@@ -71,10 +65,6 @@ public class TileBlastFurnace extends TileMultiBlockBase {
         return heat;
     }
 
-    public int getDuration() {
-        return recipe != null ? recipe.getDuration() : 0;
-    }
-
     @Override
     public double getMaxInput() {
         return 128;
@@ -90,20 +80,6 @@ public class TileBlastFurnace extends TileMultiBlockBase {
         return 2;
     }
 
-    public void onInventoryChanged() {
-        IBlastFurnaceRecipe _recipe = API.instance().getBlastFurnaceRegistry().getRecipe(this);
-
-        if (_recipe != recipe) {
-            setProgress(0);
-        }
-
-        recipe = _recipe;
-
-        markDirty();
-
-        WorldUtils.updateBlock(world, pos);
-    }
-
     @Override
     public void update() {
         super.update();
@@ -112,7 +88,7 @@ public class TileBlastFurnace extends TileMultiBlockBase {
             return;
         }
 
-        if (!isValid()) {
+        if (!valid) {
             return;
         }
 
@@ -126,7 +102,7 @@ public class TileBlastFurnace extends TileMultiBlockBase {
 
         if (isWorking()) {
             if (recipe == null) {
-                setWorking(false);
+                working = false;
             } else if ((getStackInSlot(2).isEmpty() && getStackInSlot(3).isEmpty()
                     || (API.instance().getComparer().isEqualNoQuantity(recipe.getOutput(0), getStackInSlot(2))
                     && getStackInSlot(2).getCount() + recipe.getOutput(0).getCount() <= getStackInSlot(2).getMaxStackSize())
@@ -136,12 +112,12 @@ public class TileBlastFurnace extends TileMultiBlockBase {
                 if (getEnergy() >= recipe.getEnergy()) {
                     drainEnergy(recipe.getEnergy());
                 } else {
-                    setProgress(0);
+                    progress = 0;
 
                     return;
                 }
 
-                setProgress(getProgress() + 1);
+                progress++;
 
                 if (getProgress() >= recipe.getDuration()) {
                     for (int i = 0; i < OUTPUT_SLOTS.length; i++) {
@@ -166,9 +142,9 @@ public class TileBlastFurnace extends TileMultiBlockBase {
                         }
                     }
 
-                    recipe = API.instance().getBlastFurnaceRegistry().getRecipe(this);
+                    recipe = API.instance().getMachineRegistry(name).getRecipe(this, getInputs());
 
-                    setProgress(0);
+                    progress = 0;
                 }
 
                 markDirty();
@@ -176,15 +152,13 @@ public class TileBlastFurnace extends TileMultiBlockBase {
                 WorldUtils.updateBlock(world, pos);
             }
         } else if (recipe != null) {
-            setWorking(true);
+            working = true;
         }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
-
-        recipe = API.instance().getBlastFurnaceRegistry().getRecipe(this);
 
         heat = tag.getInteger(Lib.NBT.HEAT);
     }

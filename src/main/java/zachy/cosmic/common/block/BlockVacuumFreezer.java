@@ -10,11 +10,11 @@ import net.minecraft.world.World;
 import zachy.cosmic.client.core.handler.ModelHandler;
 import zachy.cosmic.client.gui.Guis;
 import zachy.cosmic.common.Cosmic;
-import zachy.cosmic.common.block.base.BlockMultiBlockBase;
+import zachy.cosmic.common.block.base.BlockMultiblockController;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.tile.TileVacuumFreezer;
 
-public class BlockVacuumFreezer extends BlockMultiBlockBase {
+public class BlockVacuumFreezer extends BlockMultiblockController {
 
     public BlockVacuumFreezer() {
         super(Lib.Blocks.VACUUM_FREEZER);

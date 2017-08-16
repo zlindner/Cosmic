@@ -1,34 +1,31 @@
-package zachy.cosmic.apiimpl.recipe.blast_furnace;
+package zachy.cosmic.apiimpl.recipe;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRecipe;
-import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
+import zachy.cosmic.api.recipe.IMachineRecipe;
+import zachy.cosmic.api.recipe.IMachineRegistry;
 import zachy.cosmic.api.util.IComparer;
 import zachy.cosmic.apiimpl.API;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BlastFurnaceRegistry implements IBlastFurnaceRegistry {
+public class MachineRegistry implements IMachineRegistry {
 
-    private List<IBlastFurnaceRecipe> recipes = new LinkedList<>();
+    private List<IMachineRecipe> recipes = new LinkedList<>();
 
     @Override
-    public void addRecipe(@Nonnull IBlastFurnaceRecipe recipe) {
+    public void addRecipe(IMachineRecipe recipe) {
         recipes.add(recipe);
     }
 
-    @Nullable
     @Override
-    public IBlastFurnaceRecipe getRecipe(IInventory inventory) {
-        for (IBlastFurnaceRecipe recipe : recipes) {
+    public IMachineRecipe getRecipe(IInventory inventory, int inputs) {
+        for (IMachineRecipe recipe : recipes) {
             int inputsFound = 0;
 
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < inputs; i++) {
                 NonNullList<ItemStack> possibilities = recipe.getInput(i);
 
                 if (possibilities.isEmpty() && inventory.getStackInSlot(i).isEmpty()) {
@@ -48,7 +45,7 @@ public class BlastFurnaceRegistry implements IBlastFurnaceRegistry {
                 }
             }
 
-            if (inputsFound == 2) {
+            if (inputsFound == inputs) {
                 return recipe;
             }
         }
@@ -57,7 +54,7 @@ public class BlastFurnaceRegistry implements IBlastFurnaceRegistry {
     }
 
     @Override
-    public List<IBlastFurnaceRecipe> getRecipes() {
+    public List<IMachineRecipe> getRecipes() {
         return recipes;
     }
 }

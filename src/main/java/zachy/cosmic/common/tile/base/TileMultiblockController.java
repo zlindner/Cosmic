@@ -9,21 +9,16 @@ import zachy.cosmic.common.Cosmic;
 import zachy.cosmic.common.core.Lib;
 import zachy.cosmic.common.core.util.WorldUtils;
 
-public abstract class TileMultiBlockBase extends TileMachineBase {
+public abstract class TileMultiblockController extends TileMachine {
 
-    private boolean valid;
-
+    protected boolean valid = false;
     protected int counter = 0;
+
+    protected abstract boolean verifyStructure();
 
     public boolean isValid() {
         return valid;
     }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
-    }
-
-    protected abstract boolean verifyStructure();
 
     @Override
     public void update() {
@@ -34,7 +29,7 @@ public abstract class TileMultiBlockBase extends TileMachineBase {
         counter++;
 
         if (counter == 20) {
-            setValid(verifyStructure());
+            valid = verifyStructure();
 
             markDirty();
 
@@ -46,12 +41,12 @@ public abstract class TileMultiBlockBase extends TileMachineBase {
 
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        boolean clientValid = isValid();
+        boolean clientValid = valid;
 
         super.onDataPacket(net, packet);
 
         if (world.isRemote) {
-            boolean serverValid = isValid();
+            boolean serverValid = valid;
 
             if (serverValid != clientValid) {
                 world.markBlockRangeForRenderUpdate(pos, pos);

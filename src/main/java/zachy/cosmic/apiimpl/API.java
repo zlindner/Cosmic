@@ -5,18 +5,11 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import zachy.cosmic.api.IAPI;
-import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
-import zachy.cosmic.api.recipe.compressor.ICompressorRegistry;
-import zachy.cosmic.api.recipe.grinder.IGrinderRegistry;
-import zachy.cosmic.api.recipe.sawmill.ISawmillRegistry;
-import zachy.cosmic.api.recipe.vacuum_freezer.IVacuumFreezerRegistry;
+import zachy.cosmic.api.recipe.IMachineRegistry;
 import zachy.cosmic.api.util.IComparer;
-import zachy.cosmic.apiimpl.recipe.blast_furnace.BlastFurnaceRegistry;
-import zachy.cosmic.apiimpl.recipe.compressor.CompressorRegistry;
-import zachy.cosmic.apiimpl.recipe.grinder.GrinderRegistry;
-import zachy.cosmic.apiimpl.recipe.sawmill.SawmillRegistry;
-import zachy.cosmic.apiimpl.recipe.vacuum_freezer.VacuumFreezerRegistry;
+import zachy.cosmic.apiimpl.recipe.MachineRegistry;
 import zachy.cosmic.apiimpl.util.Comparer;
+import zachy.cosmic.common.core.Lib;
 
 import javax.annotation.Nonnull;
 
@@ -26,11 +19,11 @@ public class API implements IAPI {
 
     private IComparer comparer = new Comparer();
 
-    private IBlastFurnaceRegistry blastFurnaceRegistry = new BlastFurnaceRegistry();
-    private IGrinderRegistry grinderRegistry = new GrinderRegistry();
-    private ISawmillRegistry sawmillRegistry = new SawmillRegistry();
-    private ICompressorRegistry compressorRegistry = new CompressorRegistry();
-    private IVacuumFreezerRegistry vacuumFreezerRegistry = new VacuumFreezerRegistry();
+    private IMachineRegistry blastFurnaceRegistry = new MachineRegistry();
+    private IMachineRegistry compressorRegistry = new MachineRegistry();
+    private IMachineRegistry grinderRegistry = new MachineRegistry();
+    private IMachineRegistry sawmillRegistry = new MachineRegistry();
+    private IMachineRegistry vacuumFreezerRegistry = new MachineRegistry();
 
     public static IAPI instance() {
         return INSTANCE;
@@ -42,34 +35,22 @@ public class API implements IAPI {
         return comparer;
     }
 
-    @Nonnull
     @Override
-    public IBlastFurnaceRegistry getBlastFurnaceRegistry() {
-        return blastFurnaceRegistry;
-    }
+    public IMachineRegistry getMachineRegistry(String machine) {
+        switch (machine) {
+            case Lib.Blocks.BLAST_FURNACE:
+                return blastFurnaceRegistry;
+            case Lib.Blocks.COMPRESSOR:
+                return compressorRegistry;
+            case Lib.Blocks.GRINDER:
+                return grinderRegistry;
+            case Lib.Blocks.SAWMILL:
+                return sawmillRegistry;
+            case Lib.Blocks.VACUUM_FREEZER:
+                return vacuumFreezerRegistry;
+        }
 
-    @Nonnull
-    @Override
-    public IGrinderRegistry getGrinderRegistry() {
-        return grinderRegistry;
-    }
-
-    @Nonnull
-    @Override
-    public ISawmillRegistry getSawmillRegistry() {
-        return sawmillRegistry;
-    }
-
-    @Nonnull
-    @Override
-    public ICompressorRegistry getCompressorRegistry() {
-        return compressorRegistry;
-    }
-
-    @Nonnull
-    @Override
-    public IVacuumFreezerRegistry getVacuumFreezerRegistry() {
-        return vacuumFreezerRegistry;
+        return null;
     }
 
     @Override

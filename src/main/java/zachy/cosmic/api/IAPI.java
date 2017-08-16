@@ -1,11 +1,7 @@
 package zachy.cosmic.api;
 
 import net.minecraft.item.ItemStack;
-import zachy.cosmic.api.recipe.blast_furnace.IBlastFurnaceRegistry;
-import zachy.cosmic.api.recipe.compressor.ICompressorRegistry;
-import zachy.cosmic.api.recipe.grinder.IGrinderRegistry;
-import zachy.cosmic.api.recipe.sawmill.ISawmillRegistry;
-import zachy.cosmic.api.recipe.vacuum_freezer.IVacuumFreezerRegistry;
+import zachy.cosmic.api.recipe.IMachineRegistry;
 import zachy.cosmic.api.util.IComparer;
 
 import javax.annotation.Nonnull;
@@ -16,6 +12,7 @@ import javax.annotation.Nonnull;
  */
 public interface IAPI {
 
+    //TODO remove, add to stackutils
     /**
      * @return the comparer
      */
@@ -23,35 +20,12 @@ public interface IAPI {
     IComparer getComparer();
 
     /**
-     * @return the blast furnace registry
+     * @param machine the name of the machine
+     * @return the machine registry for the given machine
      */
-    @Nonnull
-    IBlastFurnaceRegistry getBlastFurnaceRegistry();
+    IMachineRegistry getMachineRegistry(String machine);
 
-    /**
-     * @return the grinder registry
-     */
-    @Nonnull
-    IGrinderRegistry getGrinderRegistry();
-
-    /**
-     * @return the sawmill registry
-     */
-    @Nonnull
-    ISawmillRegistry getSawmillRegistry();
-
-    /**
-     * @return the compressor registry
-     */
-    @Nonnull
-    ICompressorRegistry getCompressorRegistry();
-
-    /**
-     * @return the vacuum freezer registry
-     */
-    @Nonnull
-    IVacuumFreezerRegistry getVacuumFreezerRegistry();
-
+    //TODO stahp this
     /**
      * @param stack the stack
      * @param tag   whether the NBT tag of the stack should be calculated in the hashcode, used for performance reasons

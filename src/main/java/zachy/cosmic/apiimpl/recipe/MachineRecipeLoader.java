@@ -1,4 +1,4 @@
-package zachy.cosmic.apiimpl.recipe.sawmill;
+package zachy.cosmic.apiimpl.recipe;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,14 +19,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class SawmillRecipeLoader {
+public class MachineRecipeLoader {
 
     private static Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-    public static void load() {
+    public static void load(String machine, int inputs, int outputs) {
         JsonContext context = new JsonContext(Lib.MOD_ID);
 
-        CraftingHelper.findFiles(Loader.instance().activeModContainer(), "assets/" + Lib.MOD_ID + "/machine_recipes/sawmill", root -> {
+        CraftingHelper.findFiles(Loader.instance().activeModContainer(), "assets/" + Lib.MOD_ID + "/machine_recipes/" + machine, root -> {
             //TODO Load the constants into to the context.
 
             return true;
@@ -45,18 +45,20 @@ public class SawmillRecipeLoader {
             try {
                 reader = Files.newBufferedReader(file);
 
-                API.instance().getSawmillRegistry().addRecipe(new SawmillRecipeFactory(key, JsonUtils.fromJson(GSON, reader, JsonObject.class)).create(context));
+                API.instance().getMachineRegistry(machine).addRecipe(new MachineRecipeFactory(key, JsonUtils.fromJson(GSON, reader, JsonObject.class), inputs, outputs).create(context));
             } catch (JsonParseException e) {
-                FMLLog.log.error("Parsing error while reading JSON sawmill recipe {}", key, e);
+                FMLLog.log.error("Parsing error while reading JSON recipe {}", key, e);
 
                 return false;
             } catch (IOException e) {
-                FMLLog.log.error("Couldn't read JSON sawmill recipe {} from {}", key, file, e);
+                FMLLog.log.error("Couldn't read JSON recipe {} from {}", key, file, e);
 
                 return false;
             } finally {
                 IOUtils.closeQuietly(reader);
             }
+
+            FMLLog.log.info("Loaded " + machine + " recipes");
 
             return true;
         });

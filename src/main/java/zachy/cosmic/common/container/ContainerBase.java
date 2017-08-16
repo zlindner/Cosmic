@@ -11,9 +11,15 @@ public class ContainerBase extends Container {
     private TileBase tile;
     private EntityPlayer player;
 
+    private int inputs;
+    private int outputs;
+
     public ContainerBase(TileBase tile, EntityPlayer player) {
         this.tile = tile;
         this.player = player;
+
+        inputs = tile.getInputs();
+        outputs = tile.getOutputs();
     }
 
     public EntityPlayer getPlayer() {
@@ -46,8 +52,30 @@ public class ContainerBase extends Container {
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-        return ItemStack.EMPTY;
+    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+        ItemStack stack = ItemStack.EMPTY;
+
+        Slot slot = getSlot(index);
+
+        if (slot.getHasStack()) {
+            stack = slot.getStack();
+
+            if (index < inputs + outputs) {
+                if (!mergeItemStack(stack, inputs + outputs + 9, inventorySlots.size(), false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!mergeItemStack(stack, 0, inputs, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (stack.getCount() == 0) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+        }
+
+        return stack;
     }
 
     @Override

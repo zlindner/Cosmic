@@ -3,12 +3,13 @@ package zachy.cosmic.client.gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import zachy.cosmic.common.container.ContainerBase;
 import zachy.cosmic.common.core.Lib;
+import zachy.cosmic.common.tile.base.TileMachine;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -23,28 +24,26 @@ public abstract class GuiBase extends GuiContainer {
     protected int screenWidth;
     protected int screenHeight;
 
-    public GuiBase(Container container, int screenWidth, int screenHeight) {
+    private TileMachine tile;
+
+    public GuiBase(ContainerBase container, int screenWidth, int screenHeight) {
         super(container);
 
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.xSize = screenWidth;
         this.ySize = screenHeight;
+
+        tile = (TileMachine) container.getTile();
     }
 
     @Override
     public void initGui() {
-        calcHeight();
-
         super.initGui();
 
         buttonList.clear();
 
         init(guiLeft, guiTop);
-    }
-
-    protected void calcHeight() {
-
     }
 
     @Override
@@ -144,15 +143,18 @@ public abstract class GuiBase extends GuiContainer {
 
     public abstract void drawForeground(int mouseX, int mouseY);
 
-    public int getGuiLeft() {
-        return guiLeft;
-    }
-
-    public int getGuiTop() {
-        return guiTop;
-    }
-
     public boolean inBounds(int x, int y, int w, int h, int ox, int oy) {
         return ox >= x && ox <= x + w && oy >= y && oy <= y + h;
+    }
+
+    public int getProgressScaled(int scale) {
+        float progress = tile.getProgress();
+        float duration = tile.getDuration();
+
+        if (progress > duration) {
+            return scale;
+        }
+
+        return (int) (progress / duration * (float) scale);
     }
 }
