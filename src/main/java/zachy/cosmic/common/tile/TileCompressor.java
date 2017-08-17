@@ -148,6 +148,7 @@ public class TileCompressor extends TileMultiblockController {
         }
     }
 
+    //TODO clean up ISidedInventory code (possibly move to base class)
     @Override
     public int[] getSlotsForFace(EnumFacing side) {
         if (side == EnumFacing.UP) {
@@ -157,16 +158,6 @@ public class TileCompressor extends TileMultiblockController {
         } else {
             return OUTPUT_SLOTS;
         }
-    }
-
-    @Override
-    public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == INPUT_SLOTS[0] || index == INPUT_SLOTS[1];
-    }
-
-    @Override
-    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == OUTPUT_SLOTS[0] || index == OUTPUT_SLOTS[1];
     }
 
     @Optional.Method(modid = "albedo")

@@ -9,6 +9,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import zachy.cosmic.common.core.Lib;
+import zachy.cosmic.common.core.util.WorldUtils;
 
 import javax.annotation.Nullable;
 
@@ -25,6 +26,8 @@ public class TileBase extends TileEntity {
         world.notifyNeighborsOfStateChange(pos, world.getBlockState(pos).getBlock(), true);
 
         markDirty();
+
+        WorldUtils.updateBlock(world, pos);
     }
 
     public EnumFacing getDirection() {

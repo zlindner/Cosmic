@@ -180,14 +180,4 @@ public class TileBlastFurnace extends TileMultiblockController {
             return OUTPUT_SLOTS;
         }
     }
-
-    @Override
-    public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == INPUT_SLOTS[0] || index == INPUT_SLOTS[1];
-    }
-
-    @Override
-    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == OUTPUT_SLOTS[0] || index == OUTPUT_SLOTS[1];
-    }
 }

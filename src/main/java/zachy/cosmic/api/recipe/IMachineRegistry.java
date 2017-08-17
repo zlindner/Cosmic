@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import java.util.List;
 
 /**
- * The recipe registry of the blast furnace
+ * The recipe registry of a machine
  */
 public interface IMachineRegistry {
 
@@ -19,14 +19,14 @@ public interface IMachineRegistry {
     /**
      * Returns a recipe from the slots
      *
-     * @param inventory an iinventory
-     * @param inputs    the number of input slots of the machine
+     * @param inventory the machine
+     * @param inputs the number of input slots of the machine
      * @return the recipe, or null if no recipe was found
      */
     IMachineRecipe getRecipe(IInventory inventory, int inputs);
 
     /**
-     * @return a list with all of the machines recipes
+     * @return a list with all of the machine's recipes
      */
     List<IMachineRecipe> getRecipes();
 }

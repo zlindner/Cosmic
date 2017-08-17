@@ -38,17 +38,17 @@ public interface IMachineRecipe {
     int getEnergy();
 
     /**
-     * @return the fluidstack required by the recipe (if applicable)
+     * @return the fluidstack required by the recipe
      */
     FluidStack getFluid();
 
     /**
-     * @return the amount of fluid required by the recipe (if applicable)
+     * @return the amount of fluid required by the recipe
      */
     int getFluidAmount();
 
     /**
-     * @return temperature required by the recipe (if applicable)
+     * @return temperature required by the recipe
      */
     int getHeat();
 }

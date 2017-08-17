@@ -158,16 +158,6 @@ public class TileVacuumFreezer extends TileMultiblockController {
         }
     }
 
-    @Override
-    public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == INPUT_SLOTS[0];
-    }
-
-    @Override
-    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == OUTPUT_SLOTS[0];
-    }
-
     @Optional.Method(modid = "albedo")
     @Override
     public Light provideLight() {

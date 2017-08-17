@@ -143,14 +143,4 @@ public class TileGrinder extends TileMultiblockController {
             return OUTPUT_SLOTS;
         }
     }
-
-    @Override
-    public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == INPUT_SLOTS[0];
-    }
-
-    @Override
-    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == OUTPUT_SLOTS[0] || index == OUTPUT_SLOTS[1] || index == OUTPUT_SLOTS[2];
-    }
 }

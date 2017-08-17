@@ -194,12 +194,12 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
 
     @Override
     public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) {
-        return true;
+        return index < getInputs();
     }
 
     @Override
     public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-        return true;
+        return index > getInputs();
     }
 
     @Override
