@@ -6,4 +6,5 @@ public final class Guis {
     public static final int SAWMILL = 2;
     public static final int IMPLOSION_COMPRESSOR = 3;
     public static final int VACUUM_FREEZER = 4;
+    public static final int DISTILLATION_TOWER = 5;
 }

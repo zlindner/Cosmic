@@ -10,9 +10,9 @@ public class ContainerVacuumFreezer extends ContainerBase {
     public ContainerVacuumFreezer(TileVacuumFreezer tile, EntityPlayer player) {
         super(tile, player);
 
-        addSlotToContainer(new Slot(tile, 0, 66, 43));
+        addSlotToContainer(new Slot(tile, 0, 66, 42));
 
-        addSlotToContainer(new SlotOutput(tile, 1, 120, 43));
+        addSlotToContainer(new SlotOutput(tile, 1, 120, 42));
 
         addPlayerInventory(8, 100);
     }

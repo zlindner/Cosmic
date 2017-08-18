@@ -10,10 +10,10 @@ public class ContainerSawmill extends ContainerBase {
     public ContainerSawmill(TileSawmill tile, EntityPlayer player) {
         super(tile, player);
 
-        addSlotToContainer(new Slot(tile, 0, 57, 18));
+        addSlotToContainer(new Slot(tile, 0, 57, 17));
 
-        addSlotToContainer(new SlotOutput(tile, 1, 112, 43));
-        addSlotToContainer(new SlotOutput(tile, 2, 130, 43));
+        addSlotToContainer(new SlotOutput(tile, 1, 112, 42));
+        addSlotToContainer(new SlotOutput(tile, 2, 130, 42));
 
         addPlayerInventory(8, 100);
     }

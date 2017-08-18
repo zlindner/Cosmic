@@ -1,9 +1,6 @@
 package zachy.cosmic.common.tile;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import zachy.cosmic.apiimpl.API;
@@ -12,15 +9,13 @@ import zachy.cosmic.common.core.util.MultiblockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiblockController;
 
-public class TileBlastFurnace extends TileMultiblockController {
+public class TileDistillationTower extends TileMultiblockController {
 
-    private int heat = 0;
-
-    public TileBlastFurnace() {
+    public TileDistillationTower() {
         name = Lib.Blocks.BLAST_FURNACE;
 
         INPUT_SLOTS = new int[]{0, 1};
-        OUTPUT_SLOTS = new int[]{2, 3};
+        OUTPUT_SLOTS = new int[]{2, 3, 4};
 
         inventory = NonNullList.withSize(getInputs() + getOutputs(), ItemStack.EMPTY);
     }
@@ -29,44 +24,41 @@ public class TileBlastFurnace extends TileMultiblockController {
     protected boolean verifyStructure() {
         BlockPos start = pos.offset(getDirection().getOpposite()).offset(getDirection().getOpposite());
 
-        int _heat = 0;
-
-        for (int y = 0; y < 4; y++) {
+        for (int y = 0; y < 5; y++) {
             for (int x = -1; x < 2; x++) {
                 for (int z = -1; z < 2; z++) {
                     BlockPos check = start.add(x, y, z);
 
-                    if (x == 0 && (y == 1 || y == 2) && z == 0) {
-                        if (!MultiblockUtils.isAir(world, check)) {
-                            if (MultiblockUtils.isLava(world, check)) {
-                                _heat += 250;
-                            } else {
+                    if (y == 1 || y == 3) {
+                        if (x == 0 && z == 0) {
+                            if (!MultiblockUtils.isAir(world, check)) {
+                                return false;
+                            }
+                        } else {
+                            if (!MultiblockUtils.isAdvancedCasing(world, check)) {
                                 return false;
                             }
                         }
-                    } else if (!MultiblockUtils.isAnyCasing(world, check)) {
-                        return false;
+                    } else if (y == 2) {
+                        if (x == 0 && z == 0) {
+                            if (!MultiblockUtils.isAir(world, check)) {
+                                return false;
+                            }
+                        } else {
+                            if (!MultiblockUtils.isBasicCasing(world, check)) {
+                                return false;
+                            }
+                        }
                     } else {
-                        IBlockState state = world.getBlockState(check);
-
-                        _heat += 30 + (state.getBlock().getMetaFromState(state) * 20);
+                        if (!MultiblockUtils.isBasicCasing(world, check)) {
+                            return false;
+                        }
                     }
                 }
             }
         }
 
-        heat = _heat;
-
         return true;
-    }
-
-    public int getHeat() {
-        return heat;
-    }
-
-    @Override
-    public double getMaxInput() {
-        return 128;
     }
 
     @Override
@@ -78,10 +70,6 @@ public class TileBlastFurnace extends TileMultiblockController {
         }
 
         if (!valid) {
-            return;
-        }
-
-        if (recipe != null && heat < recipe.getHeat()) {
             return;
         }
 
@@ -146,27 +134,7 @@ public class TileBlastFurnace extends TileMultiblockController {
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-
-        heat = tag.getInteger(Lib.NBT.HEAT);
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-        tag.setInteger(Lib.NBT.HEAT, heat);
-
-        return super.writeToNBT(tag);
-    }
-
-    @Override
-    public int[] getSlotsForFace(EnumFacing side) {
-        if (side == EnumFacing.UP) {
-            return new int[]{INPUT_SLOTS[0]};
-        } else if (side == EnumFacing.DOWN) {
-            return new int[]{INPUT_SLOTS[1]};
-        } else {
-            return OUTPUT_SLOTS;
-        }
+    public double getMaxInput() {
+        return 128;
     }
 }

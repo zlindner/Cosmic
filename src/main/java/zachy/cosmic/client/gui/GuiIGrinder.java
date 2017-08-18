@@ -14,16 +14,6 @@ public class GuiIGrinder extends GuiBase {
     }
 
     @Override
-    public void init(int x, int y) {
-
-    }
-
-    @Override
-    public void update(int x, int y) {
-
-    }
-
-    @Override
     public void drawBackground(int x, int y, int mouseX, int mouseY) {
         bindTexture("gui/grinder.png");
 

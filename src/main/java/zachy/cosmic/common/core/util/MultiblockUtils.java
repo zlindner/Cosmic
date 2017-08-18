@@ -5,13 +5,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import zachy.cosmic.common.core.init.ModBlocks;
 
-public class MultiBlockUtils {
+public class MultiblockUtils {
 
     public static boolean isAnyCasing(World world, BlockPos pos) {
         return world.getBlockState(pos).getBlock() == ModBlocks.machine_casing;
     }
 
-    public static boolean isStandardCasing(World world, BlockPos pos) {
+    public static boolean isBasicCasing(World world, BlockPos pos) {
         return world.getBlockState(pos) == ModBlocks.machine_casing.getStateFromMeta(0);
     }
 

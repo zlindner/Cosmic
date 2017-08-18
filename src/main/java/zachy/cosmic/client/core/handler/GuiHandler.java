@@ -27,6 +27,8 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerCompressor((TileCompressor) tile, player);
             case Guis.VACUUM_FREEZER:
                 return new ContainerVacuumFreezer((TileVacuumFreezer) tile, player);
+            case Guis.DISTILLATION_TOWER:
+                return new ContainerDistillationTower((TileDistillationTower) tile, player);
             default:
                 return null;
         }
@@ -52,6 +54,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiCompressor((ContainerCompressor) getContainer(Id, WorldUtils.getTile(world, new BlockPos(x, y, z)), player));
             case Guis.VACUUM_FREEZER:
                 return new GuiVacuumFreezer((ContainerVacuumFreezer) getContainer(Id, WorldUtils.getTile(world, new BlockPos(x, y, z)), player));
+            case Guis.DISTILLATION_TOWER:
+                return new GuiDistillationTower((ContainerDistillationTower) getContainer(Id, WorldUtils.getTile(world, new BlockPos(x, y, z)), player));
             default:
                 return null;
         }

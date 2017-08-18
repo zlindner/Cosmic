@@ -22,6 +22,7 @@ public class ModBlocks {
     public static BlockBase sawmill = new BlockSawmill();
     public static BlockBase compressor = new BlockCompressor();
     public static BlockBase vacuum_freezer = new BlockVacuumFreezer();
+    public static BlockBase distillation_tower = new BlockDistillationTower();
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -34,6 +35,7 @@ public class ModBlocks {
         r.register(sawmill);
         r.register(compressor);
         r.register(vacuum_freezer);
+        r.register(distillation_tower);
 
         registerTiles();
     }
@@ -44,6 +46,7 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(TileSawmill.class, Lib.MOD_ID + ":" + Lib.Blocks.SAWMILL);
         GameRegistry.registerTileEntity(TileCompressor.class, Lib.MOD_ID + ":" + Lib.Blocks.COMPRESSOR);
         GameRegistry.registerTileEntity(TileVacuumFreezer.class, Lib.MOD_ID + ":" + Lib.Blocks.VACUUM_FREEZER);
+        GameRegistry.registerTileEntity(TileDistillationTower.class, Lib.MOD_ID + ":" + Lib.Blocks.DISTILLATION_TOWER);
     }
 
     @SubscribeEvent
@@ -57,5 +60,6 @@ public class ModBlocks {
         r.register(sawmill.createItemBlock());
         r.register(compressor.createItemBlock());
         r.register(vacuum_freezer.createItemBlock());
+        r.register(distillation_tower.createItemBlock());
     }
 }

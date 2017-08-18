@@ -24,6 +24,7 @@ public class API implements IAPI {
     private IMachineRegistry grinderRegistry = new MachineRegistry();
     private IMachineRegistry sawmillRegistry = new MachineRegistry();
     private IMachineRegistry vacuumFreezerRegistry = new MachineRegistry();
+    private IMachineRegistry distillationTowerRegistry = new MachineRegistry();
 
     public static IAPI instance() {
         return INSTANCE;
@@ -48,6 +49,8 @@ public class API implements IAPI {
                 return sawmillRegistry;
             case Lib.Blocks.VACUUM_FREEZER:
                 return vacuumFreezerRegistry;
+            case Lib.Blocks.DISTILLATION_TOWER:
+                return distillationTowerRegistry;
         }
 
         return null;

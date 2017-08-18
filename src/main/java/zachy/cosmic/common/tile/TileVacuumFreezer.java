@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Optional;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.Cosmic;
 import zachy.cosmic.common.core.Lib;
-import zachy.cosmic.common.core.util.MultiBlockUtils;
+import zachy.cosmic.common.core.util.MultiblockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiblockController;
 
@@ -36,25 +36,25 @@ public class TileVacuumFreezer extends TileMultiblockController {
 
                     if (y == 0 || y == 2) {
                         if (x == 0 && z == 0) {
-                            if (!MultiBlockUtils.isAdvancedCasing(world, check)) {
+                            if (!MultiblockUtils.isAdvancedCasing(world, check)) {
                                 return false;
                             }
                         } else {
-                            if (!MultiBlockUtils.isIntermediateCasing(world, check)) {
+                            if (!MultiblockUtils.isIntermediateCasing(world, check)) {
                                 return false;
                             }
                         }
                     } else {
                         if (x == 0 && z == 0) {
-                            if (!MultiBlockUtils.isAir(world, check)) {
+                            if (!MultiblockUtils.isAir(world, check)) {
                                 return false;
                             }
                         } else if (x == 0 || z == 0) {
-                            if (!MultiBlockUtils.isAdvancedCasing(world, check)) {
+                            if (!MultiblockUtils.isAdvancedCasing(world, check)) {
                                 return false;
                             }
                         } else {
-                            if (!MultiBlockUtils.isIntermediateCasing(world, check)) {
+                            if (!MultiblockUtils.isIntermediateCasing(world, check)) {
                                 return false;
                             }
                         }
@@ -135,16 +135,6 @@ public class TileVacuumFreezer extends TileMultiblockController {
     @Override
     public double getMaxInput() {
         return 128;
-    }
-
-    @Override
-    public double getMaxStored() {
-        return 12800;
-    }
-
-    @Override
-    public int getSinkTier() {
-        return 2;
     }
 
     @Override

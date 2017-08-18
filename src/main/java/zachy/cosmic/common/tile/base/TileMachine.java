@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.Optional;
 import zachy.cosmic.api.recipe.IMachineRecipe;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.core.Lib;
+import zachy.cosmic.common.core.util.EnergyUtils;
 import zachy.cosmic.common.core.util.StackUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 
@@ -163,7 +164,9 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
 
     public abstract double getMaxInput();
 
-    public abstract double getMaxStored();
+    public double getMaxStored() {
+        return getMaxInput() * 10;
+    }
 
     @Override
     public double getDemandedEnergy() {
@@ -172,7 +175,7 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
 
     @Override
     public int getSinkTier() {
-        return 0;
+        return EnergyUtils.getSink(getMaxInput());
     }
 
     @Override

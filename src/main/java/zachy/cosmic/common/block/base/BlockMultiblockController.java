@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import zachy.cosmic.client.core.handler.ModelHandler;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiblockController;
 
@@ -39,5 +40,10 @@ public class BlockMultiblockController extends BlockMachine {
     @Override
     public boolean isIntermediate() {
         return true;
+    }
+
+    @Override
+    public void registerModel() {
+        ModelHandler.registerBlock(this, 0, getDefaultState().withProperty(DIRECTION, EnumFacing.NORTH).withProperty(VALID, false));
     }
 }

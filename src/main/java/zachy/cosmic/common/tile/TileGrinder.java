@@ -6,7 +6,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.core.Lib;
-import zachy.cosmic.common.core.util.MultiBlockUtils;
+import zachy.cosmic.common.core.util.MultiblockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiblockController;
 
@@ -31,12 +31,12 @@ public class TileGrinder extends TileMultiblockController {
                     BlockPos check = start.add(x, y, z);
 
                     if (x == 0 && y == 1 && z == 0) {
-                        if (!MultiBlockUtils.isWater(world, check)) {
+                        if (!MultiblockUtils.isWater(world, check)) {
                             return false;
                         }
-                    } else if ((y == 0 || y == 2) && !MultiBlockUtils.isStandardCasing(world, check)) {
+                    } else if ((y == 0 || y == 2) && !MultiblockUtils.isBasicCasing(world, check)) {
                         return false;
-                    } else if (x != 0 && y == 1 && z != 0 && !MultiBlockUtils.isIntermediateCasing(world, check)) {
+                    } else if (x != 0 && y == 1 && z != 0 && !MultiblockUtils.isIntermediateCasing(world, check)) {
                         return false;
                     }
                 }
@@ -49,16 +49,6 @@ public class TileGrinder extends TileMultiblockController {
     @Override
     public double getMaxInput() {
         return 128;
-    }
-
-    @Override
-    public double getMaxStored() {
-        return 12800;
-    }
-
-    @Override
-    public int getSinkTier() {
-        return 2;
     }
 
     @Override

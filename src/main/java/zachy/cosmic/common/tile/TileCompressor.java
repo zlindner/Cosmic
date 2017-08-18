@@ -9,13 +9,13 @@ import net.minecraftforge.fml.common.Optional;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.Cosmic;
 import zachy.cosmic.common.core.Lib;
-import zachy.cosmic.common.core.util.MultiBlockUtils;
+import zachy.cosmic.common.core.util.MultiblockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiblockController;
 
 public class TileCompressor extends TileMultiblockController {
 
-    //TODO fix shift clicking not updating recipe?
+    //TODO fix recipe
     public TileCompressor() {
         name = Lib.Blocks.COMPRESSOR;
 
@@ -35,21 +35,21 @@ public class TileCompressor extends TileMultiblockController {
                     BlockPos check = start.add(x, y, z);
 
                     if (x == 0 && y == 1 && z == 0) {
-                        if (!MultiBlockUtils.isAir(world, check)) {
+                        if (!MultiblockUtils.isAir(world, check)) {
                             return false;
                         }
                     } else if (y == 0 || y == 2) {
                         if (x != 0 && z != 0) {
-                            if (!MultiBlockUtils.isStandardCasing(world, check)) {
+                            if (!MultiblockUtils.isBasicCasing(world, check)) {
                                 return false;
                             }
                         } else {
-                            if (!MultiBlockUtils.isIntermediateCasing(world, check)) {
+                            if (!MultiblockUtils.isIntermediateCasing(world, check)) {
                                 return false;
                             }
                         }
                     } else {
-                        if (!MultiBlockUtils.isIntermediateCasing(world, check)) {
+                        if (!MultiblockUtils.isIntermediateCasing(world, check)) {
                             return false;
                         }
                     }
@@ -63,16 +63,6 @@ public class TileCompressor extends TileMultiblockController {
     @Override
     public double getMaxInput() {
         return 32;
-    }
-
-    @Override
-    public double getMaxStored() {
-        return 3200;
-    }
-
-    @Override
-    public int getSinkTier() {
-        return 1;
     }
 
     //TODO put in controller class

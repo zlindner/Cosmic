@@ -26,6 +26,7 @@ public abstract class GuiBase extends GuiContainer {
 
     private TileMachine tile;
 
+    //TODO rewrite
     public GuiBase(ContainerBase container, int screenWidth, int screenHeight) {
         super(container);
 
@@ -35,22 +36,6 @@ public abstract class GuiBase extends GuiContainer {
         this.ySize = screenHeight;
 
         tile = (TileMachine) container.getTile();
-    }
-
-    @Override
-    public void initGui() {
-        super.initGui();
-
-        buttonList.clear();
-
-        init(guiLeft, guiTop);
-    }
-
-    @Override
-    public void updateScreen() {
-        super.updateScreen();
-
-        update(guiLeft, guiTop);
     }
 
     @Override
@@ -134,10 +119,6 @@ public abstract class GuiBase extends GuiContainer {
     public static String format(String name, Object... format) {
         return I18n.format(name, format);
     }
-
-    public abstract void init(int x, int y);
-
-    public abstract void update(int x, int y);
 
     public abstract void drawBackground(int x, int y, int mouseX, int mouseY);
 

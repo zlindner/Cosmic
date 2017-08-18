@@ -11,23 +11,23 @@ import zachy.cosmic.client.gui.Guis;
 import zachy.cosmic.common.Cosmic;
 import zachy.cosmic.common.block.base.BlockMultiblockController;
 import zachy.cosmic.common.core.Lib;
-import zachy.cosmic.common.tile.TileVacuumFreezer;
+import zachy.cosmic.common.tile.TileDistillationTower;
 
-public class BlockVacuumFreezer extends BlockMultiblockController {
+public class BlockDistillationTower extends BlockMultiblockController {
 
-    public BlockVacuumFreezer() {
-        super(Lib.Blocks.VACUUM_FREEZER);
+    public BlockDistillationTower() {
+        super(Lib.Blocks.DISTILLATION_TOWER);
     }
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileVacuumFreezer();
+        return new TileDistillationTower();
     }
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote && !player.isSneaking()) {
-            player.openGui(Cosmic.INSTANCE, Guis.VACUUM_FREEZER, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Cosmic.INSTANCE, Guis.DISTILLATION_TOWER, world, pos.getX(), pos.getY(), pos.getZ());
         }
 
         return true;

@@ -14,23 +14,13 @@ public class GuiCompressor extends GuiBase {
     }
 
     @Override
-    public void init(int x, int y) {
-
-    }
-
-    @Override
-    public void update(int x, int y) {
-
-    }
-
-    @Override
     public void drawBackground(int x, int y, int mouseX, int mouseY) {
         bindTexture("gui/compressor.png");
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
         if (tile.isWorking()) {
-            drawTexture(x + 81, y + 45, 176, 0, getProgressScaled(22), 11);
+            drawTexture(x + 81, y + 44, 176, 0, getProgressScaled(22), 11);
         }
     }
 

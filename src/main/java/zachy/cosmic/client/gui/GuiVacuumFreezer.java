@@ -14,23 +14,13 @@ public class GuiVacuumFreezer extends GuiBase {
     }
 
     @Override
-    public void init(int x, int y) {
-
-    }
-
-    @Override
-    public void update(int x, int y) {
-
-    }
-
-    @Override
     public void drawBackground(int x, int y, int mouseX, int mouseY) {
         bindTexture("gui/vacuum_freezer.png");
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
         if (tile.isWorking()) {
-            drawTexture(x + 91, y + 46, 176, 0, getProgressScaled(22), 10);
+            drawTexture(x + 91, y + 45, 176, 0, getProgressScaled(22), 10);
         }
     }
 

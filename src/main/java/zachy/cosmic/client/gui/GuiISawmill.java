@@ -17,27 +17,17 @@ public class GuiISawmill extends GuiBase {
     }
 
     @Override
-    public void init(int x, int y) {
-
-    }
-
-    @Override
-    public void update(int x, int y) {
-
-    }
-
-    @Override
     public void drawBackground(int x, int y, int mouseX, int mouseY) {
         bindTexture("gui/sawmill.png");
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
         if (tile.isWorking()) {
-            drawTexture(x + 83, y + 45, 176, 0, getProgressScaled(22), 11);
+            drawTexture(x + 83, y + 43, 176, 0, getProgressScaled(22), 11);
         }
 
         if (tile.getFluidStack() != null) {
-            FLUID_RENDERER.draw(mc, x + 59, y + 43, tile.getFluidStack());
+            FLUID_RENDERER.draw(mc, x + 59, y + 42, tile.getFluidStack());
         }
     }
 
@@ -49,7 +39,7 @@ public class GuiISawmill extends GuiBase {
             drawString(80, 90, format("gui.cosmic:invalid"));
         }
 
-        if (inBounds(55, 39, 20, 46, mouseX, mouseY) && tile.getFluidStack() != null) {
+        if (inBounds(55, 38, 20, 46, mouseX, mouseY) && tile.getFluidStack() != null) {
             drawTooltip(mouseX, mouseY, tile.getFluidStack().getLocalizedName() + "\n" + tile.getFluidStack().amount + " mB");
         }
 

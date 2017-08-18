@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Optional;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.common.Cosmic;
 import zachy.cosmic.common.core.Lib;
-import zachy.cosmic.common.core.util.MultiBlockUtils;
+import zachy.cosmic.common.core.util.MultiblockUtils;
 import zachy.cosmic.common.core.util.WorldUtils;
 import zachy.cosmic.common.tile.base.TileMultiblockController;
 
@@ -44,10 +44,10 @@ public class TileSawmill extends TileMultiblockController implements IFluidHandl
                 BlockPos check = start.add(x, 0, z);
 
                 if (x == 0 && z == 0) {
-                    if (!MultiBlockUtils.isIntermediateCasing(world, check)) {
+                    if (!MultiblockUtils.isIntermediateCasing(world, check)) {
                         return false;
                     }
-                } else if (!MultiBlockUtils.isStandardCasing(world, check)) {
+                } else if (!MultiblockUtils.isBasicCasing(world, check)) {
                     return false;
                 }
             }
@@ -59,11 +59,6 @@ public class TileSawmill extends TileMultiblockController implements IFluidHandl
     @Override
     public double getMaxInput() {
         return 32;
-    }
-
-    @Override
-    public double getMaxStored() {
-        return 3200;
     }
 
     @Override

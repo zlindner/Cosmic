@@ -1,0 +1,29 @@
+{
+  "outputs": [
+    {
+      "item": "minecraft:iron_ingot",
+      "data": 0
+    },
+    {
+      "item": "minecraft:gold_ingot",
+      "data": 0,
+      "count": 2
+    },
+    {
+      "item": "minecraft:empty_bucket"
+    }
+  ],
+  "duration": 100,
+  "energy": 32,
+  "inputs": [
+    {
+      "item": "minecraft:iron_nugget",
+      "data": 0
+    },
+    {
+      "item": "minecraft:gold_nugget",
+      "data": 0,
+      "count": 3
+    }
+  ]
+}

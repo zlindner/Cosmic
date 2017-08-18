@@ -9,7 +9,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import zachy.cosmic.client.core.handler.ModelHandler;
 import zachy.cosmic.client.gui.Guis;
 import zachy.cosmic.common.Cosmic;
 import zachy.cosmic.common.block.base.BlockMultiblockController;
@@ -43,10 +42,5 @@ public class BlockSawmill extends BlockMultiblockController {
         }
 
         return true;
-    }
-
-    @Override
-    public void registerModel() {
-        ModelHandler.registerBlock(this, 0, getDefaultState().withProperty(DIRECTION, EnumFacing.NORTH).withProperty(VALID, false));
     }
 }
