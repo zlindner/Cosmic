@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "direction=north,valid=true": { "model": "cosmic:distillation_tower_valid"},
+    "direction=east,valid=true": { "model": "cosmic:distillation_tower_valid", "y": 90},
+    "direction=south,valid=true": { "model": "cosmic:distillation_tower_valid", "y": 180},
+    "direction=west,valid=true": { "model": "cosmic:distillation_tower_valid", "y": 270},
+    "direction=north,valid=false": { "model": "cosmic:distillation_tower_invalid" },
+    "direction=east,valid=false": { "model": "cosmic:distillation_tower_invalid", "y": 90 },
+    "direction=south,valid=false": { "model": "cosmic:distillation_tower_invalid", "y": 180 },
+    "direction=west,valid=false": { "model": "cosmic:distillation_tower_invalid", "y": 270 }
+  }
+}

@@ -2,9 +2,9 @@
   "parent": "cosmic:block/machine",
   "textures": {
     "front": "cosmic:blocks/multiblock_controller_front_valid",
-    "side": "cosmic:blocks/grinder_side",
-    "top": "cosmic:blocks/grinder_side",
+    "side": "cosmic:blocks/distillation_tower_side",
+    "top": "cosmic:blocks/distillation_tower_side",
     "back": "cosmic:blocks/multiblock_controller_back",
-    "down": "cosmic:blocks/grinder_side"
+    "down": "cosmic:blocks/distillation_tower_side"
   }
 }

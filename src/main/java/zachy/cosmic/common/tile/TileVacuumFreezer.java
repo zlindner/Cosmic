@@ -25,6 +25,7 @@ public class TileVacuumFreezer extends TileMultiblockController {
         inventory = NonNullList.withSize(getInputs() + getOutputs(), ItemStack.EMPTY);
     }
 
+    //TODO still dont like name of method
     @Override
     protected boolean verifyStructure() {
         BlockPos start = pos.offset(EnumFacing.DOWN).offset(EnumFacing.DOWN).offset(EnumFacing.DOWN);

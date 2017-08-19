@@ -15,6 +15,7 @@ tile.grinder.name=iGrinder
 tile.sawmill.name=iSawmill
 tile.compressor.name=iCompressor
 tile.vacuum_freezer.name=iVacuum Freezer
+tile.distillation_tower.name=iDistillation Tower
 
 # GUI
 gui.cosmic:blast_furnace=iBlast Furnace
@@ -27,5 +28,7 @@ gui.cosmic:sawmill=iSawmill
 gui.cosmic:compressor=iCompressor
 
 gui.cosmic:vacuum_freezer=iVacuum Freezer
+
+gui.cosmic:distillation_tower=iDistillation Tower
 
 gui.cosmic:invalid=Invalid Structure
