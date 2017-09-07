@@ -20,6 +20,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Optional;
+import org.apache.commons.lang3.ArrayUtils;
 import zachy.cosmic.api.recipe.IMachineRecipe;
 import zachy.cosmic.apiimpl.API;
 import zachy.cosmic.core.Lib;
@@ -225,7 +226,11 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
 
     @Override
     public int[] getSlotsForFace(EnumFacing side) {
-        return new int[0];
+        if (side == getDirection() || side == getDirection().getOpposite()) {
+            return new int[0];
+        }
+
+        return ArrayUtils.addAll(INPUT_SLOTS, OUTPUT_SLOTS);
     }
 
     @Override

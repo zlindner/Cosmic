@@ -48,15 +48,4 @@ public class TileGrinder extends TileMultiblockController {
     public double getMaxInput() {
         return 128;
     }
-
-    @Override
-    public int[] getSlotsForFace(EnumFacing side) {
-        if (side == EnumFacing.UP) {
-            return INPUT_SLOTS;
-        } else if (side == EnumFacing.DOWN) {
-            return new int[0];
-        } else {
-            return OUTPUT_SLOTS;
-        }
-    }
 }

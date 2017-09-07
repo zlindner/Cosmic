@@ -3,7 +3,6 @@ package zachy.cosmic.tile.multiblock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import zachy.cosmic.core.Lib;
@@ -77,16 +76,5 @@ public class TileBlastFurnace extends TileMultiblockController {
         tag.setInteger(Lib.NBT.HEAT, heat);
 
         return super.writeToNBT(tag);
-    }
-
-    @Override
-    public int[] getSlotsForFace(EnumFacing side) {
-        if (side == EnumFacing.UP) {
-            return new int[]{INPUT_SLOTS[0]};
-        } else if (side == EnumFacing.DOWN) {
-            return new int[]{INPUT_SLOTS[1]};
-        } else {
-            return OUTPUT_SLOTS;
-        }
     }
 }

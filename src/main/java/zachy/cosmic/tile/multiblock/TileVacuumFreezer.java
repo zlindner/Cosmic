@@ -6,6 +6,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional;
+import org.apache.commons.lang3.ArrayUtils;
 import zachy.cosmic.Cosmic;
 import zachy.cosmic.core.Lib;
 import zachy.cosmic.core.util.MultiblockUtils;
@@ -71,13 +72,11 @@ public class TileVacuumFreezer extends TileMultiblockController {
 
     @Override
     public int[] getSlotsForFace(EnumFacing side) {
-        if (side == EnumFacing.UP) {
-            return new int[]{INPUT_SLOTS[0]};
-        } else if (side == EnumFacing.DOWN) {
-            return new int[]{INPUT_SLOTS[0]};
-        } else {
-            return OUTPUT_SLOTS;
+        if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
+            return new int[0];
         }
+
+        return ArrayUtils.addAll(INPUT_SLOTS, OUTPUT_SLOTS);
     }
 
     @Optional.Method(modid = "albedo")
