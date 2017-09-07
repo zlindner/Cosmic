@@ -1,7 +1,6 @@
 package zachy.cosmic.api.recipe;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -17,12 +16,14 @@ public interface IMachineRecipe {
 
     /**
      * @param index the slot we want the stack from
-     * @return possible stack(s) for the given slot, or empty list for no stack
+     *
+     * @return stack required for the given slot
      */
-    NonNullList<ItemStack> getInput(int index);
+    ItemStack getInput(int index);
 
     /**
      * @param index the slot we want the stack from
+     *
      * @return stack returned by the recipe for the given slot
      */
     ItemStack getOutput(int index);
@@ -38,7 +39,7 @@ public interface IMachineRecipe {
     int getEnergy();
 
     /**
-     * @return the fluidstack required by the recipe
+     * @return the fluid required by the recipe
      */
     FluidStack getFluid();
 

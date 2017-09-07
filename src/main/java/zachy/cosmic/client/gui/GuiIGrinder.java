@@ -1,7 +1,7 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.common.container.ContainerGrinder;
-import zachy.cosmic.common.tile.TileGrinder;
+import zachy.cosmic.container.ContainerGrinder;
+import zachy.cosmic.tile.multiblock.TileGrinder;
 
 public class GuiIGrinder extends GuiBase {
 

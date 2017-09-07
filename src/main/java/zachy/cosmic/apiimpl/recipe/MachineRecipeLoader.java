@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import zachy.cosmic.apiimpl.API;
-import zachy.cosmic.common.core.Lib;
+import zachy.cosmic.core.Lib;
 
 import java.io.BufferedReader;
 import java.io.IOException;

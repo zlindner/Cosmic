@@ -1,7 +1,7 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.common.container.ContainerVacuumFreezer;
-import zachy.cosmic.common.tile.TileVacuumFreezer;
+import zachy.cosmic.container.ContainerVacuumFreezer;
+import zachy.cosmic.tile.multiblock.TileVacuumFreezer;
 
 public class GuiVacuumFreezer extends GuiBase {
 

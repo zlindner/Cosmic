@@ -13,7 +13,7 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import zachy.cosmic.api.recipe.IMachineRecipe;
-import zachy.cosmic.common.core.util.StackUtils;
+import zachy.cosmic.core.util.StackUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,14 +41,16 @@ public class MachineRecipeFactory {
             throw new JsonSyntaxException("Expected " + inputs + " inputs, got " + jsonInputs.size() + " input(s)");
         }
 
-        List<NonNullList<ItemStack>> inputs = new ArrayList<>(jsonInputs.size());
+        NonNullList<ItemStack>inputs = NonNullList.withSize(jsonInputs.size(), ItemStack.EMPTY);
+
+        int i = 0;
 
         for (JsonElement element : jsonInputs) {
-            if (element.isJsonNull()) {
-                inputs.add(StackUtils.emptyNonNullList());
-            } else {
-                inputs.add(NonNullList.from(ItemStack.EMPTY, CraftingHelper.getIngredient(element, context).getMatchingStacks()));
+            if (!element.isJsonNull()) {
+                inputs.set(i, CraftingHelper.getItemStack(element.getAsJsonObject(), context));
             }
+
+            i++;
         }
 
         JsonArray jsonOutputs = JsonUtils.getJsonArray(json, "outputs");
@@ -59,7 +61,7 @@ public class MachineRecipeFactory {
 
         NonNullList<ItemStack> outputs = NonNullList.withSize(jsonOutputs.size(), ItemStack.EMPTY);
 
-        int i = 0;
+        i = 0;
 
         for (JsonElement element : jsonOutputs) {
             if (!element.isJsonNull()) {
@@ -99,7 +101,7 @@ public class MachineRecipeFactory {
             }
 
             @Override
-            public NonNullList<ItemStack> getInput(int index) {
+            public ItemStack getInput(int index) {
                 return inputs.get(index);
             }
 

@@ -2,11 +2,11 @@ package zachy.cosmic.apiimpl.recipe;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 import zachy.cosmic.api.recipe.IMachineRecipe;
 import zachy.cosmic.api.recipe.IMachineRegistry;
-import zachy.cosmic.api.util.IComparer;
-import zachy.cosmic.apiimpl.API;
+import zachy.cosmic.core.util.StackUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,26 +26,60 @@ public class MachineRegistry implements IMachineRegistry {
             int inputsFound = 0;
 
             for (int i = 0; i < inputs; i++) {
-                NonNullList<ItemStack> possibilities = recipe.getInput(i);
+                ItemStack recipeInput = recipe.getInput(i);
+                ItemStack inputStack = inventory.getStackInSlot(i);
 
-                if (possibilities.isEmpty() && inventory.getStackInSlot(i).isEmpty()) {
+                if (recipeInput.isEmpty() && inputStack.isEmpty()) {
                     inputsFound++;
 
                     continue;
                 }
 
-                for (ItemStack possibility : possibilities) {
-                    if (API.instance().getComparer().isEqual(possibility, inventory.getStackInSlot(i), IComparer.COMPARE_NBT | IComparer.COMPARE_DAMAGE | IComparer.COMPARE_STRIP_NBT)) {
-                        if (inventory.getStackInSlot(i).getCount() >= possibility.getCount()) {
-                            inputsFound++;
+                if (StackUtils.isCraftingEquivalent(recipeInput, inputStack, true)) {
+                    if (inputStack.getCount() >= recipeInput.getCount()) {
+                        inputsFound++;
+                    }
+                }
 
-                            break;
-                        }
+            }
+
+            if (inputsFound == inputs) {
+                return recipe;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public IMachineRecipe getRecipe(IInventory inventory, int inputs, FluidTank tank) {
+        for (IMachineRecipe recipe : recipes) {
+            int inputsFound = 0;
+
+            for (int i = 0; i < inputs; i++) {
+                ItemStack recipeInput = recipe.getInput(i);
+                ItemStack inputStack = inventory.getStackInSlot(i);
+
+                if (recipeInput.isEmpty() && inputStack.isEmpty()) {
+                    inputsFound++;
+
+                    continue;
+                }
+
+                if (StackUtils.isCraftingEquivalent(recipeInput, inputStack, true)) {
+                    if (inputStack.getCount() >= recipeInput.getCount()) {
+                        inputsFound++;
                     }
                 }
             }
 
-            if (inputsFound == inputs) {
+            if (inputsFound != inputs) {
+                return null;
+            }
+
+            FluidStack fluid = recipe.getFluid();
+
+            if ((fluid == null && tank.getFluid() == null) || fluid.isFluidEqual(tank.getFluid())) {
                 return recipe;
             }
         }

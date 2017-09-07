@@ -1,16 +1,14 @@
 {
   "outputs": [
     {
-      "item": "minecraft:iron_ingot",
-      "data": 0
+      "item": "minecraft:iron_ingot"
     }
   ],
   "duration": 100,
   "energy": 32,
   "inputs": [
     {
-      "item": "minecraft:iron_nugget",
-      "data": 0
+      "item": "minecraft:iron_nugget"
     }
   ]
 }

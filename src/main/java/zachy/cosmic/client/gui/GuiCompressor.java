@@ -1,7 +1,7 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.common.container.ContainerCompressor;
-import zachy.cosmic.common.tile.TileCompressor;
+import zachy.cosmic.container.ContainerCompressor;
+import zachy.cosmic.tile.multiblock.TileCompressor;
 
 public class GuiCompressor extends GuiBase {
 

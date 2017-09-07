@@ -1,12 +1,10 @@
 {
   "outputs": [
     {
-      "item": "minecraft:iron_ingot",
-      "data": 0
+      "item": "minecraft:iron_ingot"
     },
     {
       "item": "minecraft:gold_ingot",
-      "data": 0,
       "count": 2
     }
   ],
@@ -14,12 +12,10 @@
   "energy": 32,
   "inputs": [
     {
-      "item": "minecraft:iron_nugget",
-      "data": 0
+      "item": "minecraft:iron_nugget"
     },
     {
       "item": "minecraft:gold_nugget",
-      "data": 0,
       "count": 24
     }
   ]

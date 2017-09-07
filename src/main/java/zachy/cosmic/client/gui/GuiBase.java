@@ -7,9 +7,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import zachy.cosmic.common.container.ContainerBase;
-import zachy.cosmic.common.core.Lib;
-import zachy.cosmic.common.tile.base.TileMachine;
+import zachy.cosmic.container.ContainerBase;
+import zachy.cosmic.core.Lib;
+import zachy.cosmic.tile.base.TileMachine;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;

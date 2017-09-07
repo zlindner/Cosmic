@@ -1,6 +1,7 @@
 package zachy.cosmic.api.recipe;
 
 import net.minecraft.inventory.IInventory;
+import net.minecraftforge.fluids.FluidTank;
 
 import java.util.List;
 
@@ -24,6 +25,16 @@ public interface IMachineRegistry {
      * @return the recipe, or null if no recipe was found
      */
     IMachineRecipe getRecipe(IInventory inventory, int inputs);
+
+    /**
+     * Returns a recipe from the slots and fluid tank
+     *
+     * @param inventory the machine
+     * @param inputs the number of input slots of the machine
+     * @param tank the fluid tank containing the machine's fluid
+     * @return the recipes, or null if no recipe was found
+     */
+    IMachineRecipe getRecipe(IInventory inventory, int inputs, FluidTank tank);
 
     /**
      * @return a list with all of the machine's recipes

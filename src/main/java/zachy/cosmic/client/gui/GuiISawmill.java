@@ -1,8 +1,8 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.common.container.ContainerSawmill;
-import zachy.cosmic.common.core.util.RenderUtils;
-import zachy.cosmic.common.tile.TileSawmill;
+import zachy.cosmic.container.ContainerSawmill;
+import zachy.cosmic.core.util.RenderUtils;
+import zachy.cosmic.tile.multiblock.TileSawmill;
 
 public class GuiISawmill extends GuiBase {
 
@@ -23,7 +23,7 @@ public class GuiISawmill extends GuiBase {
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
         if (tile.isWorking()) {
-            drawTexture(x + 83, y + 43, 176, 0, getProgressScaled(22), 11);
+            drawTexture(x + 83, y + 44, 176, 0, getProgressScaled(22), 11);
         }
 
         if (tile.getFluidStack() != null) {

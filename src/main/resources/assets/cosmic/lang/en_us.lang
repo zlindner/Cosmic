@@ -17,6 +17,9 @@ tile.compressor.name=iCompressor
 tile.vacuum_freezer.name=iVacuum Freezer
 tile.distillation_tower.name=iDistillation Tower
 
+# ITEM
+item.portable_scanner.name=Portable Scanner
+
 # GUI
 gui.cosmic:blast_furnace=iBlast Furnace
 gui.cosmic:blast_furnace.heat=Heat
