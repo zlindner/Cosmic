@@ -12,6 +12,7 @@ public class API implements IAPI {
     private final IMachineRegistry blastFurnaceRegistry = new MachineRegistry();
     private final IMachineRegistry compressorRegistry = new MachineRegistry();
     private final IMachineRegistry distillationTowerRegistry = new MachineRegistry();
+    private final IMachineRegistry electrolyzerRegistry = new MachineRegistry();
     private final IMachineRegistry grinderRegistry = new MachineRegistry();
     private final IMachineRegistry sawmillRegistry = new MachineRegistry();
     private final IMachineRegistry vacuumFreezerRegistry = new MachineRegistry();
@@ -27,14 +28,16 @@ public class API implements IAPI {
                 return blastFurnaceRegistry;
             case Lib.Blocks.COMPRESSOR:
                 return compressorRegistry;
+            case Lib.Blocks.DISTILLATION_TOWER:
+                return distillationTowerRegistry;
+            case Lib.Blocks.ELECTROLYZER:
+                return electrolyzerRegistry;
             case Lib.Blocks.GRINDER:
                 return grinderRegistry;
             case Lib.Blocks.SAWMILL:
                 return sawmillRegistry;
             case Lib.Blocks.VACUUM_FREEZER:
                 return vacuumFreezerRegistry;
-            case Lib.Blocks.DISTILLATION_TOWER:
-                return distillationTowerRegistry;
         }
 
         return null;

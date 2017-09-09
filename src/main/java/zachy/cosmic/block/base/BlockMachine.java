@@ -2,6 +2,7 @@ package zachy.cosmic.block.base;
 
 import ic2.api.tile.IWrenchable;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -11,11 +12,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import zachy.cosmic.core.init.ModBlocks;
+import zachy.cosmic.core.handler.ModelHandler;
 import zachy.cosmic.core.util.StackUtils;
 import zachy.cosmic.core.util.WorldUtils;
 import zachy.cosmic.item.base.ItemBlockBase;
@@ -25,8 +25,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// todo fix BlockMachine and BlockMultiblockController thingy
 public class BlockMachine extends BlockBase implements IWrenchable {
 
+    protected static final PropertyBool ACTIVE = PropertyBool.create("active");
     protected static final PropertyDirection DIRECTION = PropertyDirection.create("direction", Arrays.asList(EnumFacing.HORIZONTALS));
 
     public BlockMachine(String name) {
@@ -35,14 +37,14 @@ public class BlockMachine extends BlockBase implements IWrenchable {
         setSoundType(SoundType.METAL);
         setHarvestLevel("pickaxe", 0);
 
-        setDefaultState(getDefaultState().withProperty(DIRECTION, EnumFacing.NORTH));
+        setDefaultState(getDefaultState().withProperty(ACTIVE, false).withProperty(DIRECTION, EnumFacing.NORTH));
     }
 
     @Override
     public Item createItemBlock() {
         ItemBlockBase itemBlock = new ItemBlockBase(this);
 
-        itemBlock.setHorizontal();
+        itemBlock.setDirectional();
 
         return itemBlock;
     }
@@ -54,7 +56,18 @@ public class BlockMachine extends BlockBase implements IWrenchable {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, DIRECTION);
+        return new BlockStateContainer(this, ACTIVE, DIRECTION);
+    }
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+        TileEntity tile = WorldUtils.getTileSafely(world, pos);
+
+        if (tile instanceof TileMachine) {
+            return getDefaultState().withProperty(ACTIVE, ((TileMachine) tile).isActive()).withProperty(DIRECTION, ((TileMachine) tile).getDirection());
+        }
+
+        return state;
     }
 
     @Override
@@ -67,30 +80,8 @@ public class BlockMachine extends BlockBase implements IWrenchable {
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        if (isBasic()) {
-            drops.add(new ItemStack(ModBlocks.machine_frame, 1, 0));
-        }
-
-        if (isIntermediate()) {
-            drops.add(new ItemStack(ModBlocks.machine_frame, 1, 1));
-        }
-
-        if (isAdvanced()) {
-            drops.add(new ItemStack(ModBlocks.machine_frame, 1, 2));
-        }
-    }
-
-    public boolean isBasic() {
-        return false;
-    }
-
-    public boolean isIntermediate() {
-        return false;
-    }
-
-    public boolean isAdvanced() {
-        return false;
+    public void registerModel() {
+        ModelHandler.registerBlock(this, 0, getDefaultState().withProperty(ACTIVE, false).withProperty(DIRECTION, EnumFacing.NORTH));
     }
 
     /*

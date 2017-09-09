@@ -9,7 +9,7 @@ import zachy.cosmic.core.Lib;
 import zachy.cosmic.core.handler.ConfigHandler;
 import zachy.cosmic.core.proxy.ServerProxy;
 
-//todo add javadocs
+// todo add javadocs
 @Mod(modid = Lib.MOD_ID, name = Lib.MOD_NAME, version = Lib.VERSION)
 public class Cosmic {
 

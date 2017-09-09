@@ -15,11 +15,13 @@ public class TileDistillationTower extends TileMultiblockController {
         INPUT_SLOTS = new int[]{0, 1};
         OUTPUT_SLOTS = new int[]{2, 3, 4};
 
+        maxInput = 128;
+
         inventory = NonNullList.withSize(getInputs() + getOutputs(), ItemStack.EMPTY);
     }
 
     @Override
-    protected boolean verifyStructure() {
+    protected boolean valid() {
         BlockPos start = pos.offset(getDirection().getOpposite()).offset(getDirection().getOpposite());
 
         for (int y = 0; y < 5; y++) {
@@ -57,10 +59,5 @@ public class TileDistillationTower extends TileMultiblockController {
         }
 
         return true;
-    }
-
-    @Override
-    public double getMaxInput() {
-        return 128;
     }
 }

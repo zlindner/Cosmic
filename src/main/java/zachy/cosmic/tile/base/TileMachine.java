@@ -34,17 +34,21 @@ import javax.annotation.Nullable;
 public abstract class TileMachine extends TileBase implements ITickable, IEnergySink, ISidedInventory, IFluidHandler, ILightProvider {
 
     protected String name;
-    protected boolean working;
+    protected boolean active;
     protected int progress;
+    protected int heat;
     protected double energy;
+    protected int maxInput;
+    protected int maxOutput;
+    protected int maxStored;
     private boolean enet;
 
     protected NonNullList<ItemStack> inventory;
     protected FluidTank tank;
     protected IMachineRecipe recipe;
 
-    public boolean isWorking() {
-        return working;
+    public boolean isActive() {
+        return active;
     }
 
     public int getProgress() {
@@ -87,6 +91,106 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
         sync();
     }
 
+    // todo allow for outputting into any empty slot (ex. grinder stops when 1st output slot is full)
+    @Override
+    public void update() {
+        if (world.isRemote) {
+            return;
+        }
+
+        if (energy < 0) {
+            return;
+        }
+
+        if (recipe != null) {
+            if (recipe.getHeat() != 0 && recipe.getHeat() > heat) {
+                return;
+            }
+
+            if (tank != null && recipe.getFluidAmount() > tank.getFluidAmount()) {
+                return;
+            }
+        }
+
+        if (active) {
+            if (recipe == null) {
+                active = false;
+            } else {
+                // Check if there is space for outputs
+                int emptyOutputs = 0;
+                int stackableOutputs = 0;
+
+                for (int i = 0; i < getOutputs(); i++) {
+                    ItemStack outputStack = getStackInSlot(OUTPUT_SLOTS[i]);
+                    ItemStack recipeStack = recipe.getOutput(i);
+
+                    if (outputStack.isEmpty()) {
+                        emptyOutputs++;
+                    } else if (StackUtils.isCraftingEquivalent(recipeStack, outputStack, true)) {
+                        if (recipeStack.getCount() + outputStack.getCount() <= outputStack.getMaxStackSize()) {
+                            stackableOutputs++;
+                        }
+                    }
+                }
+
+                if (emptyOutputs + stackableOutputs == getOutputs()) {
+                    // There is space for outputs, check for energy requirements
+                    if (energy >= recipe.getEnergy()) {
+                        drainEnergy(recipe.getEnergy());
+                    } else {
+                        progress = 0;
+
+                        return;
+                    }
+
+                    progress++;
+                }
+
+                if (progress >= recipe.getDuration()) {
+                    // Remove inputs
+                    for (int i = 0; i < getInputs(); i++) {
+                        ItemStack stack = getStackInSlot(INPUT_SLOTS[i]);
+
+                        if (!stack.isEmpty()) {
+                            stack.shrink(recipe.getInput(i).getCount());
+                        }
+                    }
+
+                    // Add outputs
+                    for (int i = 0; i < getOutputs(); i++) {
+                        ItemStack stack = getStackInSlot(OUTPUT_SLOTS[i]);
+
+                        if (stack.isEmpty()) {
+                            setInventorySlotContents(OUTPUT_SLOTS[i], recipe.getOutput(i).copy());
+                        } else {
+                            stack.grow(recipe.getOutput(i).getCount());
+
+                            sync();
+                        }
+                    }
+
+                    // Remove fluid from tank if applicable
+                    if (tank != null && recipe.getFluidAmount() > 0) {
+                        tank.drain(recipe.getFluidAmount(), true);
+                    }
+
+                    // Check to see if the recipe is still craftable
+                    if (tank != null) {
+                        recipe = API.instance().getMachineRegistry(name).getRecipe(this, getInputs(), tank);
+                    } else {
+                        recipe = API.instance().getMachineRegistry(name).getRecipe(this, getInputs());
+                    }
+
+                    progress = 0;
+                }
+
+                sync();
+            }
+        } else if (recipe != null) {
+            active = true;
+        }
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
@@ -96,7 +200,7 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
         }
 
         if (tag.hasKey(Lib.NBT.WORKING)) {
-            working = tag.getBoolean(Lib.NBT.WORKING);
+            active = tag.getBoolean(Lib.NBT.WORKING);
         }
 
         if (tag.hasKey(Lib.NBT.PROGRESS)) {
@@ -120,7 +224,7 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
             StackUtils.writeItems(this, i, tag);
         }
 
-        tag.setBoolean(Lib.NBT.WORKING, working);
+        tag.setBoolean(Lib.NBT.WORKING, active);
         tag.setInteger(Lib.NBT.PROGRESS, progress);
 
         tag.setDouble(Lib.NBT.ENERGY, energy);
@@ -178,6 +282,7 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
         }
     }
 
+    // todo should be void?
     public double drainEnergy(double extract) {
         if (extract > energy) {
             double tempEnergy = energy;
@@ -192,14 +297,16 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
         return extract;
     }
 
-    public abstract double getMaxInput();
+    public double getMaxInput() {
+        return maxInput;
+    }
 
     public double getMaxOutput() {
-        return 0;
+        return maxOutput;
     }
 
     public double getMaxStored() {
-        return 0;
+        return maxStored;
     }
 
     @Override

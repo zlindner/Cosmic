@@ -13,8 +13,7 @@ import zachy.cosmic.tile.base.TileBase;
 
 public class ItemBlockBase extends ItemBlock {
 
-    private boolean horizontal = false;
-    private boolean multidirectional = false;
+    private boolean directional;
 
     public ItemBlockBase(Block block) {
         super(block);
@@ -41,27 +40,19 @@ public class ItemBlockBase extends ItemBlock {
         setHasSubtypes(true);
     }
 
-    public void setHorizontal() {
-        horizontal = true;
-    }
-
-    public void setMultidirectional() {
-        multidirectional = true;
+    public void setDirectional() {
+        directional = true;
     }
 
     @Override
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, IBlockState state) {
         boolean result = super.placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, state);
 
-        if (result && (horizontal || multidirectional)) {
+        if (result && directional) {
             TileEntity tile = world.getTileEntity(pos);
 
             if (tile instanceof TileBase) {
-                if (horizontal) {
-                    ((TileBase) tile).setDirection(player.getHorizontalFacing().getOpposite());
-                } else if (multidirectional) {
-                    ((TileBase) tile).setDirection(EnumFacing.getDirectionFromEntityLiving(pos, player));
-                }
+                ((TileBase) tile).setDirection(player.getHorizontalFacing().getOpposite());
             }
         }
 

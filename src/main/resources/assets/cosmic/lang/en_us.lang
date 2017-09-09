@@ -10,6 +10,8 @@ tile.machine_casing_0.name=Basic Machine Casing
 tile.machine_casing_1.name=Intermediate Machine Casing
 tile.machine_casing_2.name=Advanced Machine Casing
 
+tile.electrolyzer.name=iElectrolyzer
+
 tile.blast_furnace.name=iBlast Furnace
 tile.grinder.name=iGrinder
 tile.sawmill.name=iSawmill
@@ -21,6 +23,8 @@ tile.distillation_tower.name=iDistillation Tower
 item.portable_scanner.name=Portable Scanner
 
 # GUI
+gui.cosmic:electrolyzer=iElectrolyzer
+
 gui.cosmic:blast_furnace=iBlast Furnace
 gui.cosmic:blast_furnace.heat=Heat
 

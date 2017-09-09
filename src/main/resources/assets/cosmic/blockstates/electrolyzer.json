@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "active=true,direction=north": { "model": "cosmic:electrolyzer_active"},
+    "active=true,direction=east": { "model": "cosmic:electrolyzer_active", "y": 90},
+    "active=true,direction=south": { "model": "cosmic:electrolyzer_active", "y": 180},
+    "active=true,direction=west": { "model": "cosmic:electrolyzer_active", "y": 270},
+    "active=false,direction=north": { "model": "cosmic:electrolyzer_inactive" },
+    "active=false,direction=east": { "model": "cosmic:electrolyzer_inactive", "y": 90 },
+    "active=false,direction=south": { "model": "cosmic:electrolyzer_inactive", "y": 180 },
+    "active=false,direction=west": { "model": "cosmic:electrolyzer_inactive", "y": 270 }
+  }
+}

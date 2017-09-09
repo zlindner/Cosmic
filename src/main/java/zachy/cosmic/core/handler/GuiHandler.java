@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import zachy.cosmic.client.gui.*;
 import zachy.cosmic.container.*;
-import zachy.cosmic.core.util.WorldUtils;
+import zachy.cosmic.tile.machine.TileElectrolyzer;
 import zachy.cosmic.tile.multiblock.*;
 
 import javax.annotation.Nullable;
@@ -17,6 +17,8 @@ public class GuiHandler implements IGuiHandler {
 
     private Container getContainer(int Id, TileEntity tile, EntityPlayer player) {
         switch(Id) {
+            case Guis.ELECTROLYZER:
+                return new ContainerElectrolyzer((TileElectrolyzer) tile, player);
             case Guis.BLAST_FURNACE:
                 return new ContainerBlastFurnace((TileBlastFurnace) tile, player);
             case Guis.GRINDER:
@@ -44,6 +46,8 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int Id, EntityPlayer player, World world, int x, int y, int z) {
         switch (Id) {
+            case Guis.ELECTROLYZER:
+                return new GuiElectrolyzer((ContainerElectrolyzer) getContainer(Id, world.getTileEntity(new BlockPos(x, y, z)), player));
             case Guis.BLAST_FURNACE:
                 return new GuiBlastFurnace((ContainerBlastFurnace) getContainer(Id, world.getTileEntity(new BlockPos(x, y, z)), player));
             case Guis.GRINDER:

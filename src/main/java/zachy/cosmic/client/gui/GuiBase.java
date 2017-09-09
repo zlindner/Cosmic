@@ -3,18 +3,14 @@ package zachy.cosmic.client.gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import zachy.cosmic.container.ContainerBase;
 import zachy.cosmic.core.Lib;
 import zachy.cosmic.tile.base.TileMachine;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class GuiBase extends GuiContainer {
@@ -50,10 +46,6 @@ public abstract class GuiBase extends GuiContainer {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         drawBackground(guiLeft, guiTop, mouseX, mouseY);
-
-        for (int i = 0; i < inventorySlots.inventorySlots.size(); ++i) {
-            Slot slot = inventorySlots.inventorySlots.get(i);
-        }
     }
 
     @Override
@@ -67,21 +59,13 @@ public abstract class GuiBase extends GuiContainer {
     }
 
     public void bindTexture(String file) {
-        bindTexture(Lib.MOD_ID, file);
-    }
-
-    public void bindTexture(String base, String file) {
-        String id = base + ":" + file;
+        String id = Lib.MOD_ID + ":" + file;
 
         if (!TEXTURE_CACHE.containsKey(id)) {
-            TEXTURE_CACHE.put(id, new ResourceLocation(base, "textures/" + file));
+            TEXTURE_CACHE.put(id, new ResourceLocation(Lib.MOD_ID, "textures/" + file));
         }
 
         mc.getTextureManager().bindTexture(TEXTURE_CACHE.get(id));
-    }
-
-    public void drawString(int x, int y, String message) {
-        drawString(x, y, message, 4210752);
     }
 
     public void drawString(int x, int y, String message, int color) {
@@ -92,26 +76,22 @@ public abstract class GuiBase extends GuiContainer {
         GlStateManager.enableLighting();
     }
 
+    public void drawString(int x, int y, String message) {
+        drawString(x, y, message, 4210752);
+    }
+
     public void drawStringCentred(int x, int y, String message) {
-        fontRenderer.drawString(message, x / 2 - fontRenderer.getStringWidth(message) / 2, y, 4210752);
+        drawString(x / 2 - fontRenderer.getStringWidth(message), y, message);
     }
 
     public void drawTexture(int x, int y, int textureX, int textureY, int width, int height) {
         drawTexturedModalRect(x, y, textureX, textureY, width, height);
     }
 
-    public void drawTooltip(@Nonnull ItemStack stack, int x, int y, String lines) {
-        drawTooltip(stack, x, y, Arrays.asList(lines.split("\n")));
-    }
-
     public void drawTooltip(int x, int y, String lines) {
-        drawTooltip(ItemStack.EMPTY, x, y, lines);
-    }
-
-    public void drawTooltip(@Nonnull ItemStack stack, int x, int y, List<String> lines) {
         GlStateManager.disableLighting();
 
-        GuiUtils.drawHoveringText(stack, lines, x, y, width - guiLeft, height, -1, fontRenderer);
+        GuiUtils.drawHoveringText(Arrays.asList(lines.split("\n")), x, y, width - guiLeft, height, -1, fontRenderer);
 
         GlStateManager.enableLighting();
     }

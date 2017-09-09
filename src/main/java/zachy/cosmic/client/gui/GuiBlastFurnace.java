@@ -19,7 +19,7 @@ public class GuiBlastFurnace extends GuiBase {
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
-        if (tile.isWorking()) {
+        if (tile.isActive()) {
             drawTexture(x + 81, y + 42, 176, 0, getProgressScaled(22), 15);
         }
     }

@@ -19,7 +19,7 @@ public class GuiDistillationTower extends GuiBase {
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
-        if (tile.isWorking()) {
+        if (tile.isActive()) {
             drawTexture(x + 94, y + 23, 176, 0, getProgressScaled(22), 54);
         }
     }

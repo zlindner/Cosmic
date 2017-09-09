@@ -26,11 +26,7 @@ public class MachineRecipeLoader {
     public static void load(String machine, int inputs, int outputs) {
         JsonContext context = new JsonContext(Lib.MOD_ID);
 
-        CraftingHelper.findFiles(Loader.instance().activeModContainer(), "assets/" + Lib.MOD_ID + "/machine_recipes/" + machine, root -> {
-            //TODO Load the constants into to the context.
-
-            return true;
-        }, (root, file) -> {
+        CraftingHelper.findFiles(Loader.instance().activeModContainer(), "assets/" + Lib.MOD_ID + "/machine_recipes/" + machine, root -> true, (root, file) -> {
             String relative = root.relativize(file).toString();
 
             if (!"json".equals(FilenameUtils.getExtension(file.toString()))) {

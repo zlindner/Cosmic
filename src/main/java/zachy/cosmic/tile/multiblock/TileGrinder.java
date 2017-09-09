@@ -13,14 +13,16 @@ public class TileGrinder extends TileMultiblockController {
     public TileGrinder() {
         name = Lib.Blocks.GRINDER;
 
-        INPUT_SLOTS = new int[] {0, 1};
-        OUTPUT_SLOTS = new int[] {2, 3, 4, 5};
+        INPUT_SLOTS = new int[]{0, 1};
+        OUTPUT_SLOTS = new int[]{2, 3, 4, 5};
+
+        maxInput = 128;
 
         inventory = NonNullList.withSize(getInputs() + getOutputs(), ItemStack.EMPTY);
     }
 
     @Override
-    protected boolean verifyStructure() {
+    protected boolean valid() {
         BlockPos start = pos.offset(getDirection().getOpposite()).offset(getDirection().getOpposite()).offset(EnumFacing.DOWN);
 
         for (int y = 0; y < 3; y++) {
@@ -42,10 +44,5 @@ public class TileGrinder extends TileMultiblockController {
         }
 
         return true;
-    }
-
-    @Override
-    public double getMaxInput() {
-        return 128;
     }
 }

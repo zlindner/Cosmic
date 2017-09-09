@@ -13,10 +13,6 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import zachy.cosmic.api.recipe.IMachineRecipe;
-import zachy.cosmic.core.util.StackUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MachineRecipeFactory {
 

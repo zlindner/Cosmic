@@ -17,11 +17,13 @@ public class TileBlastFurnace extends TileMultiblockController {
         INPUT_SLOTS = new int[]{0, 1};
         OUTPUT_SLOTS = new int[]{2, 3};
 
+        maxInput = 128;
+
         inventory = NonNullList.withSize(getInputs() + getOutputs(), ItemStack.EMPTY);
     }
 
     @Override
-    protected boolean verifyStructure() {
+    protected boolean valid() {
         BlockPos start = pos.offset(getDirection().getOpposite()).offset(getDirection().getOpposite());
 
         int _heat = 0;
@@ -57,11 +59,6 @@ public class TileBlastFurnace extends TileMultiblockController {
 
     public int getHeat() {
         return heat;
-    }
-
-    @Override
-    public double getMaxInput() {
-        return 128;
     }
 
     @Override

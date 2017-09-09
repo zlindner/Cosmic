@@ -1,0 +1,10 @@
+{
+  "parent": "cosmic:block/machine",
+  "textures": {
+    "front": "cosmic:blocks/electrolyzer_active",
+    "side": "cosmic:blocks/electrolyzer_active",
+    "top": "cosmic:blocks/machine_casing_basic",
+    "back": "cosmic:blocks/electrolyzer_active",
+    "down": "cosmic:blocks/machine_casing_basic"
+  }
+}
