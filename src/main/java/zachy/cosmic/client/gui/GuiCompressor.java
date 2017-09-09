@@ -1,6 +1,6 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.container.ContainerCompressor;
+import zachy.cosmic.container.multiblock.ContainerCompressor;
 import zachy.cosmic.tile.multiblock.TileCompressor;
 
 public class GuiCompressor extends GuiBase {
@@ -20,7 +20,7 @@ public class GuiCompressor extends GuiBase {
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
         if (tile.isActive()) {
-            drawTexture(x + 81, y + 44, 176, 0, getProgressScaled(22), 11);
+            drawTexture(x + 81, y + 44, 176, 0, getProgressScaled(20), 11);
         }
     }
 

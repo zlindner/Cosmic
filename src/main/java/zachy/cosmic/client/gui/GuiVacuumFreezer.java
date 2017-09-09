@@ -1,6 +1,6 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.container.ContainerVacuumFreezer;
+import zachy.cosmic.container.multiblock.ContainerVacuumFreezer;
 import zachy.cosmic.tile.multiblock.TileVacuumFreezer;
 
 public class GuiVacuumFreezer extends GuiBase {
@@ -20,7 +20,7 @@ public class GuiVacuumFreezer extends GuiBase {
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
         if (tile.isActive()) {
-            drawTexture(x + 91, y + 45, 176, 0, getProgressScaled(22), 10);
+            drawTexture(x + 91, y + 45, 176, 0, getProgressScaled(20), 10);
         }
     }
 

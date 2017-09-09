@@ -1,6 +1,6 @@
 package zachy.cosmic.tile.base;
 
-import elucent.albedo.lighting.ILightProvider;
+import com.elytradev.mirage.lighting.IColoredLight;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyEmitter;
@@ -10,6 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
@@ -30,8 +32,8 @@ import zachy.cosmic.core.util.WorldUtils;
 
 import javax.annotation.Nullable;
 
-@Optional.Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = "albedo")
-public abstract class TileMachine extends TileBase implements ITickable, IEnergySink, ISidedInventory, IFluidHandler, ILightProvider {
+@Optional.Interface(iface="com.elytradev.mirage.lighting.IColoredLight", modid="mirage")
+public abstract class TileMachine extends TileBase implements ITickable, IEnergySink, ISidedInventory, IFluidHandler, IColoredLight {
 
     protected String name;
     protected boolean active;
@@ -98,6 +100,8 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
             return;
         }
 
+        System.out.println(active);
+
         if (energy < 0) {
             return;
         }
@@ -115,6 +119,8 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
         if (active) {
             if (recipe == null) {
                 active = false;
+
+                sync();
             } else {
                 // Check if there is space for outputs
                 int emptyOutputs = 0;
@@ -192,6 +198,21 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
     }
 
     @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        boolean clientActive = active;
+
+        super.onDataPacket(net, packet);
+
+        if (world.isRemote) {
+            boolean serverActive = active;
+
+            if (serverActive != clientActive) {
+                world.markBlockRangeForRenderUpdate(pos, pos);
+            }
+        }
+    }
+
+    @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
 
@@ -199,8 +220,8 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
             StackUtils.readItems(this, i, tag);
         }
 
-        if (tag.hasKey(Lib.NBT.WORKING)) {
-            active = tag.getBoolean(Lib.NBT.WORKING);
+        if (tag.hasKey(Lib.NBT.ACTIVE)) {
+            active = tag.getBoolean(Lib.NBT.ACTIVE);
         }
 
         if (tag.hasKey(Lib.NBT.PROGRESS)) {
@@ -224,7 +245,7 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
             StackUtils.writeItems(this, i, tag);
         }
 
-        tag.setBoolean(Lib.NBT.WORKING, active);
+        tag.setBoolean(Lib.NBT.ACTIVE, active);
         tag.setInteger(Lib.NBT.PROGRESS, progress);
 
         tag.setDouble(Lib.NBT.ENERGY, energy);

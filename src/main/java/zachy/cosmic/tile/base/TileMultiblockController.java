@@ -1,6 +1,6 @@
 package zachy.cosmic.tile.base;
 
-import elucent.albedo.lighting.Light;
+import com.elytradev.mirage.lighting.Light;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -14,7 +14,7 @@ public abstract class TileMultiblockController extends TileMachine {
 
     protected int counter;
     protected boolean valid;
-    protected boolean standardOrientation = true;
+    protected boolean alternateOrientation;
 
     protected abstract boolean valid();
 
@@ -77,37 +77,38 @@ public abstract class TileMultiblockController extends TileMachine {
 
     @Override
     public int[] getSlotsForFace(EnumFacing side) {
-        if (standardOrientation) {
-            if (side == getDirection() || side == getDirection().getOpposite()) {
+        if (alternateOrientation) {
+            if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
                 return new int[0];
             }
 
             return ArrayUtils.addAll(INPUT_SLOTS, OUTPUT_SLOTS);
         }
 
-        if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
+        if (side == getDirection() || side == getDirection().getOpposite()) {
             return new int[0];
         }
 
         return ArrayUtils.addAll(INPUT_SLOTS, OUTPUT_SLOTS);
     }
 
-    @Optional.Method(modid = "albedo")
+    @Optional.Method(modid = "mirage")
     @Override
-    public Light provideLight() {
+    public Light getColoredLight() {
         if (Cosmic.INSTANCE.config.enableColouredLights) {
             if (valid) {
-                if (standardOrientation) {
-                    return Light.builder().pos(pos.offset(getDirection())).color(0, 1, 0).radius(2).build();
+                if (alternateOrientation) {
+                    return Light.builder().pos(pos).color(0, 1, 0).radius(2).build();
                 }
-                return Light.builder().pos(pos).color(0, 1, 0).radius(2).build();
+
+                return Light.builder().pos(pos.offset(getDirection())).color(0, 1, 0).radius(2).build();
             }
 
-            if (standardOrientation) {
-                return Light.builder().pos(pos.offset(getDirection())).color(1, 0, 0).radius(2).build();
+            if (alternateOrientation) {
+                return Light.builder().pos(pos).color(1, 0, 0).radius(2).build();
             }
 
-            return Light.builder().pos(pos).color(1, 0, 0).radius(2).build();
+            return Light.builder().pos(pos.offset(getDirection())).color(1, 0, 0).radius(2).build();
         }
 
         return null;

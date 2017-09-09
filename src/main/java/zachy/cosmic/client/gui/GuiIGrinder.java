@@ -1,6 +1,6 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.container.ContainerGrinder;
+import zachy.cosmic.container.multiblock.ContainerGrinder;
 import zachy.cosmic.tile.multiblock.TileGrinder;
 
 public class GuiIGrinder extends GuiBase {
@@ -20,7 +20,7 @@ public class GuiIGrinder extends GuiBase {
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
 
         if (tile.isActive()) {
-            drawTexture(x + 63, y + 45, 176, 0, getProgressScaled(22), 11);
+            drawTexture(x + 63, y + 45, 176, 0, getProgressScaled(21), 11);
         }
     }
 

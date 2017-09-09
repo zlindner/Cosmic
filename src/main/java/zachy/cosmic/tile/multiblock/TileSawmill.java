@@ -17,7 +17,7 @@ public class TileSawmill extends TileMultiblockController {
         INPUT_SLOTS = new int[]{0};
         OUTPUT_SLOTS = new int[]{1, 2};
 
-        standardOrientation = false;
+        alternateOrientation = true;
 
         maxInput = 32;
 

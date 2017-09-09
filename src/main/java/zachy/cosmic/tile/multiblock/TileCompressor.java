@@ -16,7 +16,7 @@ public class TileCompressor extends TileMultiblockController {
         INPUT_SLOTS = new int[]{0, 1};
         OUTPUT_SLOTS = new int[]{2, 3};
 
-        standardOrientation = false;
+        alternateOrientation = true;
 
         maxInput = 32;
 

@@ -25,6 +25,7 @@ public final class Lib {
     }
 
     public final class NBT {
+        public static final String ACTIVE = "Active";
         public static final String DIRECTION = "Direction";
         public static final String ENERGY = "Energy";
         public static final String HEAT = "Heat";
@@ -32,6 +33,5 @@ public final class Lib {
         public static final String PROGRESS = "Progress";
         public static final String SLOT = "Slot";
         public static final String VALID = "Valid";
-        public static final String WORKING = "Working";
     }
 }

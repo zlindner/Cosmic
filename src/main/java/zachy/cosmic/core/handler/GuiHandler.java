@@ -7,7 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import zachy.cosmic.client.gui.*;
-import zachy.cosmic.container.*;
+import zachy.cosmic.container.machine.ContainerElectrolyzer;
+import zachy.cosmic.container.multiblock.*;
 import zachy.cosmic.tile.machine.TileElectrolyzer;
 import zachy.cosmic.tile.multiblock.*;
 

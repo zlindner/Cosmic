@@ -1,6 +1,6 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.container.ContainerElectrolyzer;
+import zachy.cosmic.container.machine.ContainerElectrolyzer;
 import zachy.cosmic.tile.machine.TileElectrolyzer;
 
 public class GuiElectrolyzer extends GuiBase {
@@ -18,12 +18,15 @@ public class GuiElectrolyzer extends GuiBase {
         bindTexture("gui/electrolyzer.png");
 
         drawTexture(x, y, 0, 0, screenWidth, screenHeight);
+
+        if (tile.isActive()) {
+            drawTexture(x + 73, y + 55 - getProgressScaled(10), 176, 10 - getProgressScaled(10), 30, 10);
+        }
     }
 
     @Override
     public void drawForeground(int mouseX, int mouseY) {
         drawStringCentred(xSize, 5, format("gui.cosmic:electrolyzer"));
-
-        drawString(8, 90, format("container.inventory"));
+        drawStringCentred(xSize, 90, format("container.inventory"));
     }
 }

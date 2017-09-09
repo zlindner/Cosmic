@@ -1,11 +1,10 @@
 package zachy.cosmic.apiimpl.state.enums;
 
 public enum MachineType {
-    ELECTROLYZER(1, 4),
-
     BLAST_FURNACE(2, 2),
     COMPRESSOR(2, 2),
     DISTILLATION_TOWER(2, 3),
+    ELECTROLYZER(2, 4),
     GRINDER(2, 4),
     SAWMILL(1, 2),
     VACUUM_FREEZER(1, 1);

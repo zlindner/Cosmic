@@ -1,0 +1,21 @@
+{
+  "outputs": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot",
+      "count": 2
+    },
+    null,
+    null
+  ],
+  "duration": 100,
+  "energy": 128,
+  "inputs": [
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    null
+  ]
+}

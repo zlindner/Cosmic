@@ -1,6 +1,6 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.container.ContainerBlastFurnace;
+import zachy.cosmic.container.multiblock.ContainerBlastFurnace;
 import zachy.cosmic.tile.multiblock.TileBlastFurnace;
 
 public class GuiBlastFurnace extends GuiBase {

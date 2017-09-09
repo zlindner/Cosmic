@@ -1,6 +1,6 @@
 package zachy.cosmic.client.gui;
 
-import zachy.cosmic.container.ContainerDistillationTower;
+import zachy.cosmic.container.multiblock.ContainerDistillationTower;
 import zachy.cosmic.tile.multiblock.TileDistillationTower;
 
 public class GuiDistillationTower extends GuiBase {

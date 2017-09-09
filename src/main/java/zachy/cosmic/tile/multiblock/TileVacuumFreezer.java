@@ -16,7 +16,7 @@ public class TileVacuumFreezer extends TileMultiblockController {
         INPUT_SLOTS = new int[]{0};
         OUTPUT_SLOTS = new int[]{1};
 
-        standardOrientation = false;
+        alternateOrientation = true;
 
         maxInput = 128;
 

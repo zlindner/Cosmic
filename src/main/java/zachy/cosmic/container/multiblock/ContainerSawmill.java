@@ -1,7 +1,8 @@
-package zachy.cosmic.container;
+package zachy.cosmic.container.multiblock;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
+import zachy.cosmic.container.ContainerBase;
 import zachy.cosmic.container.slot.SlotOutput;
 import zachy.cosmic.tile.multiblock.TileSawmill;
 
