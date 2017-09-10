@@ -2,7 +2,6 @@ package zachy.cosmic.core.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -10,9 +9,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import zachy.cosmic.block.*;
 import zachy.cosmic.block.base.BlockBase;
+import zachy.cosmic.block.machine.BlockCentrifuge;
 import zachy.cosmic.block.machine.BlockElectrolyzer;
 import zachy.cosmic.block.multiblock.*;
 import zachy.cosmic.core.Lib;
+import zachy.cosmic.tile.machine.TileCentrifuge;
 import zachy.cosmic.tile.machine.TileElectrolyzer;
 import zachy.cosmic.tile.multiblock.*;
 
@@ -20,6 +21,7 @@ import zachy.cosmic.tile.multiblock.*;
 public class ModBlocks {
 
     public static BlockBase blast_furnace = new BlockBlastFurnace();
+    public static BlockBase centrifuge = new BlockCentrifuge();
     public static BlockBase compressor = new BlockCompressor();
     public static BlockBase distillation_tower = new BlockDistillationTower();
     public static BlockBase electrolyzer = new BlockElectrolyzer();
@@ -34,6 +36,7 @@ public class ModBlocks {
         IForgeRegistry<Block> r = event.getRegistry();
 
         r.register(blast_furnace);
+        r.register(centrifuge);
         r.register(compressor);
         r.register(distillation_tower);
         r.register(electrolyzer);
@@ -48,6 +51,7 @@ public class ModBlocks {
 
     private static void registerTiles() {
         GameRegistry.registerTileEntity(TileBlastFurnace.class, Lib.MOD_ID + ":" + Lib.Blocks.BLAST_FURNACE);
+        GameRegistry.registerTileEntity(TileCentrifuge.class, Lib.MOD_ID + ":" + Lib.Blocks.CENTRIFUGE);
         GameRegistry.registerTileEntity(TileCompressor.class, Lib.MOD_ID + ":" + Lib.Blocks.COMPRESSOR);
         GameRegistry.registerTileEntity(TileDistillationTower.class, Lib.MOD_ID + ":" + Lib.Blocks.DISTILLATION_TOWER);
         GameRegistry.registerTileEntity(TileElectrolyzer.class, Lib.MOD_ID + ":" + Lib.Blocks.ELECTROLYZER);
@@ -60,11 +64,11 @@ public class ModBlocks {
     public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> r = event.getRegistry();
 
-        r.register(electrolyzer.createItemBlock());
-
         r.register(blast_furnace.createItemBlock());
+        r.register(centrifuge.createItemBlock());
         r.register(compressor.createItemBlock());
         r.register(distillation_tower.createItemBlock());
+        r.register(electrolyzer.createItemBlock());
         r.register(grinder.createItemBlock());
         r.register(machine_casing.createItemBlock());
         r.register(machine_frame.createItemBlock());

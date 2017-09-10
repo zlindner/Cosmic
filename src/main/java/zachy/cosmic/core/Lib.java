@@ -10,6 +10,7 @@ public final class Lib {
 
     public final class Blocks {
         public static final String BLAST_FURNACE = "blast_furnace";
+        public static final String CENTRIFUGE = "centrifuge";
         public static final String COMPRESSOR = "compressor";
         public static final String DISTILLATION_TOWER = "distillation_tower";
         public static final String ELECTROLYZER = "electrolyzer";

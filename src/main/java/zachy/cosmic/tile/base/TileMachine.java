@@ -100,8 +100,6 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
             return;
         }
 
-        System.out.println(active);
-
         if (energy < 0) {
             return;
         }
@@ -303,19 +301,12 @@ public abstract class TileMachine extends TileBase implements ITickable, IEnergy
         }
     }
 
-    // todo should be void?
-    public double drainEnergy(double extract) {
+    public void drainEnergy(double extract) {
         if (extract > energy) {
-            double tempEnergy = energy;
-
             setEnergy(0);
-
-            return tempEnergy;
         }
 
         setEnergy(energy - extract);
-
-        return extract;
     }
 
     public double getMaxInput() {

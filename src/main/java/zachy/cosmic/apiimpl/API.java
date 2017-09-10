@@ -10,6 +10,7 @@ public class API implements IAPI {
     private static final IAPI INSTANCE = new API();
 
     private final IMachineRegistry blastFurnaceRegistry = new MachineRegistry();
+    private final IMachineRegistry centrifugeRegistry = new MachineRegistry();
     private final IMachineRegistry compressorRegistry = new MachineRegistry();
     private final IMachineRegistry distillationTowerRegistry = new MachineRegistry();
     private final IMachineRegistry electrolyzerRegistry = new MachineRegistry();
@@ -26,6 +27,8 @@ public class API implements IAPI {
         switch (machine) {
             case Lib.Blocks.BLAST_FURNACE:
                 return blastFurnaceRegistry;
+            case Lib.Blocks.CENTRIFUGE:
+                return centrifugeRegistry;
             case Lib.Blocks.COMPRESSOR:
                 return compressorRegistry;
             case Lib.Blocks.DISTILLATION_TOWER:

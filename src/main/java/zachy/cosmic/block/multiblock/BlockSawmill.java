@@ -37,7 +37,7 @@ public class BlockSawmill extends BlockMultiblockController {
         }
 
         if (!world.isRemote && !player.isSneaking()) {
-            player.openGui(Cosmic.INSTANCE, Guis.SAWMILL, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Cosmic.INSTANCE, Guis.SAWMILL.ID(), world, pos.getX(), pos.getY(), pos.getZ());
         }
 
         return true;

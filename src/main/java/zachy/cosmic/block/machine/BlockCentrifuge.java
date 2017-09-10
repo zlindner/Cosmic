@@ -11,23 +11,23 @@ import zachy.cosmic.Cosmic;
 import zachy.cosmic.block.base.BlockMachine;
 import zachy.cosmic.client.gui.Guis;
 import zachy.cosmic.core.Lib;
-import zachy.cosmic.tile.machine.TileElectrolyzer;
+import zachy.cosmic.tile.machine.TileCentrifuge;
 
-public class BlockElectrolyzer extends BlockMachine {
+public class BlockCentrifuge extends BlockMachine {
 
-    public BlockElectrolyzer() {
-        super(Lib.Blocks.ELECTROLYZER);
+    public BlockCentrifuge() {
+        super(Lib.Blocks.CENTRIFUGE);
     }
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileElectrolyzer();
+        return new TileCentrifuge();
     }
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote && !player.isSneaking()) {
-            player.openGui(Cosmic.INSTANCE, Guis.ELECTROLYZER.ID(), world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Cosmic.INSTANCE, Guis.CENTRIFUGE.ID(), world, pos.getX(), pos.getY(), pos.getZ());
         }
 
         return true;

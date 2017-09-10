@@ -22,7 +22,6 @@ public abstract class GuiBase extends GuiContainer {
 
     private TileMachine tile;
 
-    //TODO rewrite
     public GuiBase(ContainerBase container, int screenWidth, int screenHeight) {
         super(container);
 

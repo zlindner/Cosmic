@@ -27,7 +27,7 @@ public class BlockVacuumFreezer extends BlockMultiblockController {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote && !player.isSneaking()) {
-            player.openGui(Cosmic.INSTANCE, Guis.VACUUM_FREEZER, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Cosmic.INSTANCE, Guis.VACUUM_FREEZER.ID(), world, pos.getX(), pos.getY(), pos.getZ());
         }
 
         return true;

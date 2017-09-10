@@ -1,12 +1,16 @@
 package zachy.cosmic.client.gui;
 
-public final class Guis {
-    public static final int ELECTROLYZER = 0;
+public enum Guis {
+    BLAST_FURNACE,
+    CENTRIFUGE,
+    COMPRESSOR,
+    DISTILLATION_TOWER,
+    ELECTROLYZER,
+    GRINDER,
+    SAWMILL,
+    VACUUM_FREEZER;
 
-    public static final int BLAST_FURNACE = 1;
-    public static final int GRINDER = 2;
-    public static final int SAWMILL = 3;
-    public static final int IMPLOSION_COMPRESSOR = 4;
-    public static final int VACUUM_FREEZER = 5;
-    public static final int DISTILLATION_TOWER = 6;
+    public int ID() {
+        return ordinal();
+    }
 }

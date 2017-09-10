@@ -2,40 +2,33 @@
 itemGroup.cosmic=Cosmic
 
 # BLOCK
+
+tile.blast_furnace.name=iBlast Furnace
+tile.centrifuge.name=iCentrifuge
+tile.compressor.name=iCompressor
+tile.distillation_tower.name=iDistillation Tower
+tile.electrolyzer.name=iElectrolyzer
+tile.grinder.name=iGrinder
 tile.machine_frame_0.name=Basic Machine Frame
 tile.machine_frame_1.name=Intermediate Machine Frame
 tile.machine_frame_2.name=Advanced Machine Frame
-
 tile.machine_casing_0.name=Basic Machine Casing
 tile.machine_casing_1.name=Intermediate Machine Casing
 tile.machine_casing_2.name=Advanced Machine Casing
-
-tile.electrolyzer.name=iElectrolyzer
-
-tile.blast_furnace.name=iBlast Furnace
-tile.grinder.name=iGrinder
 tile.sawmill.name=iSawmill
-tile.compressor.name=iCompressor
 tile.vacuum_freezer.name=iVacuum Freezer
-tile.distillation_tower.name=iDistillation Tower
 
 # ITEM
 item.portable_scanner.name=Portable Scanner
 
 # GUI
-gui.cosmic:electrolyzer=iElectrolyzer
-
 gui.cosmic:blast_furnace=iBlast Furnace
 gui.cosmic:blast_furnace.heat=Heat
-
-gui.cosmic:grinder=iGrinder
-
-gui.cosmic:sawmill=iSawmill
-
+gui.cosmic:centrifuge=iCentrifuge
 gui.cosmic:compressor=iCompressor
-
-gui.cosmic:vacuum_freezer=iVacuum Freezer
-
 gui.cosmic:distillation_tower=iDistillation Tower
-
+gui.cosmic:electrolyzer=iElectrolyzer
+gui.cosmic:grinder=iGrinder
 gui.cosmic:invalid=Invalid Structure
+gui.cosmic:sawmill=iSawmill
+gui.cosmic:vacuum_freezer=iVacuum Freezer
