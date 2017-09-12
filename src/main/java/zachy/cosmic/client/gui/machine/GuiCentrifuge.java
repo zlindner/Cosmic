@@ -1,5 +1,6 @@
-package zachy.cosmic.client.gui;
+package zachy.cosmic.client.gui.machine;
 
+import zachy.cosmic.client.gui.GuiBase;
 import zachy.cosmic.container.machine.ContainerCentrifuge;
 import zachy.cosmic.tile.machine.TileCentrifuge;
 
@@ -29,7 +30,7 @@ public class GuiCentrifuge extends GuiBase {
 
     @Override
     public void drawForeground(int mouseX, int mouseY) {
-        drawStringCentred(xSize, 5, format("gui.cosmic:centrifuge"));
+        drawString(8, 5, format("gui.cosmic:centrifuge"));
         drawString(8, 90, format("container.inventory"));
     }
 }

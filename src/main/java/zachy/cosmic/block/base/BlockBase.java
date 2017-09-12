@@ -24,6 +24,8 @@ public class BlockBase extends Block implements IModelRegister {
         setHardness(2.0F);
         //setResistance()
 
+        setDefaultState(getBaseState());
+
         setUnlocalizedName(name);
         setRegistryName(new ResourceLocation(Lib.MOD_ID, name));
         setCreativeTab(CosmicTab.INSTANCE);
@@ -31,6 +33,10 @@ public class BlockBase extends Block implements IModelRegister {
 
     public Item createItemBlock() {
         return new ItemBlockBase(this);
+    }
+
+    public IBlockState getBaseState() {
+        return getDefaultState();
     }
 
     @Override
@@ -74,7 +80,7 @@ public class BlockBase extends Block implements IModelRegister {
     }
 
     public boolean isBasic() {
-        return true;
+        return false;
     }
 
     public boolean isIntermediate() {

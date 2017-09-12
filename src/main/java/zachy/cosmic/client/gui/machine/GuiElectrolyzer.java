@@ -1,5 +1,6 @@
-package zachy.cosmic.client.gui;
+package zachy.cosmic.client.gui.machine;
 
+import zachy.cosmic.client.gui.GuiBase;
 import zachy.cosmic.container.machine.ContainerElectrolyzer;
 import zachy.cosmic.tile.machine.TileElectrolyzer;
 
@@ -26,7 +27,7 @@ public class GuiElectrolyzer extends GuiBase {
 
     @Override
     public void drawForeground(int mouseX, int mouseY) {
-        drawStringCentred(xSize, 5, format("gui.cosmic:electrolyzer"));
-        drawStringCentred(xSize, 90, format("container.inventory"));
+        drawString(8, 5, format("gui.cosmic:electrolyzer"));
+        drawString(8, 90, format("container.inventory"));
     }
 }

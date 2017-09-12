@@ -7,10 +7,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import zachy.cosmic.client.gui.*;
+import zachy.cosmic.client.gui.machine.GuiCentrifuge;
+import zachy.cosmic.client.gui.machine.GuiChemicalReactor;
+import zachy.cosmic.client.gui.machine.GuiElectrolyzer;
+import zachy.cosmic.client.gui.multiblock.*;
 import zachy.cosmic.container.machine.ContainerCentrifuge;
+import zachy.cosmic.container.machine.ContainerChemicalReactor;
 import zachy.cosmic.container.machine.ContainerElectrolyzer;
 import zachy.cosmic.container.multiblock.*;
 import zachy.cosmic.tile.machine.TileCentrifuge;
+import zachy.cosmic.tile.machine.TileChemicalReactor;
 import zachy.cosmic.tile.machine.TileElectrolyzer;
 import zachy.cosmic.tile.multiblock.*;
 
@@ -23,12 +29,13 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerBlastFurnace((TileBlastFurnace) tile, player);
         } else if (ID == Guis.CENTRIFUGE.ID()) {
             return new ContainerCentrifuge((TileCentrifuge) tile, player);
+        } else if (ID == Guis.CHEMICAL_REACTOR.ID()) {
+            return new ContainerChemicalReactor((TileChemicalReactor) tile, player);
         } else if (ID == Guis.COMPRESSOR.ID()) {
             return new ContainerCompressor((TileCompressor) tile, player);
         } else if (ID == Guis.DISTILLATION_TOWER.ID()) {
             return new ContainerDistillationTower((TileDistillationTower) tile, player);
-        }
-        if (ID == Guis.ELECTROLYZER.ID()) {
+        } else if (ID == Guis.ELECTROLYZER.ID()) {
             return new ContainerElectrolyzer((TileElectrolyzer) tile, player);
         } else if (ID == Guis.GRINDER.ID()) {
             return new ContainerGrinder((TileGrinder) tile, player);
@@ -54,6 +61,8 @@ public class GuiHandler implements IGuiHandler {
             return new GuiBlastFurnace((ContainerBlastFurnace) getContainer(ID, world.getTileEntity(new BlockPos(x, y, z)), player));
         } else if (ID == Guis.CENTRIFUGE.ID()) {
             return new GuiCentrifuge((ContainerCentrifuge) getContainer(ID, world.getTileEntity(new BlockPos(x, y, z)), player));
+        } else if (ID == Guis.CHEMICAL_REACTOR.ID()) {
+            return new GuiChemicalReactor((ContainerChemicalReactor) getContainer(ID, world.getTileEntity(new BlockPos(x, y, z)), player));
         } else if (ID == Guis.COMPRESSOR.ID()) {
             return new GuiCompressor((ContainerCompressor) getContainer(ID, world.getTileEntity(new BlockPos(x, y, z)), player));
         } else if (ID == Guis.DISTILLATION_TOWER.ID()) {

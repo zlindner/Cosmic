@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// todo fix BlockMachine and BlockMultiblockController thingy
 public class BlockMachine extends BlockBase implements IWrenchable {
 
     protected static final PropertyBool ACTIVE = PropertyBool.create("active");
@@ -36,8 +35,6 @@ public class BlockMachine extends BlockBase implements IWrenchable {
 
         setSoundType(SoundType.METAL);
         setHarvestLevel("pickaxe", 0);
-
-        setDefaultState(getDefaultState().withProperty(ACTIVE, false).withProperty(DIRECTION, EnumFacing.NORTH));
     }
 
     @Override
@@ -52,6 +49,11 @@ public class BlockMachine extends BlockBase implements IWrenchable {
     @Override
     public boolean hasTileEntity(IBlockState state) {
         return true;
+    }
+
+    @Override
+    public IBlockState getBaseState() {
+        return getDefaultState().withProperty(ACTIVE, false).withProperty(DIRECTION, EnumFacing.NORTH);
     }
 
     @Override
@@ -119,5 +121,10 @@ public class BlockMachine extends BlockBase implements IWrenchable {
         drop.add(new ItemStack(this));
 
         return drop;
+    }
+
+    @Override
+    public boolean isBasic() {
+        return true;
     }
 }

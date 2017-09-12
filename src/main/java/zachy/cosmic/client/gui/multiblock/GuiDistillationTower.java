@@ -1,5 +1,6 @@
-package zachy.cosmic.client.gui;
+package zachy.cosmic.client.gui.multiblock;
 
+import zachy.cosmic.client.gui.GuiBase;
 import zachy.cosmic.container.multiblock.ContainerDistillationTower;
 import zachy.cosmic.tile.multiblock.TileDistillationTower;
 

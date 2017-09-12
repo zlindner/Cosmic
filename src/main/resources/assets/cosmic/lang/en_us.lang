@@ -5,6 +5,7 @@ itemGroup.cosmic=Cosmic
 
 tile.blast_furnace.name=iBlast Furnace
 tile.centrifuge.name=iCentrifuge
+tile.chemical_reactor.name=iChemical Reactor
 tile.compressor.name=iCompressor
 tile.distillation_tower.name=iDistillation Tower
 tile.electrolyzer.name=iElectrolyzer
@@ -25,6 +26,7 @@ item.portable_scanner.name=Portable Scanner
 gui.cosmic:blast_furnace=iBlast Furnace
 gui.cosmic:blast_furnace.heat=Heat
 gui.cosmic:centrifuge=iCentrifuge
+gui.cosmi:chemical_reactor=iChemical Reactor
 gui.cosmic:compressor=iCompressor
 gui.cosmic:distillation_tower=iDistillation Tower
 gui.cosmic:electrolyzer=iElectrolyzer
