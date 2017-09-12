@@ -1,8 +1,4 @@
-# CREATIVE TAB
-itemGroup.cosmic=Cosmic
-
 # BLOCK
-
 tile.blast_furnace.name=iBlast Furnace
 tile.centrifuge.name=iCentrifuge
 tile.chemical_reactor.name=iChemical Reactor
@@ -18,6 +14,22 @@ tile.machine_casing_1.name=Intermediate Machine Casing
 tile.machine_casing_2.name=Advanced Machine Casing
 tile.sawmill.name=iSawmill
 tile.vacuum_freezer.name=iVacuum Freezer
+
+# CREATIVE TAB
+itemGroup.cosmic=Cosmic
+
+# GUI
+gui.cosmic:blast_furnace=iBlast Furnace
+gui.cosmic:blast_furnace.heat=Heat
+gui.cosmic:centrifuge=iCentrifuge
+gui.cosmi:chemical_reactor=iChemical Reactor
+gui.cosmic:compressor=iCompressor
+gui.cosmic:distillation_tower=iDistillation Tower
+gui.cosmic:electrolyzer=iElectrolyzer
+gui.cosmic:grinder=iGrinder
+gui.cosmic:invalid=Invalid Structure
+gui.cosmic:sawmill=iSawmill
+gui.cosmic:vacuum_freezer=iVacuum Freezer
 
 # ITEM
 item.berylium_cell.name=Berylium Cell
@@ -62,16 +74,3 @@ item.360k_helium_coolant_cell.name=360k Helium Coolant Cell
 item.60k_nak_coolant_cell.name=60k NaK Coolant Cell
 item.180k_nak_coolant_cell.name=180k NaK Coolant Cell
 item.360k_nak_coolant_cell.name=360k NaK Coolant Cell
-
-# GUI
-gui.cosmic:blast_furnace=iBlast Furnace
-gui.cosmic:blast_furnace.heat=Heat
-gui.cosmic:centrifuge=iCentrifuge
-gui.cosmi:chemical_reactor=iChemical Reactor
-gui.cosmic:compressor=iCompressor
-gui.cosmic:distillation_tower=iDistillation Tower
-gui.cosmic:electrolyzer=iElectrolyzer
-gui.cosmic:grinder=iGrinder
-gui.cosmic:invalid=Invalid Structure
-gui.cosmic:sawmill=iSawmill
-gui.cosmic:vacuum_freezer=iVacuum Freezer
