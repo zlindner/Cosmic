@@ -1,0 +1,22 @@
+{
+  "inputs": [
+    {
+      "item": "cosmic:cell",
+      "data": 7
+    },
+    {
+      "item": "cosmic:cell",
+      "data": 26,
+      "count": 4
+    }
+  ],
+  "outputs": [
+    {
+      "item": "cosmic:cell",
+      "data": 31,
+      "count": 5
+    }
+  ],
+  "duration": 3500,
+  "energy":  32
+}

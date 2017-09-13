@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "cosmic:items/helium_cell
+        "layer0": "cosmic:items/helium_cell"
     }
 }

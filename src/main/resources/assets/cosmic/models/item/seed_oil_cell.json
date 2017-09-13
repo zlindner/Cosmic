@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "cosmic:items/seed_oil_cell
+        "layer0": "cosmic:items/seed_oil_cell"
     }
 }

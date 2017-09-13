@@ -10,6 +10,7 @@ import zachy.cosmic.core.handler.ConfigHandler;
 import zachy.cosmic.core.proxy.ServerProxy;
 
 // todo add javadocs
+// todo found major bug with shift clicking into input slots, doesn't check for equality when merging stacks
 @Mod(modid = Lib.MOD_ID, name = Lib.MOD_NAME, version = Lib.VERSION)
 public class Cosmic {
 
