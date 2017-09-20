@@ -54,8 +54,6 @@ public class MachineRecipeLoader {
                 IOUtils.closeQuietly(reader);
             }
 
-            FMLLog.log.info("Loaded " + machine + " recipes");
-
             return true;
         });
     }
