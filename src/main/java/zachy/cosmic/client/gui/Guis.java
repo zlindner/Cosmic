@@ -1,6 +1,5 @@
 package zachy.cosmic.client.gui;
 
-// todo remove and migrate to using MachineType
 public enum Guis {
     BLAST_FURNACE,
     CENTRIFUGE,
